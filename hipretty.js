@@ -234,7 +234,42 @@
 
       .hp-nav-link:hover { color: var(--hp-rose); }
 
-      .hp-header-actions { display: flex; align-items: center; gap: 14px; }
+      .hp-header-actions { display: flex; align-items: center; gap: 10px; }
+      .hp-hdr-msg-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+      .hp-hdr-msg-btn:hover {
+        transform: translateY(-2px) scale(1.06);
+      }
+      .hp-hdr-msg-tg {
+        background: rgba(0, 136, 204, 0.12);
+        border-color: rgba(0, 136, 204, 0.35);
+      }
+      .hp-hdr-msg-tg:hover {
+        background: rgba(0, 136, 204, 0.25);
+        border-color: #0088cc;
+        box-shadow: 0 0 10px rgba(0, 136, 204, 0.4);
+      }
+      .hp-hdr-msg-max {
+        background: rgba(255, 170, 68, 0.12);
+        border-color: rgba(255, 170, 68, 0.35);
+      }
+      .hp-hdr-msg-max:hover {
+        background: rgba(255, 170, 68, 0.25);
+        border-color: #FFAA44;
+        box-shadow: 0 0 10px rgba(255, 170, 68, 0.4);
+      }
+
 
       .hp-header-phone {
 
@@ -352,7 +387,10 @@
 
         .hp-logo-sub { font-size: 9px; letter-spacing: 1px; }
 
-        .hp-header-actions { gap: 8px; }
+        .hp-header-actions { gap: 6px; }
+        .hp-hdr-msg-btn { width: 32px; height: 32px; }
+        .hp-hdr-msg-btn svg { width: 15px; height: 15px; }
+
 
         .hp-header-phone {
 
@@ -3049,15 +3087,65 @@
 
 
       #hp-widget-lead {
-
         position: fixed;
-
-        bottom: 14px;
-
-        right: 14px;
-
+        bottom: 16px;
+        right: 16px;
         z-index: 9990;
-
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .hp-widget-msg-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(22, 13, 34, 0.94);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .hp-widget-msg-btn:hover {
+        transform: scale(1.08);
+      }
+      .hp-widget-msg-tg {
+        border: 1.5px solid rgba(0, 136, 204, 0.6);
+      }
+      .hp-widget-msg-tg:hover {
+        box-shadow: 0 0 14px rgba(0, 136, 204, 0.55);
+        border-color: #0088cc;
+      }
+      .hp-widget-msg-max {
+        border: 1.5px solid rgba(255, 170, 68, 0.6);
+      }
+      .hp-widget-msg-max:hover {
+        box-shadow: 0 0 14px rgba(255, 170, 68, 0.55);
+        border-color: #FFAA44;
+      }
+      @media (max-width: 480px) {
+        #hp-widget-lead {
+          bottom: 12px;
+          right: 10px;
+          gap: 6px;
+        }
+        .hp-widget-msg-btn {
+          width: 38px;
+          height: 38px;
+        }
+        .hp-widget-msg-btn svg {
+          width: 16px;
+          height: 16px;
+        }
+        .hp-widget-pulse-btn {
+          padding: 10px 14px;
+          font-size: 12.5px;
+        }
       }
 
       .hp-widget-pulse-btn {
@@ -3538,6 +3626,18 @@
           <span class="hp-phone-icon">📞</span>
 
           <span class="hp-phone-text">8 (993) 336-53-57</span>
+
+        </a>
+
+        <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-hdr-msg-btn hp-hdr-msg-tg" title="Написать в Telegram">
+
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+
+        </a>
+
+        <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-hdr-msg-btn hp-hdr-msg-max" title="Написать в MAX">
+
+          <svg viewBox="0 0 48 48" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#FFAA44"/></svg>
 
         </a>
 
@@ -5362,9 +5462,11 @@
 
     leadWidget.id = 'hp-widget-lead';
 
-    leadWidget.innerHTML = '<button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><span>✦</span> Подобрать срез</button>';
+    leadWidget.innerHTML = '<a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-widget-msg-btn hp-widget-msg-tg" title="Написать мастеру в Telegram"><svg viewBox="0 0 24 24" width="18" height="18" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg></a><a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-widget-msg-btn hp-widget-msg-max" title="Написать мастеру в MAX"><svg viewBox="0 0 48 48" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#FFAA44"/></svg></a><button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><span>✦</span> Подобрать срез</button>';
 
     document.body.appendChild(leadWidget);
+
+    setupActionButtons();
 
     window.addEventListener('scroll', function() {
       var leadSec = document.getElementById('lead-box');
