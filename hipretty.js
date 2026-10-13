@@ -1472,6 +1472,63 @@
 
       .hp-lead-section { padding: 40px 20px 70px; }
 
+      
+      /* БЛОК ДОВЕРИЯ: ЖИВЫЕ ФОТО СРЕЗКИ И ПОДГОТОВКИ */
+      .hp-lead-trust-gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        max-width: 480px;
+        margin: 0 auto 20px auto;
+      }
+      .hp-trust-card {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(244, 114, 182, 0.25);
+        background: rgba(22, 13, 34, 0.7);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        aspect-ratio: 3 / 4;
+        max-height: 200px;
+      }
+      .hp-trust-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+      .hp-trust-card:hover .hp-trust-img {
+        transform: scale(1.04);
+      }
+      .hp-trust-badge {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
+        padding: 5px 8px;
+        background: rgba(18, 9, 28, 0.88);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(244, 114, 182, 0.3);
+        border-radius: 8px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: center;
+      }
+      .hp-trust-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 6px #10B981;
+        flex-shrink: 0;
+      }
+
       .hp-lead-box {
 
         background: linear-gradient(135deg, rgba(38, 22, 54, 0.95) 0%, rgba(22, 12, 34, 0.98) 100%);
@@ -3227,6 +3284,24 @@
       @media (max-width: 420px) {
 
         .hp-lead-section { padding: 25px 6px 110px; }
+
+        .hp-lead-trust-gallery {
+          gap: 8px;
+          max-width: 100%;
+          margin: 0 auto 16px auto;
+        }
+        .hp-trust-card {
+          max-height: 135px;
+          border-radius: 12px;
+        }
+        .hp-trust-badge {
+          bottom: 5px;
+          left: 5px;
+          right: 5px;
+          padding: 3px 6px;
+          font-size: 9.5px;
+        }
+
 
         .hp-lead-box { padding: 26px 12px; border-radius: 18px; }
 
