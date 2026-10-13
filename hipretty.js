@@ -4120,6 +4120,25 @@
 
 
 
+        
+        <!-- БЛОК ДОВЕРИЯ: ЖИВЫЕ ФОТО СРЕЗКИ И ПОДГОТОВКИ -->
+        <div class="hp-lead-trust-gallery">
+          <div class="hp-trust-card">
+            <img src="https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/images/donor_cut.jpg" alt="Живой срез от одного донора" class="hp-trust-img" loading="lazy">
+            <div class="hp-trust-badge">
+              <span class="hp-trust-dot"></span>
+              <span>Срезка с донора</span>
+            </div>
+          </div>
+          <div class="hp-trust-card">
+            <img src="https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/images/salon_prep.jpg" alt="Подготовка и отбор прядей в салоне" class="hp-trust-img" loading="lazy">
+            <div class="hp-trust-badge">
+              <span class="hp-trust-dot"></span>
+              <span>Подготовка в салоне</span>
+            </div>
+          </div>
+        </div>
+
         <!-- СЛОТ ДЛЯ ОФИЦИАЛЬНОЙ РОДНОЙ TILDA-ФОРМЫ -->
 
         <div id="hp-tilda-form-slot"></div>
