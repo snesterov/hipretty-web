@@ -3601,7 +3601,7 @@
 
       <a href="https://hipretty.ru" class="hp-logo-wrap">
 
-        <div class="hp-logo">привет, волосы!</div>
+        <div class="hp-logo">hi, pretty!</div>
 
         <div class="hp-logo-sub">магазин волос • москва</div>
 
@@ -3739,7 +3739,7 @@
 
       <div class="hp-hero-girls-showcase">
 
-        <img src="https://static.tildacdn.com/tild6662-3065-4338-a165-323261623835/169.svg" alt="Магазин натуральных волос привет, волосы! — детские и славянские срезы" class="hp-girls-img" loading="eager">
+        <img src="https://static.tildacdn.com/tild6662-3065-4338-a165-323261623835/169.svg" alt="Магазин натуральных волос hi, pretty! — детские и славянские срезы" class="hp-girls-img" loading="eager">
 
         <div class="hp-hero-float-badge top-left">
 
@@ -4171,7 +4171,7 @@
 
         <div class="hp-footer-brand">
 
-          <div class="hp-footer-logo">привет, волосы!</div>
+          <div class="hp-footer-logo">hi, pretty!</div>
 
           <div style="font-size:13px;color:var(--hp-rose);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Магазин натуральных волос • Москва</div>
 
@@ -4275,7 +4275,7 @@
 
       <div class="hp-footer-bottom">
 
-        <div>© 2026 Магазин натуральных волос «привет, волосы!». Все права защищены.</div>
+        <div>© 2026 Магазин натуральных волос «hi, pretty!». Все права защищены.</div>
 
         <div class="hp-footer-bottom-links">
 
@@ -4333,7 +4333,7 @@
 
   <div id="hp-cookie-view-main" class="hp-cookie-view">
 
-    <div class="hp-cookie-title">«привет, волосы!» использует cookie</div>
+    <div class="hp-cookie-title">«hi, pretty!» использует cookie</div>
 
     <div class="hp-cookie-text">
 
@@ -4705,7 +4705,7 @@
 
         <h4>1. Общие положения</h4>
 
-        <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности данных, предпринимаемые магазином натуральных волос «привет, волосы!» (ИП Лесовая В. С., ИНН: 100201988457, ОГРНИП: 323774600090577).</p>
+        <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности данных, предпринимаемые магазином натуральных волос «hi, pretty!» (ИП Лесовая В. С., ИНН: 100201988457, ОГРНИП: 323774600090577).</p>
 
         <h4>2. Цели обработки персональных данных</h4>
 
