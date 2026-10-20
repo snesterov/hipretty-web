@@ -5192,6 +5192,10 @@
       lastContactClickTime = now;
       window.reachYmGoal('max_click');
       window.reachYmGoal('messenger_click');
+    } else if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp.com') !== -1) {
+      lastContactClickTime = now;
+      window.reachYmGoal('whatsapp_click');
+      window.reachYmGoal('messenger_click');
     }
   }, true);
 
