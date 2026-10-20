@@ -5051,36 +5051,50 @@
     } catch (err) {}
   };
 
-  // Global listeners for Tilda form success
-  if (typeof window.jQuery !== 'undefined') {
-    window.jQuery(document).on('tildaform:success', function() {
-      window.reachYmGoal('lead');
-      window.reachYmGoal('submitted');
-      window.reachYmGoal('order');
-      window.reachYmGoal('form_submit');
-      window.reachYmGoal('form4673146901');
-    });
-  }
-  document.addEventListener('tildaform:success', function() {
+  // СТРОГАЯ ЗАЩИТА ОТ ЗАДВОЕНИЯ КОНВЕРСИЙ ДЛЯ ЯНДЕКС.ДИРЕКТА (DEDUPLICATION SHIELD)
+  var sentYmLeadGoals = false;
+  window.sendLeadConversionGoals = function() {
+    if (sentYmLeadGoals) {
+      return; // Защита: цель уже отправлена, задвоение исключено на 100%!
+    }
+    sentYmLeadGoals = true;
+
     window.reachYmGoal('lead');
     window.reachYmGoal('submitted');
     window.reachYmGoal('order');
     window.reachYmGoal('form_submit');
     window.reachYmGoal('form4673146901');
+  };
+
+  // Перехват успеха формы Tilda (jQuery + Native event) с защитой от задвоения
+  if (typeof window.jQuery !== 'undefined') {
+    window.jQuery(document).on('tildaform:success', function() {
+      window.sendLeadConversionGoals();
+    });
+  }
+  document.addEventListener('tildaform:success', function() {
+    window.sendLeadConversionGoals();
   });
 
-  // Global listeners for phone & messenger clicks
+  // Защита от мульти-кликов по контактам (debounce 4 секунды)
+  var lastContactClickTime = 0;
   document.addEventListener('click', function(e) {
     var a = e.target.closest ? e.target.closest('a') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
+    var now = Date.now();
+    if (now - lastContactClickTime < 4000) return; // Исключаем спам-клики
+
     if (href.indexOf('tel:') === 0) {
+      lastContactClickTime = now;
       window.reachYmGoal('phone_click');
       window.reachYmGoal('contact_click');
     } else if (href.indexOf('t.me') !== -1) {
+      lastContactClickTime = now;
       window.reachYmGoal('telegram_click');
       window.reachYmGoal('messenger_click');
     } else if (href.indexOf('max.ru') !== -1) {
+      lastContactClickTime = now;
       window.reachYmGoal('max_click');
       window.reachYmGoal('messenger_click');
     }
@@ -5379,11 +5393,7 @@
             nameInp.value = nameInp.value + ' (' + chosenCutParam + ')';
           }
         }
-        window.reachYmGoal('lead');
-        window.reachYmGoal('submitted');
-        window.reachYmGoal('order');
-        window.reachYmGoal('form_submit');
-        window.reachYmGoal('form4673146901');
+        window.sendLeadConversionGoals();
       });
     }
   }
