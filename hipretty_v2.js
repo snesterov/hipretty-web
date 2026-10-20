@@ -5065,9 +5065,21 @@
   var sentYmLeadGoals = false;
   window.sendLeadConversionGoals = function() {
     if (sentYmLeadGoals) {
-      return; // Защита: цель уже отправлена, задвоение исключено на 100%!
+      return; // Защита: цель шлем строго один раз, без дублей на 100%!
     }
     sentYmLeadGoals = true;
+
+    // Виртуальный хит для URL-цели 'ЗАЯВКА' (ID 513400530, условие: URL содержит 'submitted')
+    try {
+      var ymId = 90792799;
+      if (typeof window.ym === 'function') {
+        window.ym(ymId, 'hit', 'https://hipretty.ru/sale2/submitted', {
+          title: 'Успешная заявка (подбор волос)'
+        });
+      } else if (window['yaCounter' + ymId]) {
+        window['yaCounter' + ymId].hit('https://hipretty.ru/sale2/submitted');
+      }
+    } catch (eHit) {}
 
     window.reachYmGoal('lead');
     window.reachYmGoal('submitted');
