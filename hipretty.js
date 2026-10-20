@@ -1,5 +1,15 @@
 (function() {
 
+  
+  // ===================== АВТОНОМНЫЙ АНТИФРОД & ЗАЩИТА ОТ СКЛИКИВАНИЯ =====================
+  window.hpHumanInteracted = false;
+  window.hpPageInitTime = Date.now();
+  ['mousemove', 'touchstart', 'scroll', 'keydown', 'click'].forEach(function(ev) {
+    window.addEventListener(ev, function() {
+      window.hpHumanInteracted = true;
+    }, { once: true, passive: true });
+  });
+
   // 1. Шрифт Cormorant Garamond и Montserrat
 
   if (!document.getElementById('hp-fonts')) {
@@ -5304,6 +5314,19 @@
       });
     }
 
+    
+    // Анти-бот: скрытая Honeypot ловушка
+    if (!form.querySelector('input[name="hp_user_website_trap"]')) {
+      var trap = document.createElement('input');
+      trap.type = 'text';
+      trap.name = 'hp_user_website_trap';
+      trap.tabIndex = -1;
+      trap.autocomplete = 'off';
+      trap.setAttribute('aria-hidden', 'true');
+      trap.style.cssText = 'position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;';
+      form.appendChild(trap);
+    }
+
     var submitBtnEl = form.querySelector('button[type="submit"], .t-submit');
     if (submitBtnEl) {
       submitBtnEl.style.setProperty('pointer-events', 'auto', 'important');
@@ -5327,16 +5350,57 @@
           return false;
         }
 
+        // АНТИФРОД УРОВЕНЬ 1: Honeypot проверка
+        var trapInp = form.querySelector('input[name="hp_user_website_trap"]');
+        if (trapInp && trapInp.value) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return false;
+        }
+
+        // АНТИФРОД УРОВЕНЬ 2: Time-gating (отсекаем скрипты-боты, заполняющие форму мгновенно)
+        var timeSpent = Date.now() - (window.hpPageInitTime || Date.now());
+        if (timeSpent < 3000) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          showCustomError(nameInp, 'Пожалуйста, проверьте данные перед отправкой');
+          return false;
+        }
+
+        // АНТИФРОД УРОВЕНЬ 3: Проверка реальной активности человека (тач / движение мыши / скролл)
+        if (!window.hpHumanInteracted) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return false;
+        }
+
         // 2. Валидация телефона (единое поле для всех каналов связи)
         var telInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
         var resInp = form.querySelector('.t-contact-method__phone-value .js-phonemask-result');
         var rawTel = (telInp ? telInp.value : '') || (resInp ? resInp.value : '');
         var digits = rawTel.replace(/\D/g, '');
 
-        if (!digits || digits.length < 5) {
+        if (!digits || digits.length < 10) {
           e.preventDefault();
           e.stopImmediatePropagation();
           showCustomError(telInp, 'Пожалуйста, укажите номер телефона');
+          return false;
+        }
+
+        // АНТИФРОД УРОВЕНЬ 4: Фильтр фейковых номеров-заглушек от ботов РСЯ
+        var last10 = digits.slice(-10);
+        var isDummy = false;
+        // Одинаковые цифры (например, 9999999999, 1111111111, 0000000000)
+        if (/^(\d)\1{9}$/.test(last10)) isDummy = true;
+        // Последовательности (1234567890, 0123456789, 9876543210)
+        if (last10 === '1234567890' || last10 === '0123456789' || last10 === '9876543210') isDummy = true;
+        // Очевидные циклические повторы (1212121212, 1231231231)
+        if (/^(\d{2,3})\1+$/.test(last10)) isDummy = true;
+
+        if (isDummy) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          showCustomError(telInp, 'Пожалуйста, укажите корректный номер');
           return false;
         }
 
