@@ -1343,31 +1343,30 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(244, 114, 182, 0.55);
       }
+      .hp-cut-messengers-label {
+        font-size: 11px;
+        color: var(--hp-muted);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2px;
+        margin-top: 3px;
+      }
       .hp-cut-messengers-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
       }
-      .hp-cut-link-tg, .hp-cut-link-max {
+      .hp-cut-link-max, .hp-cut-link-tg, .hp-cut-link-wa {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 8px 6px;
-        border-radius: 14px;
+        padding: 6px 3px;
+        border-radius: 12px;
         text-decoration: none;
         transition: all 0.2s ease;
-        line-height: 1.25;
-      }
-      .hp-cut-link-tg {
-        background: rgba(42, 171, 238, 0.12);
-        border: 1px solid rgba(42, 171, 238, 0.35);
-        color: #81D4FA !important;
-      }
-      .hp-cut-link-tg:hover {
-        background: rgba(42, 171, 238, 0.25);
-        border-color: #2AABEE;
-        transform: translateY(-1px);
+        line-height: 1.2;
       }
       .hp-cut-link-max {
         background: rgba(255, 170, 68, 0.12);
@@ -1379,13 +1378,35 @@
         border-color: #FFAA44;
         transform: translateY(-1px);
       }
+      .hp-cut-link-tg {
+        background: rgba(42, 171, 238, 0.12);
+        border: 1px solid rgba(42, 171, 238, 0.35);
+        color: #81D4FA !important;
+      }
+      .hp-cut-link-tg:hover {
+        background: rgba(42, 171, 238, 0.25);
+        border-color: #2AABEE;
+        transform: translateY(-1px);
+      }
+      .hp-cut-link-wa {
+        background: rgba(37, 211, 102, 0.12);
+        border: 1px solid rgba(37, 211, 102, 0.35);
+        color: #6ee7b7 !important;
+      }
+      .hp-cut-link-wa:hover {
+        background: rgba(37, 211, 102, 0.25);
+        border-color: #25D366;
+        transform: translateY(-1px);
+      }
       .hp-link-title {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 700;
+        white-space: nowrap;
       }
       .hp-link-sub {
-        font-size: 10px;
+        font-size: 9px;
         opacity: 0.85;
+        white-space: nowrap;
       }
       .hp-max-badge {
         color: #4ade80 !important;
@@ -3220,8 +3241,7 @@
           gap: 6px;
         }
         .hp-widget-msg-btn {
-          width: 38px;
-          height: 38px;
+          display: none !important; /* На смартфонах убираем лишние кружки, оставляем только чистую главную кнопку */
         }
         .hp-widget-msg-btn svg {
           width: 16px;
@@ -4691,14 +4711,22 @@
 
             <div class="hp-cut-actions">
               <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
+              <div class="hp-cut-messengers-label">
+                <span>Спросить в ЛС мастера:</span>
+                <span class="hp-max-badge">MAX без VPN</span>
+              </div>
               <div class="hp-cut-messengers-grid">
-                <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-link-tg" title="Открыть пост в Telegram">
-                  <span class="hp-link-title">Telegram</span>
-                  <span class="hp-link-sub">(если с VPN)</span>
+                <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Написать в ЛС в MAX">
+                  <span class="hp-link-title">ЛС в MAX</span>
+                  <span class="hp-link-sub hp-max-badge">РФ (без VPN)</span>
                 </a>
-                <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Открыть чат в MAX">
-                  <span class="hp-link-title">Чат MAX</span>
-                  <span class="hp-link-sub hp-max-badge">✓ без VPN (РФ)</span>
+                <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-cut-link-tg" title="Написать в ЛС в Telegram">
+                  <span class="hp-link-title">ЛС в TG</span>
+                  <span class="hp-link-sub">(с VPN)</span>
+                </a>
+                <a href="https://wa.me/79933365357" target="_blank" rel="noopener" class="hp-cut-link-wa" title="Написать в WhatsApp">
+                  <span class="hp-link-title">WhatsApp</span>
+                  <span class="hp-link-sub">чат</span>
                 </a>
               </div>
             </div>
