@@ -4746,7 +4746,7 @@
                   <span class="hp-vpn-sub">(нужен VPN)</span>
                   <div class="hp-vpn-btns">
                     <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-tg" title="Написать в Telegram">TG</a>
-                    <a href="https://wa.me/79933365357" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-wa" title="Написать в WhatsApp">WhatsApp</a>
+                    <a href="https://wa.me/79933365357?text=${encodeURIComponent('Здравствуйте! Интересует ' + item.title)}" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-wa" title="Написать в WhatsApp">WhatsApp</a>
                   </div>
                 </div>
               </div>
