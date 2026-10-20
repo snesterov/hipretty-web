@@ -4768,6 +4768,34 @@
 
   }
 
+  // Автоподгрузка свежих срезов из feed.json (если робот спарсил новые посты из Telegram)
+  var hpFeedSynced = false;
+  function syncFreshCutsFromFeed() {
+    if (hpFeedSynced) return;
+    hpFeedSynced = true;
+    try {
+      fetch('https://raw.githubusercontent.com/snesterov/hipretty-web/main/feed.json?t=' + Date.now())
+        .then(function(res) { return res.json(); })
+        .then(function(newFeed) {
+          if (Array.isArray(newFeed) && newFeed.length > 0) {
+            var knownIds = cutsDatabase.map(function(c) { return String(c.id); });
+            var toPrepend = [];
+            newFeed.forEach(function(item) {
+              if (item && item.id && knownIds.indexOf(String(item.id)) === -1) {
+                toPrepend.push(item);
+              }
+            });
+            if (toPrepend.length > 0) {
+              cutsDatabase = toPrepend.concat(cutsDatabase);
+              renderCatalogCards();
+            }
+          }
+        })
+        .catch(function() {});
+    } catch(e) {}
+  }
+  setTimeout(syncFreshCutsFromFeed, 600);
+
 
 
   var chosenCutParam = '';

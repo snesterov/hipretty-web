@@ -1,0 +1,52 @@
+name: Auto Sync Telegram Cuts
+
+on:
+  schedule:
+    # Runs every 4 hours (at 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC)
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # Allows manual run anytime from GitHub Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Telegram sync script
+        run: |
+          python .github/scripts/sync_telegram.py
+
+      - name: Commit and push changes if new cuts were added
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "New cuts detected! Committing and tagging..."
+            git add cuts/ feed.json hipretty.js hipretty_v2.js
+            git commit -m "Auto-sync: New cuts from Telegram @hi_pretty"
+            
+            # Create a timestamped tag for instant CDN pickup
+            TAG_NAME="sync-$(date +'%Y%m%d%H%M')"
+            git tag $TAG_NAME
+            git push origin main
+            git push origin $TAG_NAME
+            
+            # Purge jsDelivr cache
+            curl -s https://purge.jsdelivr.net/gh/snesterov/hipretty-web@main/hipretty_v2.js || true
+            curl -s https://purge.jsdelivr.net/gh/snesterov/hipretty-web@main/feed.json || true
+            curl -s https://purge.jsdelivr.net/gh/snesterov/hipretty-web@$TAG_NAME/hipretty_v2.js || true
+            echo "Successfully updated and purged CDN with tag $TAG_NAME"
+          else
+            echo "No new cuts to commit. Repository is up to date."
+          fi
