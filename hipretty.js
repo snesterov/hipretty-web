@@ -1195,27 +1195,57 @@
       }
 
       .hp-cut-price-tag {
-
         position: absolute;
-
-        bottom: 14px;
-
+        top: 14px;
         right: 14px;
-
         background: var(--hp-grad-btn);
-
         color: #1a0818;
-
-        padding: 6px 14px;
-
+        padding: 5px 12px;
         border-radius: 14px;
-
-        font-size: 13.5px;
-
+        font-size: 13px;
         font-weight: 700;
-
         box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-
+      }
+      .hp-cut-video-badge {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        background: rgba(14, 9, 21, 0.88);
+        border: 1px solid rgba(42, 171, 238, 0.6);
+        color: #fff !important;
+        padding: 8px 12px;
+        border-radius: 14px;
+        font-size: 11.5px;
+        font-weight: 600;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        z-index: 2;
+      }
+      .hp-cut-video-badge:hover {
+        background: rgba(42, 171, 238, 0.9);
+        border-color: #2AABEE;
+        transform: translateY(-2px);
+      }
+      .hp-cut-video-badge i {
+        font-style: normal;
+        font-size: 10px;
+        color: #81D4FA;
+      }
+      .hp-cut-video-badge:hover i {
+        color: #fff;
+      }
+      .hp-cut-video-badge svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        flex-shrink: 0;
       }
 
       .hp-cut-body {
@@ -1289,90 +1319,78 @@
       }
 
       .hp-cut-actions {
-
         display: flex;
-
-        gap: 10px;
-
+        flex-direction: column;
+        gap: 8px;
         margin-top: auto;
-
       }
-
       .hp-cut-btn {
-
-        flex: 1;
-
+        width: 100%;
         background: var(--hp-grad-btn);
-
         color: #1a0818 !important;
-
         text-align: center;
-
         padding: 12px 14px;
-
         border-radius: 20px;
-
         font-weight: 700;
-
         font-size: 13px;
-
         text-decoration: none;
-
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-
         cursor: pointer;
-
         border: none;
-
         box-shadow: 0 4px 14px rgba(244, 114, 182, 0.35);
-
       }
-
       .hp-cut-btn:hover {
-
         transform: translateY(-2px);
-
         box-shadow: 0 6px 20px rgba(244, 114, 182, 0.55);
-
       }
-
-      .hp-cut-btn-tg {
-
-        background: rgba(0, 136, 204, 0.18);
-
-        border: 1px solid rgba(0, 136, 204, 0.5);
-
-        color: #81D4FA !important;
-
-        padding: 12px 16px;
-
-        border-radius: 20px;
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        text-decoration: none;
-
-        display: inline-flex;
-
+      .hp-cut-messengers-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .hp-cut-link-tg, .hp-cut-link-max {
+        display: flex;
+        flex-direction: column;
         align-items: center;
-
         justify-content: center;
-
+        padding: 8px 6px;
+        border-radius: 14px;
+        text-decoration: none;
         transition: all 0.2s ease;
-
+        line-height: 1.25;
       }
-
-      .hp-cut-btn-tg:hover {
-
-        background: rgba(0, 136, 204, 0.35);
-
-        border-color: #0088cc;
-
+      .hp-cut-link-tg {
+        background: rgba(42, 171, 238, 0.12);
+        border: 1px solid rgba(42, 171, 238, 0.35);
+        color: #81D4FA !important;
       }
-
-
+      .hp-cut-link-tg:hover {
+        background: rgba(42, 171, 238, 0.25);
+        border-color: #2AABEE;
+        transform: translateY(-1px);
+      }
+      .hp-cut-link-max {
+        background: rgba(255, 170, 68, 0.12);
+        border: 1px solid rgba(255, 170, 68, 0.4);
+        color: #FFAA44 !important;
+      }
+      .hp-cut-link-max:hover {
+        background: rgba(255, 170, 68, 0.25);
+        border-color: #FFAA44;
+        transform: translateY(-1px);
+      }
+      .hp-link-title {
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .hp-link-sub {
+        font-size: 10px;
+        opacity: 0.85;
+      }
+      .hp-max-badge {
+        color: #4ade80 !important;
+        font-weight: 600;
+      }
 
       /* КВИЗ ПОДБОРА */
 
@@ -4646,13 +4664,13 @@
         <div class="hp-cut-card" data-id="${item.id}">
 
           <div class="hp-cut-img-wrap">
-
             <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.id}')">
-
             <span class="hp-cut-badge">${badgeText}</span>
-
             <span class="hp-cut-price-tag">${item.price}</span>
-
+            <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть видео среза в Telegram">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Видео среза в TG <i>(нужен VPN)</i></span>
+            </a>
           </div>
 
           <div class="hp-cut-body">
@@ -4672,11 +4690,17 @@
             <p class="hp-cut-desc">${item.desc}</p>
 
             <div class="hp-cut-actions">
-
-              <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Подобрать срез ✦</button>
-
-              <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-btn-tg" title="Открыть этот пост в Telegram @hi_pretty">В TG &rarr;</a>
-
+              <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
+              <div class="hp-cut-messengers-grid">
+                <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-link-tg" title="Открыть пост в Telegram">
+                  <span class="hp-link-title">Telegram</span>
+                  <span class="hp-link-sub">(если с VPN)</span>
+                </a>
+                <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Открыть чат в MAX">
+                  <span class="hp-link-title">Чат MAX</span>
+                  <span class="hp-link-sub hp-max-badge">✓ без VPN (РФ)</span>
+                </a>
+              </div>
             </div>
 
           </div>
