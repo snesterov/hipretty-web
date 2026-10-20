@@ -5540,14 +5540,27 @@
     if (!form.dataset.hpMounted) {
       form.dataset.hpMounted = 'true';
 
-      form.addEventListener('submit', function() {
-        if (chosenCutParam) {
-          if (nameInp && nameInp.value && nameInp.value.indexOf(chosenCutParam) === -1) {
-            nameInp.value = nameInp.value + ' (' + chosenCutParam + ')';
+      function injectCutDetails() {
+        if (!chosenCutParam) return;
+        var nameInp = form.querySelector('input[name="Name"]') || form.querySelector('input[name*="name" i]') || form.querySelector('input[type="text"]');
+        if (nameInp && nameInp.value) {
+          if (nameInp.value.indexOf(chosenCutParam) === -1) {
+            nameInp.value = nameInp.value.trim() + ' [' + chosenCutParam + ']';
           }
         }
+      }
+
+      form.addEventListener('submit', function() {
+        injectCutDetails();
         window.sendLeadConversionGoals();
       });
+
+      var sBtn = form.querySelector('button[type="submit"]') || form.querySelector('.t-submit');
+      if (sBtn) {
+        sBtn.addEventListener('click', function() {
+          injectCutDetails();
+        });
+      }
     }
   }
 
