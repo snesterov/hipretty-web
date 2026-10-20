@@ -4713,12 +4713,11 @@
               <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
               <div class="hp-cut-messengers-label">
                 <span>Спросить в ЛС мастера:</span>
-                <span class="hp-max-badge">MAX без VPN</span>
               </div>
               <div class="hp-cut-messengers-grid">
                 <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Написать в ЛС в MAX">
                   <span class="hp-link-title">ЛС в MAX</span>
-                  <span class="hp-link-sub hp-max-badge">РФ (без VPN)</span>
+                  <span class="hp-link-sub hp-max-badge">(без VPN)</span>
                 </a>
                 <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-cut-link-tg" title="Написать в ЛС в Telegram">
                   <span class="hp-link-title">ЛС в TG</span>
