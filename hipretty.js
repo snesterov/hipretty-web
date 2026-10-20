@@ -5015,6 +5015,89 @@
 
 
 
+  
+  // ===================== YANDEX METRIKA 90792799 & DIRECT CONVERSIONS =====================
+  (function initYandexMetrika() {
+    window.mainMetrikaId = 90792799;
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      if (!document.querySelector('script[src*="mc.yandex.ru/metrika/tag.js"]')) {
+        k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a);
+      }
+    })(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+
+    try {
+      window.ym(90792799, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+      });
+    } catch(e) {}
+
+    // Unblock Tilda plain-text analytics script if present
+    var plainScript = document.querySelector('script[type="text/plain"][data-tilda-cookie-type="analytics"]');
+    if (plainScript && plainScript.textContent) {
+      try {
+        var execCode = plainScript.textContent.replace(/setTimeout(function(){/i, '(function(){').replace(/},?s*d*);?s*$/i, '})();');
+        (new Function(execCode))();
+      } catch(e) {}
+    }
+  })();
+
+  window.reachYmGoal = function(goalName, params) {
+    try {
+      var id = 90792799;
+      if (typeof window.ym === 'function') {
+        window.ym(id, 'reachGoal', goalName, params);
+      } else {
+        window.ym = window.ym || function() { (window.ym.a = window.ym.a || []).push(arguments); };
+        window.ym(id, 'reachGoal', goalName, params);
+      }
+      if (window['yaCounter' + id]) {
+        window['yaCounter' + id].reachGoal(goalName, params);
+      }
+    } catch (err) {
+      console.warn('YM reachGoal error:', err);
+    }
+  };
+
+  // Global listeners for Tilda form success
+  if (typeof window.jQuery !== 'undefined') {
+    window.jQuery(document).on('tildaform:success', function() {
+      window.reachYmGoal('lead');
+      window.reachYmGoal('submitted');
+      window.reachYmGoal('order');
+      window.reachYmGoal('form_submit');
+      window.reachYmGoal('form4673146901');
+    });
+  }
+  document.addEventListener('tildaform:success', function() {
+    window.reachYmGoal('lead');
+    window.reachYmGoal('submitted');
+    window.reachYmGoal('order');
+    window.reachYmGoal('form_submit');
+    window.reachYmGoal('form4673146901');
+  });
+
+  // Global listeners for phone & messenger clicks
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.startsWith('tel:')) {
+      window.reachYmGoal('phone_click');
+      window.reachYmGoal('contact_click');
+    } else if (href.includes('t.me')) {
+      window.reachYmGoal('telegram_click');
+      window.reachYmGoal('messenger_click');
+    } else if (href.includes('max.ru')) {
+      window.reachYmGoal('max_click');
+      window.reachYmGoal('messenger_click');
+    }
+  }, true);
+
   function setupContactMethodSwitcher(form) {
     var methodContainer = form.querySelector('.t-contact-method__types-container');
     var valContainer = form.querySelector('.t-contact-method__value-container');
@@ -5037,7 +5120,7 @@
       phone: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="rgba(244,114,182,0.25)"/><path d="M7 9.8a12.5 12.5 0 005.2 5.2l1.8-1.8c.2-.2.5-.3.8-.2.9.3 1.9.5 2.9.5.4 0 .8.4.8.8v2.9c0 .4-.4.8-.8.8-7.5 0-13.7-6.2-13.7-13.7 0-.4.4-.8.8-.8H8c.4 0 .8.4.8.8 0 1 .2 2 .5 2.9.1.3 0 .6-.2.8L7 9.8z" fill="#f472b6"/></svg>',
       telegram: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.5 11.8l3.2 1.2 1.3 4.1c.2.5.8.6 1.1.2l1.9-1.9 3.8 2.8c.4.3 1 .1 1.1-.4l2.2-10.4c.1-.6-.4-1.1-1-.9L5.5 10.7c-.6.2-.6 1 0 1.1zm4.2 1l6.8-4.3c.2-.1.3.1.2.2l-5.6 5.1-.2 2.3-.8-2.6-.4-.7z" fill="#ffffff"/></svg>',
       whatsapp: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.5 14.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9c0 1.7 1.3 3.4 1.4 3.6.2.2 2.5 3.9 6.2 5.4.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.5z" fill="#ffffff"/></svg>',
-      max_messenger: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="#0080FF"/><path d="M6.5 15.5V8.5h2.2l2.3 4.5 2.3-4.5h2.2v7h-1.8v-4.8l-2.1 4.2h-1.2L8.3 10.7v4.8H6.5z" fill="#ffffff"/></svg>'
+      max_messenger: '<svg viewBox="0 0 48 48" width="20" height="20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#FFAA44"/></svg>'
     };
 
     var titles = {
@@ -5308,10 +5391,11 @@
             nameInp.value = nameInp.value + ' (' + chosenCutParam + ')';
           }
         }
-        if (typeof window.ym === 'function') {
-          window.ym(90792799, 'reachGoal', 'submitted');
-          window.ym(90792799, 'reachGoal', 'gamelead_send');
-        }
+        window.reachYmGoal('lead');
+        window.reachYmGoal('submitted');
+        window.reachYmGoal('order');
+        window.reachYmGoal('form_submit');
+        window.reachYmGoal('form4673146901');
       });
     }
   }
