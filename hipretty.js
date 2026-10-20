@@ -5023,7 +5023,7 @@
       m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
       m[i].l=1*new Date();
       if (!document.querySelector('script[src*="mc.yandex.ru/metrika/tag.js"]')) {
-        k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a);
+        k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;if(a&&a.parentNode){a.parentNode.insertBefore(k,a);}else{document.head.appendChild(k);}
       }
     })(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
 
@@ -5035,15 +5035,6 @@
         webvisor: true
       });
     } catch(e) {}
-
-    // Unblock Tilda plain-text analytics script if present
-    var plainScript = document.querySelector('script[type="text/plain"][data-tilda-cookie-type="analytics"]');
-    if (plainScript && plainScript.textContent) {
-      try {
-        var execCode = plainScript.textContent.replace(/setTimeout(function(){/i, '(function(){').replace(/},?s*d*);?s*$/i, '})();');
-        (new Function(execCode))();
-      } catch(e) {}
-    }
   })();
 
   window.reachYmGoal = function(goalName, params) {
@@ -5051,16 +5042,13 @@
       var id = 90792799;
       if (typeof window.ym === 'function') {
         window.ym(id, 'reachGoal', goalName, params);
-      } else {
-        window.ym = window.ym || function() { (window.ym.a = window.ym.a || []).push(arguments); };
+      } else if (window.ym) {
         window.ym(id, 'reachGoal', goalName, params);
       }
       if (window['yaCounter' + id]) {
         window['yaCounter' + id].reachGoal(goalName, params);
       }
-    } catch (err) {
-      console.warn('YM reachGoal error:', err);
-    }
+    } catch (err) {}
   };
 
   // Global listeners for Tilda form success
@@ -5083,16 +5071,16 @@
 
   // Global listeners for phone & messenger clicks
   document.addEventListener('click', function(e) {
-    var a = e.target.closest('a');
+    var a = e.target.closest ? e.target.closest('a') : null;
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (href.startsWith('tel:')) {
+    if (href.indexOf('tel:') === 0) {
       window.reachYmGoal('phone_click');
       window.reachYmGoal('contact_click');
-    } else if (href.includes('t.me')) {
+    } else if (href.indexOf('t.me') !== -1) {
       window.reachYmGoal('telegram_click');
       window.reachYmGoal('messenger_click');
-    } else if (href.includes('max.ru')) {
+    } else if (href.indexOf('max.ru') !== -1) {
       window.reachYmGoal('max_click');
       window.reachYmGoal('messenger_click');
     }
