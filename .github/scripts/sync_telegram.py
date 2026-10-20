@@ -149,19 +149,26 @@ def sync():
 
     print(f"Successfully processed {len(new_cuts)} new cuts! Inserting into catalog...")
 
-    # Insert into hipretty.js and hipretty_v2.js at the top of cutsDatabase
-    new_cuts_js_str = ",\n  ".join([json.dumps(c, ensure_ascii=False, indent=2) for c in new_cuts])
+    # Ensure total cuts is always divisible by 3 (so grid has no orphan single cards on PC)
     for js_path in [js_file, js_v2_file]:
         if os.path.exists(js_path):
             with open(js_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             idx = content.find('var cutsDatabase = [')
-            if idx != -1:
-                insert_pos = idx + len('var cutsDatabase = [\n  ')
-                updated_content = content[:insert_pos] + new_cuts_js_str + ",\n  " + content[insert_pos:]
-                with open(js_path, 'w', encoding='utf-8') as f:
-                    f.write(updated_content)
-                print(f"Updated cutsDatabase in {os.path.basename(js_path)}")
+            end_idx = content.find('];', idx) + 1
+            if idx != -1 and end_idx != -1:
+                try:
+                    cur_cuts = json.loads(content[idx + len('var cutsDatabase = '):end_idx])
+                    all_cuts = new_cuts + cur_cuts
+                    if len(all_cuts) % 3 != 0:
+                        all_cuts = all_cuts[:-(len(all_cuts) % 3)]
+                    new_js_data = json.dumps(all_cuts, ensure_ascii=False, indent=2)
+                    updated_content = content[:idx] + 'var cutsDatabase = ' + new_js_data + content[end_idx:]
+                    with open(js_path, 'w', encoding='utf-8') as f:
+                        f.write(updated_content)
+                    print(f"Updated cutsDatabase in {os.path.basename(js_path)} with {len(all_cuts)} cuts (clean grid x3)")
+                except Exception as e:
+                    print("Error updating cutsDatabase:", e)
 
     # Update feed.json as well
     if os.path.exists(feed_file):
