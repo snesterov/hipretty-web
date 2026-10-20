@@ -1346,67 +1346,92 @@
       .hp-cut-messengers-label {
         font-size: 11px;
         color: var(--hp-muted);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        margin-top: 4px;
         padding: 0 2px;
-        margin-top: 3px;
       }
-      .hp-cut-messengers-grid {
+      .hp-cut-messengers-split {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 6px;
-      }
-      .hp-cut-link-max, .hp-cut-link-tg, .hp-cut-link-wa {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 6px 3px;
-        border-radius: 12px;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        line-height: 1.2;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        align-items: stretch;
       }
       .hp-cut-link-max {
         background: rgba(255, 170, 68, 0.12);
         border: 1px solid rgba(255, 170, 68, 0.4);
         color: #FFAA44 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 8px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        line-height: 1.2;
       }
       .hp-cut-link-max:hover {
         background: rgba(255, 170, 68, 0.25);
         border-color: #FFAA44;
         transform: translateY(-1px);
       }
-      .hp-cut-link-tg {
-        background: rgba(42, 171, 238, 0.12);
-        border: 1px solid rgba(42, 171, 238, 0.35);
+      .hp-cut-vpn-group {
+        background: rgba(22, 13, 34, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 4px 6px 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .hp-vpn-sub {
+        font-size: 9px;
+        color: var(--hp-muted);
+        text-align: center;
+        line-height: 1;
+        margin-bottom: 4px;
+        opacity: 0.85;
+      }
+      .hp-vpn-btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+      }
+      .hp-vpn-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 2px;
+        border-radius: 8px;
+        font-size: 10.5px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      .hp-vpn-tg {
+        background: rgba(42, 171, 238, 0.18);
+        border: 1px solid rgba(42, 171, 238, 0.4);
         color: #81D4FA !important;
       }
-      .hp-cut-link-tg:hover {
-        background: rgba(42, 171, 238, 0.25);
+      .hp-vpn-tg:hover {
+        background: rgba(42, 171, 238, 0.32);
         border-color: #2AABEE;
-        transform: translateY(-1px);
       }
-      .hp-cut-link-wa {
-        background: rgba(37, 211, 102, 0.12);
-        border: 1px solid rgba(37, 211, 102, 0.35);
+      .hp-vpn-wa {
+        background: rgba(37, 211, 102, 0.18);
+        border: 1px solid rgba(37, 211, 102, 0.4);
         color: #6ee7b7 !important;
       }
-      .hp-cut-link-wa:hover {
-        background: rgba(37, 211, 102, 0.25);
+      .hp-vpn-wa:hover {
+        background: rgba(37, 211, 102, 0.32);
         border-color: #25D366;
-        transform: translateY(-1px);
       }
       .hp-link-title {
-        font-size: 11px;
+        font-size: 11.5px;
         font-weight: 700;
-        white-space: nowrap;
       }
       .hp-link-sub {
-        font-size: 9px;
+        font-size: 9.5px;
         opacity: 0.85;
-        white-space: nowrap;
       }
       .hp-max-badge {
         color: #4ade80 !important;
@@ -4711,22 +4736,19 @@
 
             <div class="hp-cut-actions">
               <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
-              <div class="hp-cut-messengers-label">
-                <span>Спросить в ЛС мастера:</span>
-              </div>
-              <div class="hp-cut-messengers-grid">
+              <div class="hp-cut-messengers-label">Написать мастеру в ЛС:</div>
+              <div class="hp-cut-messengers-split">
                 <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Написать в ЛС в MAX">
                   <span class="hp-link-title">ЛС в MAX</span>
-                  <span class="hp-link-sub hp-max-badge">(без VPN)</span>
+                  <span class="hp-link-sub hp-max-badge">✓ без VPN</span>
                 </a>
-                <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-cut-link-tg" title="Написать в ЛС в Telegram">
-                  <span class="hp-link-title">ЛС в TG</span>
-                  <span class="hp-link-sub">(с VPN)</span>
-                </a>
-                <a href="https://wa.me/79933365357" target="_blank" rel="noopener" class="hp-cut-link-wa" title="Написать в WhatsApp">
-                  <span class="hp-link-title">WhatsApp</span>
-                  <span class="hp-link-sub">чат</span>
-                </a>
+                <div class="hp-cut-vpn-group">
+                  <span class="hp-vpn-sub">(нужен VPN)</span>
+                  <div class="hp-vpn-btns">
+                    <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-tg" title="Написать в Telegram">TG</a>
+                    <a href="https://wa.me/79933365357" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-wa" title="Написать в WhatsApp">WhatsApp</a>
+                  </div>
+                </div>
               </div>
             </div>
 
