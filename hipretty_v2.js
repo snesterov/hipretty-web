@@ -2240,91 +2240,41 @@
         margin: 0 !important;
         width: 100% !important;
       }
-      /* Контейнер телефонной маски Тильды */
-      #hp-tilda-form-slot .t-input-phonemask__wrap {
-        display: flex !important;
-        align-items: center !important;
+      /* Единые чистые белые инпуты для формы (Имя и Телефон) */
+      #hp-tilda-form-slot input.t-input,
+      #hp-tilda-form-slot input[type="text"],
+      #hp-tilda-form-slot input[type="tel"],
+      #hp-tilda-form-slot .t-contact-method__phone-value input {
+        display: block !important;
         width: 100% !important;
-        background: rgba(14, 9, 21, 0.9) !important;
-        border: 1px solid var(--hp-border, rgba(244, 114, 182, 0.25)) !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        background: #ffffff !important;
+        color: #111111 !important;
+        border: 1.5px solid rgba(244, 114, 182, 0.35) !important;
         border-radius: 16px !important;
         padding: 0 18px !important;
-        height: 56px !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
         box-sizing: border-box !important;
-        position: relative !important;
+        outline: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
         transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
       }
-      #hp-tilda-form-slot .t-input-phonemask__wrap:focus-within {
+      #hp-tilda-form-slot input:focus {
         border-color: var(--hp-rose, #f472b6) !important;
-        box-shadow: 0 0 16px rgba(244, 114, 182, 0.3) !important;
+        box-shadow: 0 0 16px rgba(244, 114, 182, 0.4) !important;
+      }
+      #hp-tilda-form-slot input::placeholder,
+      #hp-tilda-form-slot input::-webkit-input-placeholder {
+        color: #888888 !important;
+        opacity: 1 !important;
       }
       #hp-tilda-form-slot .t-input-phonemask__select {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        margin-right: 12px !important;
-        padding-right: 12px !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
-        cursor: pointer !important;
-        color: #ffffff !important;
-        height: 100% !important;
-        flex-shrink: 0 !important;
-      }
-      #hp-tilda-form-slot .t-input-phonemask__select-code {
-        color: #ffffff !important;
-        font-family: 'Montserrat', sans-serif !important;
-        font-size: 15px !important;
-        font-weight: 600 !important;
-      }
-      #hp-tilda-form-slot .t-input-phonemask__select-triangle {
-        border-top-color: var(--hp-rose, #f472b6) !important;
-      }
-      #hp-tilda-form-slot input.t-input.t-input-phonemask {
-        background: transparent !important;
-        border: none !important;
-        border-radius: 0 !important;
-        padding: 0 !important;
-        height: 100% !important;
-        width: 100% !important;
-        flex: 1 !important;
-        box-shadow: none !important;
-        color: #ffffff !important;
-        font-size: 15.5px !important;
-        font-family: 'Montserrat', sans-serif !important;
-        outline: none !important;
-      }
-      #hp-tilda-form-slot .t-input-phonemask__options-wrap {
-        background: #1d0f28 !important;
-        border: 1px solid rgba(244, 114, 182, 0.4) !important;
-        border-radius: 14px !important;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8) !important;
-        color: #fff !important;
-        z-index: 99999999 !important;
-      }
-      #hp-tilda-form-slot .t-input-phonemask__options-item {
-        color: #ffffff !important;
-        font-family: 'Montserrat', sans-serif !important;
-        padding: 8px 14px !important;
-      }
-      #hp-tilda-form-slot .t-input-phonemask__options-item:hover,
-      #hp-tilda-form-slot .t-input-phonemask__options-item_chosen {
-        background: rgba(244, 114, 182, 0.2) !important;
-        color: #fff !important;
-      }
-      /* Обычные текстовые инпуты (Имя, Telegram ник, MAX ссылка) */
-      #hp-tilda-form-slot input.t-input:not(.t-input-phonemask):not(.t-input-phonemask__wrap),
-      #hp-tilda-form-slot textarea.t-input {
-        width: 100% !important;
-        background: rgba(14, 9, 21, 0.9) !important;
-        border: 1px solid var(--hp-border, rgba(244, 114, 182, 0.25)) !important;
-        border-radius: 16px !important;
-        padding: 16px 22px !important;
-        color: #ffffff !important;
-        font-size: 15.5px !important;
-        font-family: 'Montserrat', sans-serif !important;
-        outline: none !important;
-        box-sizing: border-box !important;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+        display: none !important;
       }
       #hp-tilda-form-slot input.t-input:not(.t-input-phonemask):focus,
       #hp-tilda-form-slot textarea.t-input:focus {
@@ -5390,6 +5340,40 @@
     // No MutationObserver to prevent event-loop freeze
   }
 
+
+    // Автоматическая маска телефона +7 (9XX) XXX-XX-XX
+    function attachCleanPhoneMask(inp) {
+      if (!inp || inp.dataset.cleanMaskSet) return;
+      inp.dataset.cleanMaskSet = 'true';
+      inp.placeholder = '+7 (___) ___-__-__';
+      inp.style.setProperty('background', '#ffffff', 'important');
+      inp.style.setProperty('color', '#111111', 'important');
+      inp.style.setProperty('display', 'block', 'important');
+
+      inp.addEventListener('input', function() {
+        var digits = inp.value.replace(/\D/g, '');
+        if (!digits) {
+          inp.value = '';
+          return;
+        }
+        if (digits[0] === '7' || digits[0] === '8') {
+          digits = digits.substring(1);
+        }
+        var formatted = '+7';
+        if (digits.length > 0) formatted += ' (' + digits.substring(0, 3);
+        if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
+        if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
+        if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
+        inp.value = formatted;
+      });
+
+      inp.addEventListener('focus', function() {
+        if (!inp.value) inp.value = '+7 (';
+      });
+      inp.addEventListener('blur', function() {
+        if (inp.value === '+7 (' || inp.value === '+7') inp.value = '';
+      });
+    }
   function mountTildaNativeForm() {
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
@@ -5434,7 +5418,7 @@
 
     var subBtn = form.querySelector('.t-btnflex__text, .t-submit');
     if (subBtn) {
-      subBtn.textContent = 'Получить расчет и сертификат 5 000 ₽';
+      subBtn.textContent = 'Получить подбор и фото среза ✦';
     }
 
     function showCustomError(inputEl, msg) {
@@ -5563,6 +5547,8 @@
     setTimeout(initPhoneMasks, 1200);
 
     setupContactMethodSwitcher(form);
+    var pInpEl = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]');
+    if (pInpEl) attachCleanPhoneMask(pInpEl);
 
     function installBulletproofTildaValidator() {
       var bulletproofValidator = function(formTarget) {
