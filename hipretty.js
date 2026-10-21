@@ -5782,15 +5782,21 @@
     if (!slot) return;
     if (slot.querySelector('#form4673146901, form') || slot.querySelector('.hp-success-card')) return;
 
-    slot.innerHTML = '<form id="form4673146901" name="form4673146901" role="form" action="https://forms.tildacdn.com/procces/" method="POST" data-formactiontype="2" data-inputbox=".t-input-group" data-success-popup="y" class="t-form js-form-proccess" data-formskey="a8a1a8151b151a0221d568e5a5500437" autocomplete="off" onsubmit="return false;">' +
-      '<input type="hidden" name="formservices[]" value="a8a1a8151b151a0221d568e5a5500437">' +
-      '<input type="hidden" name="tildaspec-formid" value="4673146901">' +
-      '<input type="hidden" name="tildaspec-formname" value="Заявка на подбор">' +
-      '<input type="hidden" name="tildaspec-pageid" value="297318909">' +
+    slot.innerHTML = '<form id="form546191949" name="form546191949" role="form" action="https://forms.tildacdn.com/procces/" method="POST" data-formactiontype="2" data-inputbox=".t-input-group" data-success-popup="y" class="t-form js-form-proccess" data-formskey="a8a1a8151b151a0221d568e5a5500437" autocomplete="off" onsubmit="return false;">' +
+      '<input type="hidden" name="formservices[]" value="b50f30259e15e3d8d5212d867a1d4954" class="js-formaction-services">' +
+      '<input type="hidden" name="formservices[]" value="f84b098f0cddc52c587a2c2f5e0fadfc" class="js-formaction-services">' +
+      '<input type="hidden" name="formservices[]" value="9f2f90b847bfb45b6924b750bb155691" class="js-formaction-services">' +
+      '<input type="hidden" name="formservices[]" value="3de76a792e289629ff456561531ed0ca" class="js-formaction-services">' +
+      '<input type="hidden" name="formservices[]" value="079d3725ab062a821f281c7010b7677f" class="js-formaction-services">' +
+      '<input type="hidden" name="tildaspec-formid" value="546191949">' +
+      '<input type="hidden" name="tildaspec-formname" value="Заявка на подбор со срезом">' +
+      '<input type="hidden" name="tildaspec-pageid" value="33796955">' +
       '<input type="hidden" name="tildaspec-projectid" value="5500437">' +
       '<input type="hidden" name="cut" id="hp-builtin-cut-hidden" value="">' +
       '<input type="hidden" name="messenger" id="hp-builtin-msg-hidden" value="">' +
       '<input type="hidden" name="Phone" id="hp-builtin-phone-hidden" value="">' +
+      '<input type="hidden" name="Textarea" id="hp-builtin-textarea-hidden" value="">' +
+      '<input type="hidden" name="Checkbox" value="yes">' +
       '<div class="t-form__inputsbox">' +
         '<div class="t-input-group">' +
           '<div class="hp-input-label">Ваше имя <span style="font-size:12px;font-weight:400;color:#b8acc7;">(как к вам обращаться)</span></div>' +
@@ -5965,20 +5971,96 @@
                   '• Устройство: ' + deviceText + '\n' +
                   '• Страница: ' + window.location.href.split('?')[0];
 
-      // 1. Прямая отправка в Telegram Бот (чистый текст без разметки - 100% доходимость)
-      var pureText = '🔥 Новая заявка с сайта!\n\n' +
-                     '👤 Имя: ' + clientName + '\n' +
-                     '📞 Телефон: ' + fPhone + '\n' +
-                     '💬 Способ связи: ' + methodText + '\n' +
-                     '✂️ Срез/запрос: ' + selectedCut + '\n\n' +
-                     '⚡ Быстрая связь:\n' +
-                     '• WhatsApp: ' + waLink + '\n' +
-                     '• MAX: ' + maxLink + '\n\n' +
-                     '📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n' +
-                     '📱 Устройство: ' + deviceText + '\n' +
-                     '🌐 Страница: ' + window.location.href.split('?')[0];
+      // 1. Формирование сопроводительного текста с быстрыми ссылками
+      var commentText = '✂️ Срез: ' + selectedCut + '\n💬 Связь: ' + methodText + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink + '\n📊 Источник: ' + utmSource + ' / ' + utmCampaign + '\n📱 Устройство: ' + deviceText;
 
+      // 2. Заполнение скрытых полей формы перед отправкой
+      var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
+      if (cutHidden) cutHidden.value = selectedCut;
+      var msgHidden = bForm.querySelector('#hp-builtin-msg-hidden');
+      if (msgHidden) msgHidden.value = methodText;
+      var phoneHidden = bForm.querySelector('#hp-builtin-phone-hidden');
+      if (phoneHidden) phoneHidden.value = fPhone;
+      var taHidden = bForm.querySelector('#hp-builtin-textarea-hidden');
+      if (taHidden) taHidden.value = commentText;
+
+      // 3. Доставка в Tilda Server Gateway с привязкой 5 рабочих сервисов (включая Telegram чат)
+      var servicesList = [
+        'b50f30259e15e3d8d5212d867a1d4954',
+        'f84b098f0cddc52c587a2c2f5e0fadfc',
+        '9f2f90b847bfb45b6924b750bb155691',
+        '3de76a792e289629ff456561531ed0ca',
+        '079d3725ab062a821f281c7010b7677f'
+      ];
+
+      var allRecords = document.getElementById('allrecords');
+      var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
+
+      // 3A. Вызов нативного метода Tilda
+      if (window.tildaForm && typeof window.tildaForm.send === 'function') {
+        try {
+          window.tildaForm.send(bForm, submitBtn, 2, formsKey);
+        } catch(err) {}
+      }
+
+      // 3B. Гарантированный фоновый POST запрос в Tilda со всеми 5 сервисами (form546191949)
       try {
+        var p1 = new URLSearchParams();
+        servicesList.forEach(function(s) { p1.append('formservices[]', s); });
+        p1.append('formid', 'form546191949');
+        p1.append('tildaspec-formid', '546191949');
+        p1.append('tildaspec-formname', 'Заявка на подбор со срезом (sale2)');
+        p1.append('tildaspec-pageid', '33796955');
+        p1.append('tildaspec-projectid', '5500437');
+        p1.append('Name', clientName);
+        p1.append('Phone', fPhone);
+        p1.append('cut', selectedCut);
+        p1.append('messenger', methodText);
+        p1.append('Textarea', commentText);
+        p1.append('Checkbox', 'yes');
+
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open('POST', 'https://forms.tildacdn.com/procces/', true);
+        xhr1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr1.send(p1.toString());
+      } catch(e) {}
+
+      // 3C. Дублирующий фоновый запрос (form1915062531) для полной надежности
+      try {
+        var p2 = new URLSearchParams();
+        servicesList.forEach(function(s) { p2.append('formservices[]', s); });
+        p2.append('formid', 'form1915062531');
+        p2.append('tildaspec-formid', '1915062531');
+        p2.append('tildaspec-formname', 'Заявка на подбор со срезом (sale2)');
+        p2.append('tildaspec-pageid', '297318909');
+        p2.append('tildaspec-projectid', '5500437');
+        p2.append('Name', clientName);
+        p2.append('Phone', fPhone);
+        p2.append('cut', selectedCut);
+        p2.append('messenger', methodText);
+        p2.append('Textarea', commentText);
+        p2.append('Checkbox', 'yes');
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open('POST', 'https://forms.tildacdn.com/procces/', true);
+        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr2.send(p2.toString());
+      } catch(e) {}
+
+      // 3D. Прямой запрос в Telegram Bot API для пользователей вне РФ / с VPN
+      try {
+        var pureText = '🔥 Новая заявка с сайта!\n\n' +
+                       '👤 Имя: ' + clientName + '\n' +
+                       '📞 Телефон: ' + fPhone + '\n' +
+                       '💬 Способ связи: ' + methodText + '\n' +
+                       '✂️ Срез/запрос: ' + selectedCut + '\n\n' +
+                       '⚡ Быстрая связь:\n' +
+                       '• WhatsApp: ' + waLink + '\n' +
+                       '• MAX: ' + maxLink + '\n\n' +
+                       '📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n' +
+                       '📱 Устройство: ' + deviceText + '\n' +
+                       '🌐 Страница: ' + window.location.href.split('?')[0];
+
         fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -5986,43 +6068,6 @@
             chat_id: '-1004296582963',
             text: pureText
           })
-        }).catch(function(err) {});
-      } catch(e) {}
-
-      // 2. Отправка через серверный шлюз Tilda (гарантирует доставку если у клиента заблокирован api.telegram.org)
-      try {
-        var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
-        if (cutHidden) cutHidden.value = selectedCut;
-        var msgHidden = bForm.querySelector('#hp-builtin-msg-hidden');
-        if (msgHidden) msgHidden.value = methodText;
-        var phoneHidden = bForm.querySelector('#hp-builtin-phone-hidden');
-        if (phoneHidden) phoneHidden.value = fPhone;
-
-        var allRecords = document.getElementById('allrecords');
-        var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
-
-        if (window.tildaForm && typeof window.tildaForm.send === 'function') {
-          try {
-            window.tildaForm.send(bForm, submitBtn, 2, formsKey);
-          } catch(err) {}
-        }
-
-        var tildaFormData = new FormData(bForm);
-        tildaFormData.append('Name', clientName);
-        tildaFormData.append('Phone', fPhone);
-        tildaFormData.append('cut', selectedCut);
-        tildaFormData.append('messenger', methodText);
-        tildaFormData.append('formid', 'form4673146901');
-        tildaFormData.append('formservices', formsKey);
-        tildaFormData.append('tildaspec-formid', '4673146901');
-        tildaFormData.append('tildaspec-formname', 'Заявка на подбор');
-        tildaFormData.append('tildaspec-pageid', '297318909');
-        tildaFormData.append('tildaspec-projectid', '5500437');
-
-        fetch('https://forms.tildacdn.com/procces/', {
-          method: 'POST',
-          body: tildaFormData,
-          mode: 'no-cors'
         }).catch(function(err) {});
       } catch(e) {}
 
