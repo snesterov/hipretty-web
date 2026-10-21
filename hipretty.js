@@ -2281,20 +2281,97 @@
         border-color: var(--hp-rose, #f472b6) !important;
         box-shadow: 0 0 16px rgba(244, 114, 182, 0.3) !important;
       }
+      #hp-tilda-form-slot input::placeholder,
       #hp-tilda-form-slot input::-webkit-input-placeholder,
-      #hp-tilda-form-slot textarea::-webkit-input-placeholder {
-        color: rgba(255, 255, 255, 0.45) !important;
-        opacity: 1 !important;
-      }
+      #hp-tilda-form-slot textarea::-webkit-input-placeholder,
       #hp-tilda-form-slot input::-moz-placeholder,
-      #hp-tilda-form-slot textarea::-moz-placeholder {
-        color: rgba(255, 255, 255, 0.45) !important;
-        opacity: 1 !important;
-      }
+      #hp-tilda-form-slot textarea::-moz-placeholder,
       #hp-tilda-form-slot input:-ms-input-placeholder,
       #hp-tilda-form-slot textarea:-ms-input-placeholder {
-        color: rgba(255, 255, 255, 0.45) !important;
+        color: #71717a !important;
         opacity: 1 !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__phone-value .t-input-block {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+      }
+      .hp-country-prefix {
+        position: absolute !important;
+        left: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+        padding: 5px 8px !important;
+        background: #f4f4f5 !important;
+        border: 1px solid #e4e4e7 !important;
+        border-radius: 10px !important;
+        cursor: pointer !important;
+        z-index: 10 !important;
+        user-select: none !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #18181b !important;
+        transition: background 0.15s ease !important;
+      }
+      .hp-country-prefix:hover {
+        background: #e4e4e7 !important;
+      }
+      .hp-country-prefix .hp-flag {
+        font-size: 17px !important;
+        line-height: 1 !important;
+      }
+      .hp-country-prefix .hp-code {
+        font-weight: 700 !important;
+        color: #111111 !important;
+        font-size: 14px !important;
+      }
+      .hp-country-dropdown {
+        position: absolute !important;
+        left: 0 !important;
+        top: calc(100% + 6px) !important;
+        background: #ffffff !important;
+        border: 1px solid rgba(244, 114, 182, 0.4) !important;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35) !important;
+        border-radius: 14px !important;
+        padding: 6px !important;
+        z-index: 1000 !important;
+        width: 250px !important;
+        display: none;
+        flex-direction: column !important;
+        gap: 2px !important;
+      }
+      .hp-country-dropdown.hp-show {
+        display: flex !important;
+      }
+      .hp-country-item {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        font-size: 13.5px !important;
+        font-weight: 500 !important;
+        color: #18181b !important;
+        transition: background 0.15s ease !important;
+      }
+      .hp-country-item:hover {
+        background: #fdf2f8 !important;
+        color: #db2777 !important;
+      }
+      .hp-country-item .hp-c-name {
+        flex: 1 !important;
+      }
+      .hp-country-item .hp-c-code {
+        font-weight: 600 !important;
+        color: #71717a !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__phone-value input[type="tel"] {
+        padding-left: 92px !important;
       }
       #hp-tilda-form-slot .hp-field-error-msg {
         color: #fca5a5 !important;
@@ -5410,29 +5487,103 @@
 
 
     // Автоматическая маска телефона +7 (9XX) XXX-XX-XX
+    var hpCurrentCountry = { code: '+7', flag: '🇷🇺', name: 'Россия' };
+
+    function renderCountryPrefix(valBlock, inp) {
+      if (!valBlock || valBlock.querySelector('#hp-country-prefix')) return;
+      var tBlock = valBlock.querySelector('.t-input-block') || valBlock;
+      tBlock.style.setProperty('position', 'relative', 'important');
+
+      var pref = document.createElement('div');
+      pref.id = 'hp-country-prefix';
+      pref.className = 'hp-country-prefix';
+      pref.innerHTML = '<span class="hp-flag">' + hpCurrentCountry.flag + '</span><span class="hp-code">' + hpCurrentCountry.code + '</span><svg class="hp-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+      var dropdown = document.createElement('div');
+      dropdown.id = 'hp-country-dropdown';
+      dropdown.className = 'hp-country-dropdown';
+
+      var countries = [
+        { code: '+7', flag: '🇷🇺', name: 'Россия' },
+        { code: '+375', flag: '🇧🇾', name: 'Беларусь' },
+        { code: '+7', flag: '🇰🇿', name: 'Казахстан' },
+        { code: '+374', flag: '🇦🇲', name: 'Армения' },
+        { code: '+995', flag: '🇬🇪', name: 'Грузия' },
+        { code: '+994', flag: '🇦🇿', name: 'Азербайджан' },
+        { code: '+998', flag: '🇺🇿', name: 'Узбекистан' },
+        { code: '+', flag: '🌍', name: 'Другая страна' }
+      ];
+
+      countries.forEach(function(c) {
+        var item = document.createElement('div');
+        item.className = 'hp-country-item';
+        item.innerHTML = '<span>' + c.flag + '</span><span class="hp-c-name">' + c.name + '</span><span class="hp-c-code">' + c.code + '</span>';
+        item.addEventListener('click', function(ev) {
+          ev.stopPropagation();
+          hpCurrentCountry = c;
+          pref.querySelector('.hp-flag').textContent = c.flag;
+          pref.querySelector('.hp-code').textContent = c.code;
+          dropdown.classList.remove('hp-show');
+          if (inp) {
+            inp.value = '';
+            inp.focus();
+          }
+        });
+        dropdown.appendChild(item);
+      });
+
+      pref.addEventListener('click', function(ev) {
+        ev.stopPropagation();
+        dropdown.classList.toggle('hp-show');
+      });
+
+      document.addEventListener('click', function(ev) {
+        if (!pref.contains(ev.target)) {
+          dropdown.classList.remove('hp-show');
+        }
+      });
+
+      tBlock.appendChild(pref);
+      tBlock.appendChild(dropdown);
+    }
+
     function attachCleanPhoneMask(inp) {
       if (!inp || inp.dataset.cleanMaskSet) return;
       inp.dataset.cleanMaskSet = 'true';
-      inp.placeholder = '+7 (999) 000-00-00';
+      inp.placeholder = '(999) 000-00-00';
       inp.setAttribute('autocomplete', 'tel');
       inp.setAttribute('inputmode', 'tel');
       inp.setAttribute('type', 'tel');
+      inp.setAttribute('name', 'phone');
       inp.style.setProperty('background', '#ffffff', 'important');
       inp.style.setProperty('color', '#111111', 'important');
       inp.style.setProperty('display', 'block', 'important');
+      inp.style.setProperty('padding-left', '92px', 'important');
+
+      var valBlock = inp.closest('.t-contact-method__phone-value') || inp.parentElement;
+      if (valBlock) renderCountryPrefix(valBlock, inp);
 
       function formatPhoneValue() {
-        var digits = inp.value.replace(/\D/g, '');
+        var val = inp.value;
+        if (!val) return;
+        var digits = val.replace(/\D/g, '');
         if (!digits) {
           inp.value = '';
           return;
         }
-        if (digits[0] === '7' || digits[0] === '8') {
-          digits = digits.substring(1);
+
+        // Если введен код страны в поле (например из буфера +7999... или 8999...)
+        if (hpCurrentCountry.code === '+7') {
+          if ((digits.length >= 11 && (digits[0] === '7' || digits[0] === '8')) || (digits.length === 10 && digits[0] === '8')) {
+            digits = digits.substring(1);
+          }
+        } else if (hpCurrentCountry.code === '+375' && digits.indexOf('375') === 0) {
+          digits = digits.substring(3);
         }
+
         digits = digits.substring(0, 10);
-        var formatted = '+7';
-        if (digits.length > 0) formatted += ' (' + digits.substring(0, 3);
+        var formatted = '';
+        if (digits.length > 0) formatted += '(' + digits.substring(0, 3);
         if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
         if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
         if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
@@ -5442,9 +5593,6 @@
       inp.addEventListener('input', formatPhoneValue);
       inp.addEventListener('change', formatPhoneValue);
       inp.addEventListener('paste', function() { setTimeout(formatPhoneValue, 10); });
-      inp.addEventListener('blur', function() {
-        if (inp.value === '+7 (' || inp.value === '+7') inp.value = '';
-      });
     }
 
   function mountTildaNativeForm() {
@@ -5637,7 +5785,8 @@
         var cbInp = form.querySelector('input[name="Checkbox"]');
         if (cbInp) cbInp.checked = true;
 
-        var cleanPhone = '+7' + digits.slice(-10);
+        var prefixCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
+        var cleanPhone = prefixCode + digits.slice(-10);
         if (telInp) telInp.value = cleanPhone;
         if (resInp) resInp.value = cleanPhone;
         form.querySelectorAll('input[type="tel"], input[name*="phone" i], input[name*="Phone" i], input[name="messenger-id"], .js-phonemask-result, input[name="tildaspec-phone-part[]"]').forEach(function(inp) {
@@ -5699,7 +5848,8 @@
         var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
 
         var lastDigits = digits.slice(-10);
-        var fPhone = '+7 (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
+        var pCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
+        var fPhone = pCode + ' (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
 
         var searchParams = new URLSearchParams(window.location.search);
         var utmSource = searchParams.get('utm_source') || 'Прямой / Органика';
@@ -5777,7 +5927,8 @@
 
     var nameInp = form.querySelector('input[name="Name"]');
     if (nameInp) {
-      nameInp.placeholder = 'Ваше имя';
+      nameInp.placeholder = 'Например, Анна';
+      nameInp.setAttribute('placeholder', 'Например, Анна');
       nameInp.setAttribute('autocomplete', 'name');
     }
 
