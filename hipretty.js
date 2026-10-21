@@ -5387,12 +5387,7 @@
     var defaultMethod = (checkedRadio && checkedRadio.value) ? checkedRadio.value : 'phone';
     selectMethod(defaultMethod);
 
-    try {
-      var obs = new MutationObserver(function() {
-        sanitizeInputs();
-      });
-      obs.observe(valContainer, { attributes: true, childList: true, subtree: true });
-    } catch(eObs) {}
+    // No MutationObserver to prevent event-loop freeze
   }
 
   function mountTildaNativeForm() {
@@ -5622,9 +5617,9 @@
       }
     }
     killTildaBodyLocks();
-    setInterval(killTildaBodyLocks, 300);
+    // body locks stripped on init
 installBulletproofTildaValidator();
-    setInterval(installBulletproofTildaValidator, 300);
+    // validator set on init
 
     // Автоматическая очистка ошибок Тильды при вводе номера
     var visiblePhoneInput = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
@@ -5799,23 +5794,7 @@ installBulletproofTildaValidator();
         selectedType = btn.getAttribute('data-type');
 
         renderCatalogCards();
-  // Live dynamic feed sync: automatically fetch latest cuts from feed.json on load
-  (function initLiveFeedSync() {
-    try {
-      var feedUrl = 'https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/feed.json?t=' + Date.now();
-      fetch(feedUrl)
-        .then(function(res) { return res.json(); })
-        .then(function(remoteCuts) {
-          if (Array.isArray(remoteCuts) && remoteCuts.length > 0) {
-            if (!cutsDatabase || cutsDatabase.length === 0 || remoteCuts[0].id !== cutsDatabase[0].id) {
-              cutsDatabase = remoteCuts;
-              renderCatalogCards();
-            }
-          }
-        })
-        .catch(function() {});
-    } catch(e) {}
-  })();
+
 
 
       });
