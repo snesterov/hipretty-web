@@ -5847,6 +5847,19 @@
       });
     }
 
+    // Синхронизация введенного номера между всеми вкладками (Телефон / WhatsApp / Telegram / MAX)
+    var allContactInputs = form.querySelectorAll('.t-contact-method__value-container input');
+    allContactInputs.forEach(function(inp) {
+      if (inp.dataset.hpSyncBound) return;
+      inp.dataset.hpSyncBound = 'true';
+      inp.addEventListener('input', function() {
+        var curVal = inp.value;
+        allContactInputs.forEach(function(other) {
+          if (other !== inp) other.value = curVal;
+        });
+      });
+    });
+
     var submitBtnEl = form.querySelector('button[type="submit"], .t-submit');
     if (submitBtnEl && !submitBtnEl.dataset.hpBound) {
       submitBtnEl.dataset.hpBound = 'true';
@@ -5858,9 +5871,9 @@
         e.preventDefault();
         e.stopPropagation();
 
-        // 1. Железная защита от дублей и мульти-кликов (минимум 10 сек интервал)
+        // 1. Защита от спам-кликов (дебаунс 5 секунд)
         var now = Date.now();
-        if (window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 10000)) {
+        if (window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 5000)) {
           return false;
         }
 
@@ -5873,10 +5886,44 @@
           return false;
         }
 
-        var telInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]');
-        var resInp = form.querySelector('.t-contact-method__phone-value .js-phonemask-result');
-        var rawTel = (telInp ? telInp.value : '') || (resInp ? resInp.value : '');
-        var digits = rawTel.replace(/\D/g, '');
+        // 2. УНИВЕРСАЛЬНЫЙ ПОИСК ТЕЛЕФОНА (проверяем ВСЕ инпуты в форме, включая WhatsApp, Telegram, MAX и Телефон)
+        var digits = '';
+        var telInp = null;
+        var candidateInputs = form.querySelectorAll('.t-contact-method__value-container input:not([type="hidden"]), input[type="tel"], input[name="phone"], input[name="messenger-id"]');
+
+        for (var i = 0; i < candidateInputs.length; i++) {
+          var cInp = candidateInputs[i];
+          var d = (cInp.value || '').replace(/\D/g, '');
+          if (d.length >= 10) {
+            digits = d;
+            telInp = cInp;
+            break;
+          }
+        }
+
+        // Если ровно 10 цифр не найдено, берем инпут с любыми цифрами для показа ошибки
+        if (!digits) {
+          for (var i = 0; i < candidateInputs.length; i++) {
+            var cInp = candidateInputs[i];
+            var d = (cInp.value || '').replace(/\D/g, '');
+            if (d.length > 0) {
+              digits = d;
+              telInp = cInp;
+              break;
+            }
+          }
+        }
+
+        // Если совсем ничего, берем видимый инпут
+        if (!telInp) {
+          for (var i = 0; i < candidateInputs.length; i++) {
+            if (candidateInputs[i].offsetParent !== null) {
+              telInp = candidateInputs[i];
+              break;
+            }
+          }
+          if (!telInp && candidateInputs.length > 0) telInp = candidateInputs[0];
+        }
 
         if (!digits || digits.length < 10) {
           showCustomError(telInp, 'Пожалуйста, укажите номер телефона');
@@ -5888,7 +5935,7 @@
           return false;
         }
 
-        // Фиксируем время отправки и блокируем кнопку моментально
+        // Фиксируем отправку
         window.hpLastLeadSubmitTime = now;
         submitBtnEl.disabled = true;
         submitBtnEl.style.setProperty('pointer-events', 'none', 'important');
@@ -5900,16 +5947,16 @@
 
         var prefixCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
         var cleanPhone = prefixCode + digits.slice(-10);
-        if (telInp) telInp.value = cleanPhone;
-        if (resInp) resInp.value = cleanPhone;
-        form.querySelectorAll('input[type="tel"], input[name*="phone" i], input[name*="Phone" i], input[name="messenger-id"], .js-phonemask-result, input[name="tildaspec-phone-part[]"]').forEach(function(inp) {
+
+        // Заполняем абсолютно все скрытые и открытые поля телефона единым номером
+        candidateInputs.forEach(function(inp) {
           inp.value = cleanPhone;
           inp.disabled = false;
         });
 
         sanitizeInactiveMessengerInputs(form);
 
-        // Сбор данных для Telegram
+        // Сбор данных
         var activeMethodEl = form.querySelector('.t-contact-method__type.t-contact-method__type_active');
         var methodType = activeMethodEl ? activeMethodEl.getAttribute('data-method-type') : 'phone';
         var methodLabels = {
@@ -5947,7 +5994,7 @@
                     '• Устройство: ' + deviceText + '\n' +
                     '• Страница: ' + window.location.href.split('?')[0];
 
-        // 1. Ровно ОДИН вызов в Telegram Бот (гарантированная доставка без дублей)
+        // 1. Моментальная отправка в Telegram Бот (без дублирования)
         try {
           fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
             method: 'POST',
@@ -5978,7 +6025,7 @@
           window.sendLeadConversionGoals();
         }
 
-        // 4. Мгновенная замена формы на красивую карточку подтверждения (невозможно кликнуть повторно)
+        // 4. Мгновенная замена формы на красивую карточку подтверждения
         var slot = document.getElementById('hp-tilda-form-slot');
         var successHtml = '<div class="hp-success-card">' +
           '<div class="hp-success-check">✓</div>' +
