@@ -2118,19 +2118,46 @@
         display: inline-block !important;
         line-height: 1 !important;
       }
-      #hp-tilda-form-slot .t-contact-method__value-container {
+      #hp-tilda-form-slot .t-contact-method__value-container,
+      #hp-tilda-form-slot .t-contact-method__value-container.t-contact-method__hidden {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
       }
-      #hp-tilda-form-slot .t-contact-method__value-container > div {
-        display: none !important;
+      #hp-tilda-form-slot .t-contact-method__phone-value,
+      #hp-tilda-form-slot .t-contact-method__phone-value.t-contact-method__hidden {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         width: 100% !important;
       }
-      #hp-tilda-form-slot .t-contact-method__value-container > div.hp-method-active {
+      #hp-tilda-form-slot .t-contact-method__phone-value .t-input-block {
         display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        margin: 0 !important;
       }
-      #hp-tilda-form-slot .t-contact-method__hidden,
+      #hp-tilda-form-slot .t-contact-method__phone-value input[type="tel"],
+      #hp-tilda-form-slot .t-contact-method__phone-value input.t-input,
+      #hp-tilda-form-slot .t-contact-method__phone-value .t-input-phonemask__wrap {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__telegram-value,
+      #hp-tilda-form-slot .t-contact-method__whatsapp-value,
+      #hp-tilda-form-slot .t-contact-method__max_messenger-value {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+      }
       #hp-tilda-form-slot .hp-block-hidden {
         display: none !important;
       }
@@ -5184,16 +5211,6 @@
 
     var methodBtns = methodContainer.querySelectorAll('.t-contact-method__type');
     var phoneVal = valContainer.querySelector('.t-contact-method__phone-value');
-    var tgVal = valContainer.querySelector('.t-contact-method__telegram-value');
-    var waVal = valContainer.querySelector('.t-contact-method__whatsapp-value');
-    var maxVal = valContainer.querySelector('.t-contact-method__max_messenger-value');
-
-    var valMap = {
-      'phone': phoneVal,
-      'telegram': tgVal,
-      'whatsapp': waVal,
-      'max_messenger': maxVal
-    };
 
     var icons = {
       phone: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="rgba(244,114,182,0.25)"/><path d="M7 9.8a12.5 12.5 0 005.2 5.2l1.8-1.8c.2-.2.5-.3.8-.2.9.3 1.9.5 2.9.5.4 0 .8.4.8.8v2.9c0 .4-.4.8-.8.8-7.5 0-13.7-6.2-13.7-13.7 0-.4.4-.8.8-.8H8c.4 0 .8.4.8.8 0 1 .2 2 .5 2.9.1.3 0 .6-.2.8L7 9.8z" fill="#f472b6"/></svg>',
@@ -5217,24 +5234,50 @@
       }
     });
 
-    function sanitizeInactiveMessengerInputs(formEl) {
-      if (!formEl) return;
-      var inactives = formEl.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value, .t-contact-method__hidden');
+    function sanitizeInputs() {
+      var inactives = form.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
       inactives.forEach(function(block, bIdx) {
+        block.style.setProperty('display', 'none', 'important');
         block.querySelectorAll('input').forEach(function(inp, iIdx) {
           inp.disabled = true;
           inp.removeAttribute('data-tilda-req');
           inp.removeAttribute('required');
           inp.classList.remove('js-tilda-rule');
-          inp.id = 'hp_inactive_m_' + bIdx + '_' + iIdx;
+          inp.removeAttribute('name');
+          inp.id = 'hp_inert_' + bIdx + '_' + iIdx;
         });
       });
-      var activePhone = formEl.querySelector('.t-contact-method__phone-value input[type="tel"]');
-      if (activePhone) {
-        activePhone.disabled = false;
-        activePhone.classList.add('js-tilda-rule');
-        activePhone.setAttribute('data-tilda-req', '1');
-        activePhone.id = 'input_1770920801992';
+
+      if (valContainer) {
+        valContainer.classList.remove('t-contact-method__hidden');
+        valContainer.style.setProperty('display', 'block', 'important');
+        valContainer.style.setProperty('visibility', 'visible', 'important');
+        valContainer.style.setProperty('opacity', '1', 'important');
+      }
+      if (phoneVal) {
+        phoneVal.classList.remove('t-contact-method__hidden');
+        phoneVal.style.setProperty('display', 'block', 'important');
+        phoneVal.style.setProperty('visibility', 'visible', 'important');
+        phoneVal.style.setProperty('opacity', '1', 'important');
+      }
+      var pInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]');
+      if (pInp) {
+        pInp.disabled = false;
+        pInp.setAttribute('data-tilda-req', '1');
+        pInp.classList.add('js-tilda-rule');
+        pInp.setAttribute('name', 'messenger-id');
+        pInp.id = 'input_1770920801992';
+        pInp.style.setProperty('display', 'block', 'important');
+        pInp.style.setProperty('visibility', 'visible', 'important');
+        pInp.style.setProperty('opacity', '1', 'important');
+        pInp.style.setProperty('pointer-events', 'auto', 'important');
+        var wrap = pInp.closest('.t-input-block') || pInp.closest('.t-input-phonemask__wrap');
+        if (wrap) {
+          wrap.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
+          wrap.style.setProperty('display', 'flex', 'important');
+          wrap.style.setProperty('visibility', 'visible', 'important');
+          wrap.style.setProperty('opacity', '1', 'important');
+        }
       }
     }
 
@@ -5253,50 +5296,7 @@
           if (r) r.checked = false;
         }
       });
-
-      // Всегда отображаем единое, надежное поле телефона с маской (+7, флаг)!
-      if (phoneVal) {
-        phoneVal.style.setProperty('display', 'block', 'important');
-        phoneVal.classList.remove('t-contact-method__hidden');
-        phoneVal.classList.add('hp-method-active');
-
-        var phoneInputs = phoneVal.querySelectorAll('input');
-        phoneInputs.forEach(function(inp) {
-          inp.disabled = false;
-          inp.classList.add('js-tilda-rule');
-          inp.setAttribute('data-tilda-req', '1');
-          inp.id = 'input_1770920801992';
-          var wrap = inp.closest('.t-input-block');
-          if (wrap) {
-            wrap.style.setProperty('display', 'block', 'important');
-            wrap.classList.remove('hp-block-hidden');
-          }
-        });
-      }
-
-      // Остальные блоки скрываем и ПОЛНОСТЬЮ разоружаем для валидатора Тильды:
-      // снимаем data-tilda-req и js-tilda-rule, меняем id, чтобы Тильда не считала их пустыми обязательными полями!
-      [tgVal, waVal, maxVal].forEach(function(block, bIdx) {
-        if (!block) return;
-        block.style.setProperty('display', 'none', 'important');
-        block.classList.add('t-contact-method__hidden');
-        block.classList.remove('hp-method-active');
-        var inps = block.querySelectorAll('input');
-        inps.forEach(function(inp, iIdx) {
-          inp.disabled = true;
-          inp.removeAttribute('data-tilda-req');
-          inp.removeAttribute('required');
-          inp.classList.remove('js-tilda-rule');
-          inp.id = 'hp_inactive_m_' + bIdx + '_' + iIdx;
-          var wrap = inp.closest('.t-input-block');
-          if (wrap) {
-            wrap.style.setProperty('display', 'none', 'important');
-            wrap.classList.add('hp-block-hidden');
-          }
-        });
-      });
-
-      sanitizeInactiveMessengerInputs(form);
+      sanitizeInputs();
     }
 
     methodBtns.forEach(function(btn) {
@@ -5309,8 +5309,15 @@
     });
 
     var checkedRadio = methodContainer.querySelector('input[type="radio"]:checked');
-    var defaultMethod = (checkedRadio && checkedRadio.value && valMap[checkedRadio.value]) ? checkedRadio.value : 'telegram';
+    var defaultMethod = (checkedRadio && checkedRadio.value) ? checkedRadio.value : 'phone';
     selectMethod(defaultMethod);
+
+    try {
+      var obs = new MutationObserver(function() {
+        sanitizeInputs();
+      });
+      obs.observe(valContainer, { attributes: true, childList: true, subtree: true });
+    } catch(eObs) {}
   }
 
   function mountTildaNativeForm() {
@@ -5320,8 +5327,6 @@
     var rec = document.getElementById('rec4673146901');
     if (!rec) return;
 
-    // ВАЖНО: Переносим ВЕСЬ блок #rec4673146901 внутрь слота!
-    // Не вырываем форму, чтобы все функции Тильды (телефонная маска с флагом и кодом +7, валидация и отправка) работали штатно!
     if (rec.parentElement !== slot) {
       slot.appendChild(rec);
     }
@@ -5357,7 +5362,6 @@
     form.style.setProperty('position', 'static', 'important');
     form.style.setProperty('transform', 'none', 'important');
 
-    // Заголовки и плашки
     var titleGroup = form.querySelector('.t-input-title');
     if (titleGroup) {
       titleGroup.textContent = 'Выберите удобный способ связи:';
@@ -5365,7 +5369,7 @@
 
     var subBtn = form.querySelector('.t-btnflex__text, .t-submit');
     if (subBtn) {
-      subBtn.textContent = 'Получить подбор и фото среза ✦';
+      subBtn.textContent = 'Получить расчет и сертификат 5 000 ₽';
     }
 
     function showCustomError(inputEl, msg) {
@@ -5408,8 +5412,6 @@
       });
     }
 
-    
-    // Анти-бот: скрытая Honeypot ловушка
     if (!form.querySelector('input[name="hp_user_website_trap"]')) {
       var trap = document.createElement('input');
       trap.type = 'text';
@@ -5427,9 +5429,6 @@
       submitBtnEl.style.setProperty('cursor', 'pointer', 'important');
       submitBtnEl.removeAttribute('disabled');
 
-      // Очищаем скрытые поля перед проверкой Тильды
-      sanitizeInactiveMessengerInputs(form);
-
       submitBtnEl.addEventListener('click', function(e) {
         if (submitBtnEl.tildaSendingStatus === '1') {
           submitBtnEl.tildaSendingStatus = '0';
@@ -5438,6 +5437,7 @@
 
         clearCustomErrors(form);
 
+        var nameInp = form.querySelector('input[name="Name"]');
         var nameVal = (nameInp ? nameInp.value : '').trim();
         if (!nameVal) {
           e.preventDefault();
@@ -5458,18 +5458,17 @@
           return false;
         }
 
-        // Автоматически отмечаем согласие, чтобы Тильда не ругалась на чекбокс
         var cbInp = form.querySelector('input[name="Checkbox"]');
         if (cbInp) cbInp.checked = true;
 
-        // Синхронизируем готовый номер телефона во все скрытые поля Тильды
         var cleanPhone = '+7' + digits.slice(-10);
+        if (telInp) telInp.value = cleanPhone;
+        if (resInp) resInp.value = cleanPhone;
         form.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
           inp.value = cleanPhone;
           inp.disabled = false;
         });
 
-        // Скрываем все предупреждения и ошибки
         form.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
           el.style.display = 'none';
           el.innerHTML = '';
@@ -5482,16 +5481,6 @@
       nameInp.placeholder = 'Ваше имя';
     }
 
-    var tgInp = form.querySelector('input[data-contact-method="telegram"]');
-    if (tgInp) {
-      tgInp.placeholder = 'Ник @username или номер телефона';
-    }
-    var maxInp = form.querySelector('input[data-contact-method="max_messenger"]');
-    if (maxInp) {
-      maxInp.placeholder = 'Ссылка на профиль MAX или телефон';
-    }
-
-    // Инициализируем телефонные маски Tilda
     function initPhoneMasks() {
       if (typeof window.t_form_phonemask__mulitple__load === 'function') {
         var maskInputs = rec.querySelectorAll('[data-phonemask-lid="1770920801992"]');
@@ -5500,11 +5489,6 @@
             window.t_form_phonemask__mulitple__load(maskInputs);
           } catch (e) {}
         }
-      }
-      if (typeof window.t_contactMethod__init === 'function') {
-        try {
-          window.t_contactMethod__init('4673146901', '1770920801992');
-        } catch (e) {}
       }
     }
 
@@ -5515,47 +5499,51 @@
 
     setupContactMethodSwitcher(form);
 
-    // Железный перехват валидатора Тильды: не даем Тильде ругаться на скрытые мессенджеры!
     function installBulletproofTildaValidator() {
-      if (window.tildaForm) {
-        window.tildaForm.validate = function(formTarget) {
-          var f = (typeof t_forms__getElement === 'function') ? t_forms__getElement(formTarget) : formTarget;
-          if (!f) return [];
-          var n = f.querySelector('input[name="Name"]');
-          var t = f.querySelector('.t-contact-method__phone-value input[type="tel"]') || f.querySelector('input[type="tel"]');
-          var nVal = (n ? n.value : '').trim();
-          var tVal = (t ? t.value : '').replace(/\D/g, '');
+      var bulletproofValidator = function(formTarget) {
+        var f = (typeof t_forms__getElement === 'function') ? t_forms__getElement(formTarget) : (formTarget || form);
+        if (!f) return [];
+        var n = f.querySelector('input[name="Name"]');
+        var t = f.querySelector('.t-contact-method__phone-value input[type="tel"]') || f.querySelector('input[type="tel"]');
+        var resInp = f.querySelector('.t-contact-method__phone-value .js-phonemask-result');
+        var nVal = (n ? n.value : '').trim();
+        var rawT = (t ? t.value : '') || (resInp ? resInp.value : '');
+        var tVal = rawT.replace(/\D/g, '');
 
-          var errs = [];
-          if (!nVal) {
-            errs.push({ obj: n, type: ['req'] });
-          }
-          if (!tVal || tVal.length < 10) {
-            errs.push({ obj: t, type: ['req'] });
-          }
+        var errs = [];
+        if (!nVal) {
+          errs.push({ obj: n, type: ['req'] });
+        }
+        if (!tVal || tVal.length < 10) {
+          errs.push({ obj: t, type: ['req'] });
+        }
 
-          if (errs.length === 0) {
-            var fullNum = '+7' + tVal.slice(-10);
-            f.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
-              inp.value = fullNum;
-              inp.disabled = false;
-            });
-            var cBox = f.querySelector('input[name="Checkbox"]');
-            if (cBox) cBox.checked = true;
-            f.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
-              el.style.display = 'none';
-              el.innerHTML = '';
-            });
-            return []; // ОШИБОК НЕТ, ТИЛЬДА МГНОВЕННО ОТПРАВЛЯЕТ ФОРМУ!
-          }
-          return errs;
-        };
-      }
+        if (errs.length === 0) {
+          var fullNum = '+7' + tVal.slice(-10);
+          if (t) t.value = fullNum;
+          if (resInp) resInp.value = fullNum;
+          f.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
+            inp.value = fullNum;
+            inp.disabled = false;
+          });
+          var cBox = f.querySelector('input[name="Checkbox"]');
+          if (cBox) cBox.checked = true;
+          f.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
+            el.style.display = 'none';
+            el.innerHTML = '';
+          });
+          return [];
+        }
+        return errs;
+      };
+
+      if (!window.tildaForm) window.tildaForm = {};
+      window.tildaForm.validate = bulletproofValidator;
+      window.validateForm = bulletproofValidator;
     }
 
     installBulletproofTildaValidator();
-    setInterval(installBulletproofTildaValidator, 500);
-
+    setInterval(installBulletproofTildaValidator, 300);
 
     // Автоматическая очистка ошибок Тильды при вводе номера
     var visiblePhoneInput = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
