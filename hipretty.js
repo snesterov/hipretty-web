@@ -2342,6 +2342,35 @@
         box-shadow: 0 12px 35px rgba(244, 114, 182, 0.6) !important;
       }
       #hp-tilda-form-slot .t-btn_wrap-effects { display: none !important; }
+      #hp-tilda-form-slot .hp-input-label {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        color: #fce7f3 !important;
+        margin-bottom: 8px !important;
+        margin-top: 14px !important;
+        text-align: left !important;
+        display: block !important;
+      }
+      #hp-tilda-form-slot .hp-contact-hint-box {
+        background: rgba(244, 114, 182, 0.08) !important;
+        border-left: 3px solid #f472b6 !important;
+        border-radius: 10px !important;
+        padding: 10px 14px !important;
+        margin: 10px 0 16px 0 !important;
+        font-size: 13px !important;
+        color: #fce7f3 !important;
+        line-height: 1.45 !important;
+        text-align: left !important;
+        transition: all 0.2s ease !important;
+      }
+      #hp-tilda-form-slot .hp-form-security-note {
+        font-size: 12px !important;
+        color: #b8acc7 !important;
+        text-align: center !important;
+        margin-top: 12px !important;
+        line-height: 1.4 !important;
+      }
       #hp-tilda-form-slot .js-successbox {
         background: rgba(16, 185, 129, 0.15) !important;
         border: 1px solid #10B981 !important;
@@ -5303,7 +5332,10 @@
         pInp.disabled = false;
         pInp.setAttribute('data-tilda-req', '1');
         pInp.classList.add('js-tilda-rule');
-        pInp.setAttribute('name', 'messenger-id');
+        pInp.setAttribute('name', 'phone');
+        pInp.setAttribute('autocomplete', 'tel');
+        pInp.setAttribute('inputmode', 'tel');
+        pInp.setAttribute('type', 'tel');
         pInp.id = 'input_1770920801992';
         pInp.style.setProperty('display', 'block', 'important');
         pInp.style.setProperty('visibility', 'visible', 'important');
@@ -5335,6 +5367,29 @@
         }
       });
       sanitizeInputs();
+
+      var hints = {
+        phone: '📞 <b>Звонок по телефону:</b> Мастер свяжется с вами в течение 10 минут, ответит на все вопросы и бесплатно подберет срез.',
+        telegram: '✈️ <b>Подбор в Telegram:</b> Укажите номер телефона. Мастер пришлет персональную подборку, фото и видео срезов в Telegram.',
+        whatsapp: '💬 <b>Подбор в WhatsApp:</b> Укажите номер телефона. Мастер отправит видео срезов при дневном свете и проконсультирует в чате WhatsApp.',
+        max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет варианты срезов без потери качества и без VPN.'
+      };
+      var hBox = form.querySelector('#hp-contact-hint-box');
+      if (hBox && hints[methodType]) {
+        hBox.innerHTML = hints[methodType];
+      }
+      var pLbl = form.querySelector('#hp-phone-label');
+      if (pLbl) {
+        if (methodType === 'telegram') {
+          pLbl.innerHTML = 'Номер телефона для Telegram <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для связи в чате)</span>';
+        } else if (methodType === 'whatsapp') {
+          pLbl.innerHTML = 'Номер WhatsApp <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для отправки видео)</span>';
+        } else if (methodType === 'max_messenger') {
+          pLbl.innerHTML = 'Номер телефона для MAX <span style="font-size:12px;font-weight:400;color:#b8acc7;">(без VPN)</span>';
+        } else {
+          pLbl.innerHTML = 'Номер телефона <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для звонка и подбора)</span>';
+        }
+      }
     }
 
     methodBtns.forEach(function(btn) {
@@ -5358,7 +5413,7 @@
     function attachCleanPhoneMask(inp) {
       if (!inp || inp.dataset.cleanMaskSet) return;
       inp.dataset.cleanMaskSet = 'true';
-      inp.placeholder = '+7 (___) ___-__-__';
+      inp.placeholder = '+7 (999) 000-00-00';
       inp.setAttribute('autocomplete', 'tel');
       inp.setAttribute('inputmode', 'tel');
       inp.setAttribute('type', 'tel');
@@ -5429,9 +5484,49 @@
     form.style.setProperty('position', 'static', 'important');
     form.style.setProperty('transform', 'none', 'important');
 
+    // Добавляем понятный лейбл над полем имени
+    var nameInputEl = form.querySelector('input[name="Name"]');
+    var nameGroup = nameInputEl ? (nameInputEl.closest('.t-input-group') || nameInputEl.parentElement) : null;
+    if (nameGroup && !form.querySelector('#hp-name-label')) {
+      var nameLbl = document.createElement('div');
+      nameLbl.id = 'hp-name-label';
+      nameLbl.className = 'hp-input-label';
+      nameLbl.innerHTML = 'Ваше имя <span style="font-size:12px;font-weight:400;color:#b8acc7;">(как к вам обращаться)</span>';
+      nameGroup.insertBefore(nameLbl, nameGroup.firstChild);
+    }
+
     var titleGroup = form.querySelector('.t-input-title');
     if (titleGroup) {
-      titleGroup.textContent = 'Выберите удобный способ связи:';
+      titleGroup.textContent = 'Куда прислать подбор и видео среза:';
+      titleGroup.className = 't-input-title hp-input-label';
+    }
+
+    // Добавляем лейбл над номером телефона
+    var valContainerEl = form.querySelector('.t-contact-method__value-container');
+    if (valContainerEl && !form.querySelector('#hp-phone-label')) {
+      var phoneLbl = document.createElement('div');
+      phoneLbl.id = 'hp-phone-label';
+      phoneLbl.className = 'hp-input-label';
+      phoneLbl.innerHTML = 'Номер телефона <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для звонка и подбора)</span>';
+      valContainerEl.insertBefore(phoneLbl, valContainerEl.firstChild);
+    }
+
+    // Добавляем плашку с понятной подсказкой под полем ввода
+    if (valContainerEl && !form.querySelector('#hp-contact-hint-box')) {
+      var hintBoxEl = document.createElement('div');
+      hintBoxEl.id = 'hp-contact-hint-box';
+      hintBoxEl.className = 'hp-contact-hint-box';
+      hintBoxEl.innerHTML = '📞 <b>Звонок по телефону:</b> Мастер свяжется с вами в течение 10 минут, ответит на все вопросы и бесплатно подберет срез.';
+      valContainerEl.appendChild(hintBoxEl);
+    }
+
+    // Подсказка безопасности под кнопкой отправки
+    var submitWrapEl = form.querySelector('.t-form__submit');
+    if (submitWrapEl && !form.querySelector('.hp-form-security-note')) {
+      var secNoteEl = document.createElement('div');
+      secNoteEl.className = 'hp-form-security-note';
+      secNoteEl.innerHTML = '🔒 Ваши данные защищены (152-ФЗ РФ). Консультация и подбор среза бесплатны и ни к чему вас не обязывают.';
+      submitWrapEl.appendChild(secNoteEl);
     }
 
     var subBtn = form.querySelector('.t-btnflex__text, .t-submit');
