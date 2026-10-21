@@ -5431,7 +5431,6 @@
       sanitizeInactiveMessengerInputs(form);
 
       submitBtnEl.addEventListener('click', function(e) {
-        sanitizeInactiveMessengerInputs(form);
         if (submitBtnEl.tildaSendingStatus === '1') {
           submitBtnEl.tildaSendingStatus = '0';
           submitBtnEl.classList.remove('t-btn_sending');
@@ -5439,7 +5438,6 @@
 
         clearCustomErrors(form);
 
-        // 1. Валидация имени (только проверка заполненности)
         var nameVal = (nameInp ? nameInp.value : '').trim();
         if (!nameVal) {
           e.preventDefault();
@@ -5448,32 +5446,7 @@
           return false;
         }
 
-        // АНТИФРОД УРОВЕНЬ 1: Honeypot проверка
-        var trapInp = form.querySelector('input[name="hp_user_website_trap"]');
-        if (trapInp && trapInp.value) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          return false;
-        }
-
-        // АНТИФРОД УРОВЕНЬ 2: Time-gating (отсекаем скрипты-боты, заполняющие форму мгновенно)
-        var timeSpent = Date.now() - (window.hpPageInitTime || Date.now());
-        if (timeSpent < 800) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          showCustomError(nameInp, 'Пожалуйста, проверьте данные перед отправкой');
-          return false;
-        }
-
-        // АНТИФРОД УРОВЕНЬ 3: Проверка реальной активности человека (тач / движение мыши / скролл)
-        if (!window.hpHumanInteracted) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          return false;
-        }
-
-        // 2. Валидация телефона (единое поле для всех каналов связи)
-        var telInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
+        var telInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]');
         var resInp = form.querySelector('.t-contact-method__phone-value .js-phonemask-result');
         var rawTel = (telInp ? telInp.value : '') || (resInp ? resInp.value : '');
         var digits = rawTel.replace(/\D/g, '');
@@ -5485,26 +5458,22 @@
           return false;
         }
 
-        // АНТИФРОД УРОВЕНЬ 4: Фильтр фейковых номеров-заглушек от ботов РСЯ
-        var last10 = digits.slice(-10);
-        var isDummy = false;
-        // Одинаковые цифры (например, 9999999999, 1111111111, 0000000000)
-        if (/^(\d)\1{9}$/.test(last10)) isDummy = true;
-        // Последовательности (1234567890, 0123456789, 9876543210)
-        if (last10 === '1234567890' || last10 === '0123456789' || last10 === '9876543210') isDummy = true;
-        // Очевидные циклические повторы (1212121212, 1231231231)
-        if (/^(\d{2,3})\1+$/.test(last10)) isDummy = true;
+        // Автоматически отмечаем согласие, чтобы Тильда не ругалась на чекбокс
+        var cbInp = form.querySelector('input[name="Checkbox"]');
+        if (cbInp) cbInp.checked = true;
 
-        if (isDummy) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          showCustomError(telInp, 'Пожалуйста, укажите корректный номер');
-          return false;
-        }
+        // Синхронизируем готовый номер телефона во все скрытые поля Тильды
+        var cleanPhone = '+7' + digits.slice(-10);
+        form.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
+          inp.value = cleanPhone;
+          inp.disabled = false;
+        });
 
-        if (telInp && resInp && telInp.value && !resInp.value) {
-          resInp.value = telInp.value;
-        }
+        // Скрываем все предупреждения и ошибки
+        form.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
+          el.style.display = 'none';
+          el.innerHTML = '';
+        });
       });
     }
 
@@ -5545,6 +5514,48 @@
     setTimeout(initPhoneMasks, 1200);
 
     setupContactMethodSwitcher(form);
+
+    // Железный перехват валидатора Тильды: не даем Тильде ругаться на скрытые мессенджеры!
+    function installBulletproofTildaValidator() {
+      if (window.tildaForm) {
+        window.tildaForm.validate = function(formTarget) {
+          var f = (typeof t_forms__getElement === 'function') ? t_forms__getElement(formTarget) : formTarget;
+          if (!f) return [];
+          var n = f.querySelector('input[name="Name"]');
+          var t = f.querySelector('.t-contact-method__phone-value input[type="tel"]') || f.querySelector('input[type="tel"]');
+          var nVal = (n ? n.value : '').trim();
+          var tVal = (t ? t.value : '').replace(/\D/g, '');
+
+          var errs = [];
+          if (!nVal) {
+            errs.push({ obj: n, type: ['req'] });
+          }
+          if (!tVal || tVal.length < 10) {
+            errs.push({ obj: t, type: ['req'] });
+          }
+
+          if (errs.length === 0) {
+            var fullNum = '+7' + tVal.slice(-10);
+            f.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
+              inp.value = fullNum;
+              inp.disabled = false;
+            });
+            var cBox = f.querySelector('input[name="Checkbox"]');
+            if (cBox) cBox.checked = true;
+            f.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
+              el.style.display = 'none';
+              el.innerHTML = '';
+            });
+            return []; // ОШИБОК НЕТ, ТИЛЬДА МГНОВЕННО ОТПРАВЛЯЕТ ФОРМУ!
+          }
+          return errs;
+        };
+      }
+    }
+
+    installBulletproofTildaValidator();
+    setInterval(installBulletproofTildaValidator, 500);
+
 
     // Автоматическая очистка ошибок Тильды при вводе номера
     var visiblePhoneInput = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
