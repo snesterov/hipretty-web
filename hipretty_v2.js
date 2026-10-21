@@ -2155,6 +2155,44 @@
         border-color: var(--hp-rose, #f472b6) !important;
         background: rgba(244, 114, 182, 0.12) !important;
       }
+      
+      #hp-tilda-form-slot .t-contact-method__type[data-method="phone"].hp-active {
+        background: rgba(244, 114, 182, 0.22) !important;
+        border-color: #f472b6 !important;
+        box-shadow: 0 0 16px rgba(244, 114, 182, 0.45) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="whatsapp"].hp-active {
+        background: rgba(37, 211, 102, 0.22) !important;
+        border-color: #25D366 !important;
+        box-shadow: 0 0 16px rgba(37, 211, 102, 0.45) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="telegram"].hp-active {
+        background: rgba(34, 158, 217, 0.22) !important;
+        border-color: #229ED9 !important;
+        box-shadow: 0 0 16px rgba(34, 158, 217, 0.45) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="max_messenger"].hp-active {
+        background: rgba(168, 85, 247, 0.22) !important;
+        border-color: #A855F7 !important;
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.45) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="phone"]:hover {
+        border-color: #f472b6 !important;
+        background: rgba(244, 114, 182, 0.12) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="whatsapp"]:hover {
+        border-color: #25D366 !important;
+        background: rgba(37, 211, 102, 0.12) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="telegram"]:hover {
+        border-color: #229ED9 !important;
+        background: rgba(34, 158, 217, 0.12) !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__type[data-method="max_messenger"]:hover {
+        border-color: #A855F7 !important;
+        background: rgba(168, 85, 247, 0.12) !important;
+      }
+
       #hp-tilda-form-slot .t-contact-method__type.hp-active,
       #hp-tilda-form-slot .t-contact-method__type:has(>.t-radio:checked) {
         background: rgba(244, 114, 182, 0.22) !important;
@@ -5757,26 +5795,26 @@
           '<div class="t-contact-method__types-container" id="hp-builtin-method-container">' +
             '<div class="t-contact-method__type hp-active" data-method="phone">' +
               '<div class="t-contact-method__type-label">' +
-                '<span style="font-size:18px;">📞</span>' +
-                '<span class="t-contact-method__title">Телефон</span>' +
+                '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="vertical-align:middle;flex-shrink:0;"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#F472B6"/></svg>' +
+                '<span class="t-contact-method__title" style="color:#fdfafd!important;">Телефон</span>' +
               '</div>' +
             '</div>' +
             '<div class="t-contact-method__type" data-method="whatsapp">' +
               '<div class="t-contact-method__type-label">' +
-                '<span style="font-size:18px;">💬</span>' +
-                '<span class="t-contact-method__title">WhatsApp</span>' +
+                '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="vertical-align:middle;flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.892.525 3.662 1.438 5.176L2.1 21.9l4.872-1.306A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.07 14.168c-.214.604-1.244 1.157-1.722 1.218-.456.058-1.042.083-1.684-.122-.39-.124-.892-.29-1.543-.573-2.723-1.182-4.502-3.953-4.639-4.135-.136-.182-1.1-1.464-1.1-2.793 0-1.328.694-1.982.94-2.247.246-.265.536-.331.715-.331.18 0 .358.002.513.01.166.008.388-.063.608.465.226.542.77 1.88.837 2.018.067.137.112.298.022.477-.09.18-.135.292-.269.448-.134.157-.282.35-.403.47-.135.135-.276.282-.119.55.157.269.697 1.148 1.493 1.856 1.026.912 1.892 1.194 2.161 1.328.269.135.426.113.583-.067.157-.18.672-.784.851-1.053.18-.269.358-.224.604-.134.246.09 1.566.738 1.834.872.269.135.448.202.515.314.067.112.067.65-.147 1.254z" fill="#25D366"/></svg>' +
+                '<span class="t-contact-method__title" style="color:#fdfafd!important;">WhatsApp</span>' +
               '</div>' +
             '</div>' +
             '<div class="t-contact-method__type" data-method="telegram">' +
               '<div class="t-contact-method__type-label">' +
-                '<span style="font-size:18px;">✈️</span>' +
-                '<span class="t-contact-method__title">Telegram</span>' +
+                '<svg viewBox="0 0 24 24" width="18" height="18" fill="#229ED9" style="vertical-align:middle;flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>' +
+                '<span class="t-contact-method__title" style="color:#fdfafd!important;">Telegram</span>' +
               '</div>' +
             '</div>' +
             '<div class="t-contact-method__type" data-method="max_messenger">' +
               '<div class="t-contact-method__type-label">' +
-                '<span style="font-size:18px;">🟣</span>' +
-                '<span class="t-contact-method__title">MAX</span>' +
+                '<svg viewBox="0 0 48 48" width="18" height="18" fill="none" style="vertical-align:middle;flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#A855F7"/></svg>' +
+                '<span class="t-contact-method__title" style="color:#fdfafd!important;">MAX</span>' +
               '</div>' +
             '</div>' +
           '</div>' +
