@@ -2419,6 +2419,31 @@
         box-shadow: 0 12px 35px rgba(244, 114, 182, 0.6) !important;
       }
       #hp-tilda-form-slot .t-btn_wrap-effects { display: none !important; }
+      /* Полное отключение белых оверлеев и попапов Тильды */
+      .t-popup,
+      .t-popup_show,
+      .t702,
+      .t702__wrapper,
+      #rec4673146901:not(#hp-tilda-form-slot *),
+      body > .t-popup,
+      .t-popup__container,
+      .cf-turnstile-wrapper,
+      .t-captcha {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+        background: transparent !important;
+        z-index: -9999 !important;
+      }
+      body.t-body_popupshowed,
+      html.t-body_popupshowed,
+      body.t-body_scroll-locked,
+      html.t-body_scroll-locked {
+        overflow: auto !important;
+        position: static !important;
+        height: auto !important;
+      }
       #hp-tilda-form-slot .hp-input-label {
         font-family: 'Montserrat', sans-serif !important;
         font-size: 13.5px !important;
@@ -5885,43 +5910,18 @@
           });
         } catch(e) {}
 
-        // --- BACKGROUND TILDA / CRM SUBMISSION ---
-        var allRecords = document.getElementById('allrecords');
-        var formsKey = allRecords ? allRecords.getAttribute('data-tilda-formskey') : '';
-        var formActionType = parseInt(form.getAttribute('data-formactiontype') || '2', 10);
+        // --- QUIET BACKGROUND TILDA / CRM BACKUP (NO CAPTCHA / NO POPUPS) ---
+        handleSuccess();
 
-        var sent = false;
-        if (window.tildaForm && typeof window.tildaForm.send === 'function') {
-          try {
-            var $form = (typeof window.jQuery !== 'undefined') ? window.jQuery(form) : form;
-            window.tildaForm.send($form, submitBtnEl, formActionType, formsKey);
-            sent = true;
-          } catch(err) {
-            console.error('tildaForm.send error:', err);
-            sent = false;
-          }
-        }
-
-        if (!sent) {
+        try {
           var actionUrl = form.getAttribute('action') || 'https://forms.tildacdn.com/procces/';
           var formData = new FormData(form);
           fetch(actionUrl, {
             method: 'POST',
             body: formData,
-            mode: 'cors'
-          }).then(function(res) {
-            handleSuccess();
-          }).catch(function(e) {
-            try {
-              form.submit();
-            } catch(subErr) {
-              handleError();
-            }
-          });
-        } else {
-          // Immediately show success UI while Tilda finishes in background
-          handleSuccess();
-        }
+            mode: 'no-cors'
+          }).catch(function(err) {});
+        } catch(e) {}
       });
     }
 
@@ -5997,6 +5997,15 @@
 
     
     function killTildaBodyLocks() {
+      if (window.tildaForm) {
+        window.tildaForm.showCaptcha = function() {};
+      }
+      document.querySelectorAll('.t-popup, .t-popup_show').forEach(function(p) {
+        if (!p.closest('#hp-tilda-form-slot')) {
+          p.classList.remove('t-popup_show');
+          p.style.setProperty('display', 'none', 'important');
+        }
+      });
       if (document.body.classList.contains('t-body_popupshowed') || document.body.classList.contains('t-body_scroll-locked')) {
         document.body.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
       }
