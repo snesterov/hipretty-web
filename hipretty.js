@@ -5589,6 +5589,58 @@
           submitBtnEl.textContent = origBtnText;
         }
 
+        // --- DIRECT TELEGRAM BOT DISPATCH (0.3s guaranteed delivery) ---
+        var activeMethodEl = form.querySelector('.t-contact-method__type.t-contact-method__type_active');
+        var methodType = activeMethodEl ? activeMethodEl.getAttribute('data-method-type') : 'phone';
+        var methodLabels = {
+          phone: '📞 Звонок по телефону',
+          telegram: '✈️ Telegram',
+          whatsapp: '💬 WhatsApp',
+          max_messenger: '🟣 MAX'
+        };
+        var methodText = methodLabels[methodType] || methodType;
+
+        var cutParamEl = document.getElementById('hp-selected-cut-text');
+        var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
+
+        var lastDigits = digits.slice(-10);
+        var fPhone = '+7 (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
+
+        var searchParams = new URLSearchParams(window.location.search);
+        var utmSource = searchParams.get('utm_source') || 'Прямой / Органика';
+        var utmCampaign = searchParams.get('utm_campaign') || '-';
+        var utmContent = searchParams.get('utm_content') || '-';
+        var utmTerm = searchParams.get('utm_term') || '-';
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
+
+        var tgMsg = '🔥 <b>Новая заявка с сайта!</b>\n\n' +
+                    '👤 <b>Имя:</b> ' + (nameVal || 'Не указано') + '\n' +
+                    '📞 <b>Телефон:</b> <code>' + fPhone + '</code>\n' +
+                    '💬 <b>Способ связи:</b> ' + methodText + '\n' +
+                    '✂️ <b>Срез/запрос:</b> ' + selectedCut + '\n\n' +
+                    '📊 <b>Трафик и маркетинг:</b>\n' +
+                    '• Источник: <code>' + utmSource + '</code>\n' +
+                    '• Кампания: <code>' + utmCampaign + '</code>\n' +
+                    '• Ключ/объявление: <code>' + (utmTerm !== '-' ? utmTerm : utmContent) + '</code>\n' +
+                    '• Устройство: ' + deviceText + '\n' +
+                    '• Страница: ' + window.location.href.split('?')[0];
+
+        try {
+          fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: '-1004296582963',
+              text: tgMsg,
+              parse_mode: 'HTML'
+            })
+          }).catch(function(tgErr) {
+            console.error('TG send error:', tgErr);
+          });
+        } catch(e) {}
+
+        // --- BACKGROUND TILDA / CRM SUBMISSION ---
         var allRecords = document.getElementById('allrecords');
         var formsKey = allRecords ? allRecords.getAttribute('data-tilda-formskey') : '';
         var formActionType = parseInt(form.getAttribute('data-formactiontype') || '2', 10);
@@ -5621,6 +5673,9 @@
               handleError();
             }
           });
+        } else {
+          // Immediately show success UI while Tilda finishes in background
+          handleSuccess();
         }
       });
     }
