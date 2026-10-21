@@ -4713,7 +4713,7 @@
 
           <div class="hp-cut-img-wrap">
             <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.id}')">
-            <span class="hp-cut-badge">${badgeText}</span>
+            <span class="hp-cut-badge">${badgeText}</span>${item.id === cutsDatabase[0].id ? '<span class="hp-cut-new-badge">★ Свежий (Пост #' + item.id + ')</span>' : ''}
             <span class="hp-cut-price-tag">${item.price}</span>
             <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть видео среза в Telegram">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -4731,7 +4731,7 @@
 
               <span>${item.weight}</span>
 
-              <span>Пост в канале</span>
+              <span class="hp-cut-post-tag">Пост #${item.id}</span>
 
             </div>
 
@@ -5718,6 +5718,24 @@
         selectedType = btn.getAttribute('data-type');
 
         renderCatalogCards();
+  // Live dynamic feed sync: automatically fetch latest cuts from feed.json on load
+  (function initLiveFeedSync() {
+    try {
+      var feedUrl = 'https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/feed.json?t=' + Date.now();
+      fetch(feedUrl)
+        .then(function(res) { return res.json(); })
+        .then(function(remoteCuts) {
+          if (Array.isArray(remoteCuts) && remoteCuts.length > 0) {
+            if (!cutsDatabase || cutsDatabase.length === 0 || remoteCuts[0].id !== cutsDatabase[0].id) {
+              cutsDatabase = remoteCuts;
+              renderCatalogCards();
+            }
+          }
+        })
+        .catch(function() {});
+    } catch(e) {}
+  })();
+
 
       });
 
