@@ -2419,6 +2419,84 @@
         box-shadow: 0 12px 35px rgba(244, 114, 182, 0.6) !important;
       }
       #hp-tilda-form-slot .t-btn_wrap-effects { display: none !important; }
+      .hp-success-card {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.08) 100%) !important;
+        border: 2px solid #10B981 !important;
+        border-radius: 20px !important;
+        padding: 32px 20px !important;
+        text-align: center !important;
+        box-shadow: 0 16px 45px rgba(16, 185, 129, 0.25) !important;
+        animation: hpSuccessFadeIn 0.35s ease forwards !important;
+        margin: 10px 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      @keyframes hpSuccessFadeIn {
+        from { opacity: 0; transform: scale(0.96); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .hp-success-check {
+        width: 64px !important;
+        height: 64px !important;
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+        color: #ffffff !important;
+        font-size: 34px !important;
+        font-weight: 700 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 auto 16px auto !important;
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45) !important;
+      }
+      .hp-success-title {
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 30px !important;
+        font-weight: 700 !important;
+        color: #fdfafd !important;
+        margin: 0 0 10px 0 !important;
+        letter-spacing: 0.5px !important;
+      }
+      .hp-success-desc {
+        font-size: 14.5px !important;
+        color: #e2e8f0 !important;
+        line-height: 1.5 !important;
+        margin: 0 0 20px 0 !important;
+      }
+      .hp-success-info-box {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 14px !important;
+        padding: 14px 18px !important;
+        text-align: left !important;
+        margin-bottom: 18px !important;
+      }
+      .hp-success-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 7px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+        font-size: 13.5px !important;
+      }
+      .hp-success-row:last-child {
+        border-bottom: none !important;
+      }
+      .hp-s-label {
+        color: #b8acc7 !important;
+      }
+      .hp-s-val {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+      }
+      .hp-success-tip {
+        font-size: 13px !important;
+        color: #6ee7b7 !important;
+        background: rgba(16, 185, 129, 0.12) !important;
+        padding: 10px 14px !important;
+        border-radius: 10px !important;
+        line-height: 1.45 !important;
+      }
       /* Полное отключение белых оверлеев и попапов Тильды */
       .t-popup,
       .t-popup_show,
@@ -5770,7 +5848,8 @@
     }
 
     var submitBtnEl = form.querySelector('button[type="submit"], .t-submit');
-    if (submitBtnEl) {
+    if (submitBtnEl && !submitBtnEl.dataset.hpBound) {
+      submitBtnEl.dataset.hpBound = 'true';
       submitBtnEl.style.setProperty('pointer-events', 'auto', 'important');
       submitBtnEl.style.setProperty('cursor', 'pointer', 'important');
       submitBtnEl.removeAttribute('disabled');
@@ -5779,7 +5858,9 @@
         e.preventDefault();
         e.stopPropagation();
 
-        if (submitBtnEl.tildaSendingStatus === '1') {
+        // 1. Железная защита от дублей и мульти-кликов (минимум 10 сек интервал)
+        var now = Date.now();
+        if (window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 10000)) {
           return false;
         }
 
@@ -5807,6 +5888,13 @@
           return false;
         }
 
+        // Фиксируем время отправки и блокируем кнопку моментально
+        window.hpLastLeadSubmitTime = now;
+        submitBtnEl.disabled = true;
+        submitBtnEl.style.setProperty('pointer-events', 'none', 'important');
+        submitBtnEl.style.setProperty('opacity', '0.7', 'important');
+        submitBtnEl.textContent = 'Отправка заявки...';
+
         var cbInp = form.querySelector('input[name="Checkbox"]');
         if (cbInp) cbInp.checked = true;
 
@@ -5821,44 +5909,7 @@
 
         sanitizeInactiveMessengerInputs(form);
 
-        form.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
-          el.style.display = 'none';
-          el.innerHTML = '';
-        });
-
-        submitBtnEl.classList.add('t-btn_sending');
-        submitBtnEl.tildaSendingStatus = '1';
-        var origBtnText = submitBtnEl.textContent;
-        submitBtnEl.textContent = 'Отправка заявки...';
-
-        function handleSuccess() {
-          submitBtnEl.tildaSendingStatus = '0';
-          submitBtnEl.classList.remove('t-btn_sending');
-          var sBox = form.querySelector('.js-successbox');
-          if (sBox) {
-            sBox.style.setProperty('display', 'block', 'important');
-            sBox.innerHTML = '<div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#10B981;">✓ Заявка успешно отправлена!</div><div style="color:#e2e8f0;font-size:15px;">Мастер уже подбирает срез и свяжется с вами в течение 10 минут.</div>';
-          }
-          var inputsWrap = form.querySelector('.t-form__inputsbox') || form.querySelector('.t-form__wrapper');
-          if (inputsWrap) inputsWrap.style.display = 'none';
-          submitBtnEl.style.display = 'none';
-
-          if (typeof window.sendLeadConversionGoals === 'function') {
-            window.sendLeadConversionGoals();
-          }
-          document.dispatchEvent(new CustomEvent('tildaform:success', { detail: { form: form } }));
-          if (typeof window.jQuery !== 'undefined') {
-            window.jQuery(document).trigger('tildaform:success', [form]);
-          }
-        }
-
-        function handleError() {
-          submitBtnEl.tildaSendingStatus = '0';
-          submitBtnEl.classList.remove('t-btn_sending');
-          submitBtnEl.textContent = origBtnText;
-        }
-
-        // --- DIRECT TELEGRAM BOT DISPATCH (0.3s guaranteed delivery) ---
+        // Сбор данных для Telegram
         var activeMethodEl = form.querySelector('.t-contact-method__type.t-contact-method__type_active');
         var methodType = activeMethodEl ? activeMethodEl.getAttribute('data-method-type') : 'phone';
         var methodLabels = {
@@ -5896,6 +5947,7 @@
                     '• Устройство: ' + deviceText + '\n' +
                     '• Страница: ' + window.location.href.split('?')[0];
 
+        // 1. Ровно ОДИН вызов в Telegram Бот (гарантированная доставка без дублей)
         try {
           fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
             method: 'POST',
@@ -5910,9 +5962,7 @@
           });
         } catch(e) {}
 
-        // --- QUIET BACKGROUND TILDA / CRM BACKUP (NO CAPTCHA / NO POPUPS) ---
-        handleSuccess();
-
+        // 2. Фоновое резервирование в Тильду
         try {
           var actionUrl = form.getAttribute('action') || 'https://forms.tildacdn.com/procces/';
           var formData = new FormData(form);
@@ -5922,6 +5972,32 @@
             mode: 'no-cors'
           }).catch(function(err) {});
         } catch(e) {}
+
+        // 3. Отправка целей в Яндекс Метрику для Директа
+        if (typeof window.sendLeadConversionGoals === 'function') {
+          window.sendLeadConversionGoals();
+        }
+
+        // 4. Мгновенная замена формы на красивую карточку подтверждения (невозможно кликнуть повторно)
+        var slot = document.getElementById('hp-tilda-form-slot');
+        var successHtml = '<div class="hp-success-card">' +
+          '<div class="hp-success-check">✓</div>' +
+          '<h3 class="hp-success-title">Заявка успешно принята!</h3>' +
+          '<p class="hp-success-desc">Мастер уже получил ваш запрос и свяжется с вами в течение 10 минут.</p>' +
+          '<div class="hp-success-info-box">' +
+            '<div class="hp-success-row"><span class="hp-s-label">Имя:</span><span class="hp-s-val">' + (nameVal || 'Клиент') + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Телефон:</span><span class="hp-s-val">' + fPhone + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Способ связи:</span><span class="hp-s-val">' + methodText + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Срез/запрос:</span><span class="hp-s-val">' + selectedCut + '</span></div>' +
+          '</div>' +
+          '<div class="hp-success-tip">⚡ <b>Статус:</b> Заявка зафиксирована, мастер готовит видео среза. Пожалуйста, ожидайте ответа.</div>' +
+        '</div>';
+
+        if (slot) {
+          slot.innerHTML = successHtml;
+        } else {
+          form.innerHTML = successHtml;
+        }
       });
     }
 
