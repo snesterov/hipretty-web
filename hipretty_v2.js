@@ -5780,9 +5780,17 @@
 
   function renderBuiltinLeadForm(slot) {
     if (!slot) return;
-    if (slot.querySelector('#hp-builtin-lead-form') || slot.querySelector('.hp-success-card')) return;
+    if (slot.querySelector('#form4673146901, form') || slot.querySelector('.hp-success-card')) return;
 
-    slot.innerHTML = '<form id="hp-builtin-lead-form" class="t-form" autocomplete="off" onsubmit="return false;">' +
+    slot.innerHTML = '<form id="form4673146901" name="form4673146901" role="form" action="https://forms.tildacdn.com/procces/" method="POST" data-formactiontype="2" data-inputbox=".t-input-group" data-success-popup="y" class="t-form js-form-proccess" data-formskey="a8a1a8151b151a0221d568e5a5500437" autocomplete="off" onsubmit="return false;">' +
+      '<input type="hidden" name="formservices[]" value="a8a1a8151b151a0221d568e5a5500437">' +
+      '<input type="hidden" name="tildaspec-formid" value="4673146901">' +
+      '<input type="hidden" name="tildaspec-formname" value="Заявка на подбор">' +
+      '<input type="hidden" name="tildaspec-pageid" value="297318909">' +
+      '<input type="hidden" name="tildaspec-projectid" value="5500437">' +
+      '<input type="hidden" name="cut" id="hp-builtin-cut-hidden" value="">' +
+      '<input type="hidden" name="messenger" id="hp-builtin-msg-hidden" value="">' +
+      '<input type="hidden" name="Phone" id="hp-builtin-phone-hidden" value="">' +
       '<div class="t-form__inputsbox">' +
         '<div class="t-input-group">' +
           '<div class="hp-input-label">Ваше имя <span style="font-size:12px;font-weight:400;color:#b8acc7;">(как к вам обращаться)</span></div>' +
@@ -5956,47 +5964,63 @@
                   '• Устройство: ' + deviceText + '\n' +
                   '• Страница: ' + window.location.href.split('?')[0];
 
-      // 1. Моментальная отправка в Telegram Бот (без проблемных кнопок)
+      // 1. Прямая отправка в Telegram Бот (чистый текст без разметки - 100% доходимость)
+      var pureText = '🔥 Новая заявка с сайта!\n\n' +
+                     '👤 Имя: ' + clientName + '\n' +
+                     '📞 Телефон: ' + fPhone + '\n' +
+                     '💬 Способ связи: ' + methodText + '\n' +
+                     '✂️ Срез/запрос: ' + selectedCut + '\n\n' +
+                     '⚡ Быстрая связь:\n' +
+                     '• WhatsApp: ' + waLink + '\n' +
+                     '• MAX: ' + maxLink + '\n\n' +
+                     '📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n' +
+                     '📱 Устройство: ' + deviceText + '\n' +
+                     '🌐 Страница: ' + window.location.href.split('?')[0];
+
       try {
         fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: '-1004296582963',
-            text: tgMsg,
-            parse_mode: 'HTML',
-            disable_web_page_preview: true
+            text: pureText
           })
-        }).then(function(res) {
-          if (!res.ok) {
-            var plainMsg = '🔥 Новая заявка с сайта!\n\nИмя: ' + clientName + '\nТелефон: ' + fPhone + '\nСпособ связи: ' + methodText + '\nСрез: ' + selectedCut + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink;
-            fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                chat_id: '-1004296582963',
-                text: plainMsg
-              })
-            }).catch(function() {});
-          }
-        }).catch(function(tgErr) {
-          console.error('TG send error:', tgErr);
-        });
+        }).catch(function(err) {});
       } catch(e) {}
 
-      // 2. Фоновое резервирование в Тильду
+      // 2. Отправка через серверный шлюз Tilda (гарантирует доставку если у клиента заблокирован api.telegram.org)
       try {
+        var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
+        if (cutHidden) cutHidden.value = selectedCut;
+        var msgHidden = bForm.querySelector('#hp-builtin-msg-hidden');
+        if (msgHidden) msgHidden.value = methodText;
+        var phoneHidden = bForm.querySelector('#hp-builtin-phone-hidden');
+        if (phoneHidden) phoneHidden.value = fPhone;
+
         var allRecords = document.getElementById('allrecords');
-        var formsKey = allRecords ? allRecords.getAttribute('data-tilda-formskey') : '';
-        var tildaData = new FormData();
-        tildaData.append('Name', nVal);
-        tildaData.append('phone', fPhone);
-        tildaData.append('cut', selectedCut);
-        tildaData.append('messenger', methodText);
-        if (formsKey) tildaData.append('formservices', formsKey);
+        var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
+
+        if (window.tildaForm && typeof window.tildaForm.send === 'function') {
+          try {
+            window.tildaForm.send(bForm, submitBtn, 2, formsKey);
+          } catch(err) {}
+        }
+
+        var tildaFormData = new FormData(bForm);
+        tildaFormData.append('Name', clientName);
+        tildaFormData.append('Phone', fPhone);
+        tildaFormData.append('cut', selectedCut);
+        tildaFormData.append('messenger', methodText);
+        tildaFormData.append('formid', 'form4673146901');
+        tildaFormData.append('formservices', formsKey);
+        tildaFormData.append('tildaspec-formid', '4673146901');
+        tildaFormData.append('tildaspec-formname', 'Заявка на подбор');
+        tildaFormData.append('tildaspec-pageid', '297318909');
+        tildaFormData.append('tildaspec-projectid', '5500437');
+
         fetch('https://forms.tildacdn.com/procces/', {
           method: 'POST',
-          body: tildaData,
+          body: tildaFormData,
           mode: 'no-cors'
         }).catch(function(err) {});
       } catch(e) {}
