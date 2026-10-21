@@ -5217,6 +5217,27 @@
       }
     });
 
+    function sanitizeInactiveMessengerInputs(formEl) {
+      if (!formEl) return;
+      var inactives = formEl.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value, .t-contact-method__hidden');
+      inactives.forEach(function(block, bIdx) {
+        block.querySelectorAll('input').forEach(function(inp, iIdx) {
+          inp.disabled = true;
+          inp.removeAttribute('data-tilda-req');
+          inp.removeAttribute('required');
+          inp.classList.remove('js-tilda-rule');
+          inp.id = 'hp_inactive_m_' + bIdx + '_' + iIdx;
+        });
+      });
+      var activePhone = formEl.querySelector('.t-contact-method__phone-value input[type="tel"]');
+      if (activePhone) {
+        activePhone.disabled = false;
+        activePhone.classList.add('js-tilda-rule');
+        activePhone.setAttribute('data-tilda-req', '1');
+        activePhone.id = 'input_1770920801992';
+      }
+    }
+
     function selectMethod(methodType) {
       methodBtns.forEach(function(btn) {
         var bType = btn.getAttribute('data-method-type');
@@ -5234,8 +5255,6 @@
       });
 
       // Всегда отображаем единое, надежное поле телефона с маской (+7, флаг)!
-      // Клиент выбирает предпочтительный канал связи (Telegram, MAX, WhatsApp, Телефон),
-      // а вводит свой номер, чтобы исключить любые ошибки в никах и ссылках.
       if (phoneVal) {
         phoneVal.style.setProperty('display', 'block', 'important');
         phoneVal.classList.remove('t-contact-method__hidden');
@@ -5245,6 +5264,8 @@
         phoneInputs.forEach(function(inp) {
           inp.disabled = false;
           inp.classList.add('js-tilda-rule');
+          inp.setAttribute('data-tilda-req', '1');
+          inp.id = 'input_1770920801992';
           var wrap = inp.closest('.t-input-block');
           if (wrap) {
             wrap.style.setProperty('display', 'block', 'important');
@@ -5253,16 +5274,20 @@
         });
       }
 
-      // Остальные блоки скрываем и отключаем
-      [tgVal, waVal, maxVal].forEach(function(block) {
+      // Остальные блоки скрываем и ПОЛНОСТЬЮ разоружаем для валидатора Тильды:
+      // снимаем data-tilda-req и js-tilda-rule, меняем id, чтобы Тильда не считала их пустыми обязательными полями!
+      [tgVal, waVal, maxVal].forEach(function(block, bIdx) {
         if (!block) return;
         block.style.setProperty('display', 'none', 'important');
         block.classList.add('t-contact-method__hidden');
         block.classList.remove('hp-method-active');
         var inps = block.querySelectorAll('input');
-        inps.forEach(function(inp) {
+        inps.forEach(function(inp, iIdx) {
           inp.disabled = true;
+          inp.removeAttribute('data-tilda-req');
+          inp.removeAttribute('required');
           inp.classList.remove('js-tilda-rule');
+          inp.id = 'hp_inactive_m_' + bIdx + '_' + iIdx;
           var wrap = inp.closest('.t-input-block');
           if (wrap) {
             wrap.style.setProperty('display', 'none', 'important');
@@ -5270,6 +5295,8 @@
           }
         });
       });
+
+      sanitizeInactiveMessengerInputs(form);
     }
 
     methodBtns.forEach(function(btn) {
@@ -5400,7 +5427,11 @@
       submitBtnEl.style.setProperty('cursor', 'pointer', 'important');
       submitBtnEl.removeAttribute('disabled');
 
+      // Очищаем скрытые поля перед проверкой Тильды
+      sanitizeInactiveMessengerInputs(form);
+
       submitBtnEl.addEventListener('click', function(e) {
+        sanitizeInactiveMessengerInputs(form);
         if (submitBtnEl.tildaSendingStatus === '1') {
           submitBtnEl.tildaSendingStatus = '0';
           submitBtnEl.classList.remove('t-btn_sending');
@@ -5427,7 +5458,7 @@
 
         // АНТИФРОД УРОВЕНЬ 2: Time-gating (отсекаем скрипты-боты, заполняющие форму мгновенно)
         var timeSpent = Date.now() - (window.hpPageInitTime || Date.now());
-        if (timeSpent < 3000) {
+        if (timeSpent < 800) {
           e.preventDefault();
           e.stopImmediatePropagation();
           showCustomError(nameInp, 'Пожалуйста, проверьте данные перед отправкой');
@@ -5514,6 +5545,56 @@
     setTimeout(initPhoneMasks, 1200);
 
     setupContactMethodSwitcher(form);
+
+    // Автоматическая очистка ошибок Тильды при вводе номера
+    var visiblePhoneInput = form.querySelector('.t-contact-method__phone-value input[type="tel"]');
+    if (visiblePhoneInput) {
+      visiblePhoneInput.addEventListener('input', function() {
+        var digits = visiblePhoneInput.value.replace(/\D/g, '');
+        if (digits.length >= 10) {
+          var errSpan = form.querySelector('#error_1770920801992');
+          if (errSpan) {
+            errSpan.style.display = 'none';
+            errSpan.innerHTML = '';
+          }
+          var errBox = form.querySelector('.js-errorbox-all');
+          if (errBox) {
+            errBox.style.display = 'none';
+          }
+          var blk = visiblePhoneInput.closest('.t-input-block');
+          if (blk) blk.classList.remove('t-input-block_error');
+        }
+      });
+    }
+
+    // Надежная обработка чекбокса согласия
+    var consentCb = form.querySelector('input[name="Checkbox"]');
+    if (consentCb) {
+      consentCb.checked = true; // По умолчанию всегда отмечен!
+      var cbGroup = consentCb.closest('.t-input-group_cb');
+      if (cbGroup) {
+        cbGroup.addEventListener('click', function(ev) {
+          var cbErr = cbGroup.querySelector('#error_1748433871038');
+          if (cbErr && consentCb.checked) {
+            cbErr.style.display = 'none';
+            cbErr.innerHTML = '';
+          }
+        });
+      }
+    }
+
+    // Обертка валидатора Тильды: перед валидацией Тильды всегда снимаем data-tilda-req со скрытых полей!
+    if (window.tildaForm && typeof window.tildaForm.validate === 'function' && !window.tildaForm._hpSanitized) {
+      var origTildaValidate = window.tildaForm.validate;
+      window.tildaForm.validate = function(targetForm) {
+        try {
+          sanitizeInactiveMessengerInputs(typeof t_forms__getElement === 'function' ? t_forms__getElement(targetForm) : targetForm);
+        } catch(ex) {}
+        return origTildaValidate.apply(this, arguments);
+      };
+      window.tildaForm._hpSanitized = true;
+    }
+
 
     if (!form.dataset.hpMounted) {
       form.dataset.hpMounted = 'true';
