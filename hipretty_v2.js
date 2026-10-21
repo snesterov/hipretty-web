@@ -5847,7 +5847,8 @@
       '</div>' +
     '</form>';
 
-    var bForm = slot.querySelector('#hp-builtin-lead-form');
+    var bForm = slot.querySelector('form');
+    if (!bForm) return;
     var bPhoneInp = bForm.querySelector('#hp-builtin-phone-input');
     var bPhoneBlock = bForm.querySelector('#hp-builtin-phone-block');
 
