@@ -1966,7 +1966,82 @@
         position: relative !important;
         z-index: 5 !important;
       }
-      /* rec4673146901 внутри слота: статичный блок в потоке страницы */
+      
+      /* Unblock all page clicks: neutralize Tilda popup overlay & scroll locks */
+      body, html {
+        position: static !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100% !important;
+      }
+      body.t-body_popupshowed, body.t-body_scroll-locked,
+      html.t-body_popupshowed, html.t-body_scroll-locked {
+        position: static !important;
+        overflow-y: auto !important;
+        height: auto !important;
+      }
+      body > #rec4673146901,
+      #allrecords > #rec4673146901,
+      .t-popup {
+        display: none !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+        z-index: -1 !important;
+      }
+
+      /* Mobile layout adjustments */
+      @media (max-width: 768px) {
+        .hp-footer-top {
+          grid-template-columns: 1fr !important;
+          gap: 32px !important;
+        }
+        .hp-contacts-card {
+          padding: 24px 16px !important;
+          border-radius: 20px !important;
+        }
+        .hp-contacts-messengers {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 10px !important;
+          width: 100% !important;
+        }
+        .hp-m-link {
+          white-space: normal !important;
+          word-break: break-word !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          padding: 12px 14px !important;
+          background: rgba(255, 255, 255, 0.05) !important;
+          border: 1px solid rgba(244, 114, 182, 0.2) !important;
+          border-radius: 14px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+        }
+        .hp-footer {
+          padding: 40px 16px 120px !important;
+        }
+        .hp-footer-links {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+        }
+        .hp-footer-links a {
+          white-space: normal !important;
+          word-break: break-word !important;
+        }
+        #hp-btn-top {
+          bottom: 20px !important;
+          left: 14px !important;
+        }
+        #hp-widget-lead {
+          bottom: 20px !important;
+          right: 14px !important;
+        }
+      }
+/* rec4673146901 внутри слота: статичный блок в потоке страницы */
       #hp-tilda-form-slot #rec4673146901,
       #hp-tilda-form-slot .t702,
       #hp-tilda-form-slot .t-popup,
@@ -5325,35 +5400,30 @@
     if (!slot) return;
 
     var rec = document.getElementById('rec4673146901');
-    if (!rec) return;
+    var form = document.querySelector('form#form4673146901') || (rec ? rec.querySelector('form') : null);
+    if (!form) return;
 
-    if (rec.parentElement !== slot) {
-      slot.appendChild(rec);
+    if (form.parentElement !== slot) {
+      slot.appendChild(form);
     }
 
-    rec.style.setProperty('display', 'block', 'important');
-    rec.style.setProperty('visibility', 'visible', 'important');
-    rec.style.setProperty('opacity', '1', 'important');
-    rec.style.setProperty('pointer-events', 'auto', 'important');
-    rec.style.setProperty('position', 'static', 'important');
-
-    var popup = rec.querySelector('.t-popup');
-    if (popup) {
-      popup.style.setProperty('display', 'block', 'important');
-      popup.style.setProperty('visibility', 'visible', 'important');
-      popup.style.setProperty('opacity', '1', 'important');
-      popup.style.setProperty('position', 'static', 'important');
-      popup.classList.add('t-popup_show');
+    // Completely neutralize rec4673146901 and any t-popup overlays
+    if (rec) {
+      rec.style.setProperty('display', 'none', 'important');
+      rec.style.setProperty('visibility', 'hidden', 'important');
+      rec.style.setProperty('pointer-events', 'none', 'important');
+      rec.querySelectorAll('.t-popup').forEach(function(p) {
+        p.classList.remove('t-popup_show');
+        p.style.setProperty('display', 'none', 'important');
+        p.style.setProperty('pointer-events', 'none', 'important');
+        p.style.setProperty('visibility', 'hidden', 'important');
+      });
     }
 
-    var popupContainer = rec.querySelector('.t-popup__container');
-    if (popupContainer) {
-      popupContainer.style.setProperty('display', 'block', 'important');
-      popupContainer.style.setProperty('position', 'static', 'important');
-      popupContainer.style.setProperty('background', 'transparent', 'important');
-    }
+    // Strip body scroll locks permanently
+    document.body.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
+    document.documentElement.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
 
-    var form = rec.querySelector('form#form4673146901') || rec.querySelector('form');
     if (!form) return;
 
     form.style.setProperty('display', 'block', 'important');
@@ -5542,7 +5612,18 @@
       window.validateForm = bulletproofValidator;
     }
 
-    installBulletproofTildaValidator();
+    
+    function killTildaBodyLocks() {
+      if (document.body.classList.contains('t-body_popupshowed') || document.body.classList.contains('t-body_scroll-locked')) {
+        document.body.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
+      }
+      if (document.documentElement.classList.contains('t-body_popupshowed') || document.documentElement.classList.contains('t-body_scroll-locked')) {
+        document.documentElement.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
+      }
+    }
+    killTildaBodyLocks();
+    setInterval(killTildaBodyLocks, 300);
+installBulletproofTildaValidator();
     setInterval(installBulletproofTildaValidator, 300);
 
     // Автоматическая очистка ошибок Тильды при вводе номера
