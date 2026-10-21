@@ -5934,11 +5934,23 @@
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
 
+      var rawDigits = digits.replace(/\D/g, '');
+      var intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
+      var clientName = (nVal || 'Клиент').trim();
+
+      var waUrl = 'https://wa.me/' + intDigits + '?text=' + encodeURIComponent('Здравствуйте, ' + clientName + '! Вы оставляли заявку на подбор волос на сайте HiPretty.');
+      var tgUrl = 'https://t.me/+' + intDigits;
+      var maxUrl = 'https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE';
+
       var tgMsg = '🔥 <b>Новая заявка с сайта!</b>\n\n' +
-                  '👤 <b>Имя:</b> ' + nVal + '\n' +
+                  '👤 <b>Имя:</b> ' + clientName + '\n' +
                   '📞 <b>Телефон:</b> <code>' + fPhone + '</code>\n' +
                   '💬 <b>Способ связи:</b> ' + methodText + '\n' +
                   '✂️ <b>Срез/запрос:</b> ' + selectedCut + '\n\n' +
+                  '⚡ <b>Связаться с клиентом в 1 клик:</b>\n' +
+                  '• 💬 <a href="' + waUrl + '">Написать в WhatsApp</a>\n' +
+                  '• ✈️ <a href="' + tgUrl + '">Открыть в Telegram</a>\n' +
+                  '• 🟣 <a href="' + maxUrl + '">Открыть профиль в MAX</a>\n\n' +
                   '📊 <b>Трафик и маркетинг:</b>\n' +
                   '• Источник: <code>' + utmSource + '</code>\n' +
                   '• Кампания: <code>' + utmCampaign + '</code>\n' +
@@ -5946,7 +5958,7 @@
                   '• Устройство: ' + deviceText + '\n' +
                   '• Страница: ' + window.location.href.split('?')[0];
 
-      // 1. Моментальная отправка в Telegram Бот
+      // 1. Моментальная отправка в Telegram Бот с инлайн-кнопками прямого ответа
       try {
         fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
           method: 'POST',
@@ -5954,7 +5966,19 @@
           body: JSON.stringify({
             chat_id: '-1004296582963',
             text: tgMsg,
-            parse_mode: 'HTML'
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  { text: '💬 Открыть WhatsApp', url: waUrl },
+                  { text: '✈️ Открыть Telegram', url: tgUrl }
+                ],
+                [
+                  { text: '🟣 Связаться в MAX', url: maxUrl }
+                ]
+              ]
+            }
           })
         }).catch(function(tgErr) {
           console.error('TG send error:', tgErr);
@@ -6288,11 +6312,23 @@ function mountTildaNativeForm() {
         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
 
+        var rawDigits = digits.replace(/\D/g, '');
+        var intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
+        var clientName = (nameVal || 'Клиент').trim();
+
+        var waUrl = 'https://wa.me/' + intDigits + '?text=' + encodeURIComponent('Здравствуйте, ' + clientName + '! Вы оставляли заявку на подбор волос на сайте HiPretty.');
+        var tgUrl = 'https://t.me/+' + intDigits;
+        var maxUrl = 'https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE';
+
         var tgMsg = '🔥 <b>Новая заявка с сайта!</b>\n\n' +
-                    '👤 <b>Имя:</b> ' + (nameVal || 'Не указано') + '\n' +
+                    '👤 <b>Имя:</b> ' + clientName + '\n' +
                     '📞 <b>Телефон:</b> <code>' + fPhone + '</code>\n' +
                     '💬 <b>Способ связи:</b> ' + methodText + '\n' +
                     '✂️ <b>Срез/запрос:</b> ' + selectedCut + '\n\n' +
+                    '⚡ <b>Связаться с клиентом в 1 клик:</b>\n' +
+                    '• 💬 <a href="' + waUrl + '">Написать в WhatsApp</a>\n' +
+                    '• ✈️ <a href="' + tgUrl + '">Открыть в Telegram</a>\n' +
+                    '• 🟣 <a href="' + maxUrl + '">Открыть профиль в MAX</a>\n\n' +
                     '📊 <b>Трафик и маркетинг:</b>\n' +
                     '• Источник: <code>' + utmSource + '</code>\n' +
                     '• Кампания: <code>' + utmCampaign + '</code>\n' +
@@ -6300,7 +6336,7 @@ function mountTildaNativeForm() {
                     '• Устройство: ' + deviceText + '\n' +
                     '• Страница: ' + window.location.href.split('?')[0];
 
-        // 1. Моментальная отправка в Telegram Бот (без дублирования)
+        // 1. Моментальная отправка в Telegram Бот с инлайн-кнопками прямого ответа
         try {
           fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
             method: 'POST',
@@ -6308,7 +6344,19 @@ function mountTildaNativeForm() {
             body: JSON.stringify({
               chat_id: '-1004296582963',
               text: tgMsg,
-              parse_mode: 'HTML'
+              parse_mode: 'HTML',
+              disable_web_page_preview: true,
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    { text: '💬 Открыть WhatsApp', url: waUrl },
+                    { text: '✈️ Открыть Telegram', url: tgUrl }
+                  ],
+                  [
+                    { text: '🟣 Связаться в MAX', url: maxUrl }
+                  ]
+                ]
+              }
             })
           }).catch(function(tgErr) {
             console.error('TG send error:', tgErr);
