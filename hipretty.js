@@ -4197,7 +4197,7 @@
 
         <p class="hp-lead-subtitle">
 
-          Оставьте контакты, и наш мастер бесплатно подберет идеальный срез по вашему фото и покажет варианты.
+          Оставьте контакты, и наш мастер бесплатно подберет идеальный срез и покажет варианты.
 
         </p>
 
@@ -5192,14 +5192,27 @@
   };
 
   // Перехват успеха формы Tilda (jQuery + Native event) с защитой от задвоения
-  if (typeof window.jQuery !== 'undefined') {
-    window.jQuery(document).on('tildaform:success', function() {
-      window.sendLeadConversionGoals();
-    });
-  }
-  document.addEventListener('tildaform:success', function() {
+  function onTildaFormSuccessGlobal() {
     window.sendLeadConversionGoals();
-  });
+    var formEl = document.querySelector('form#form4673146901');
+    if (formEl) {
+      var sBox = formEl.querySelector('.js-successbox');
+      if (sBox) {
+        sBox.style.setProperty('display', 'block', 'important');
+        if (!sBox.innerHTML || sBox.innerHTML.trim() === '') {
+          sBox.innerHTML = '<div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#10B981;">✓ Заявка успешно отправлена!</div><div style="color:#e2e8f0;font-size:15px;">Мастер уже подбирает срез и свяжется с вами в течение 10 минут.</div>';
+        }
+      }
+      var inputsWrap = formEl.querySelector('.t-form__inputsbox') || formEl.querySelector('.t-form__wrapper');
+      if (inputsWrap) inputsWrap.style.display = 'none';
+      var sBtn = formEl.querySelector('button[type="submit"], .t-submit');
+      if (sBtn) sBtn.style.display = 'none';
+    }
+  }
+  if (typeof window.jQuery !== 'undefined') {
+    window.jQuery(document).on('tildaform:success', onTildaFormSuccessGlobal);
+  }
+  document.addEventListener('tildaform:success', onTildaFormSuccessGlobal);
 
   // Защита от мульти-кликов по контактам (debounce 4 секунды)
   var lastContactClickTime = 0;
@@ -5346,11 +5359,14 @@
       if (!inp || inp.dataset.cleanMaskSet) return;
       inp.dataset.cleanMaskSet = 'true';
       inp.placeholder = '+7 (___) ___-__-__';
+      inp.setAttribute('autocomplete', 'tel');
+      inp.setAttribute('inputmode', 'tel');
+      inp.setAttribute('type', 'tel');
       inp.style.setProperty('background', '#ffffff', 'important');
       inp.style.setProperty('color', '#111111', 'important');
       inp.style.setProperty('display', 'block', 'important');
 
-      inp.addEventListener('input', function() {
+      function formatPhoneValue() {
         var digits = inp.value.replace(/\D/g, '');
         if (!digits) {
           inp.value = '';
@@ -5359,21 +5375,23 @@
         if (digits[0] === '7' || digits[0] === '8') {
           digits = digits.substring(1);
         }
+        digits = digits.substring(0, 10);
         var formatted = '+7';
         if (digits.length > 0) formatted += ' (' + digits.substring(0, 3);
         if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
         if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
         if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
         inp.value = formatted;
-      });
+      }
 
-      inp.addEventListener('focus', function() {
-        if (!inp.value) inp.value = '+7 (';
-      });
+      inp.addEventListener('input', formatPhoneValue);
+      inp.addEventListener('change', formatPhoneValue);
+      inp.addEventListener('paste', function() { setTimeout(formatPhoneValue, 10); });
       inp.addEventListener('blur', function() {
         if (inp.value === '+7 (' || inp.value === '+7') inp.value = '';
       });
     }
+
   function mountTildaNativeForm() {
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
@@ -5472,6 +5490,17 @@
       form.appendChild(trap);
     }
 
+    function sanitizeInactiveMessengerInputs(targetForm) {
+      if (!targetForm) return;
+      var inactives = targetForm.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
+      inactives.forEach(function(wrap) {
+        wrap.querySelectorAll('input').forEach(function(inp) {
+          inp.removeAttribute('data-tilda-req');
+          inp.removeAttribute('required');
+        });
+      });
+    }
+
     var submitBtnEl = form.querySelector('button[type="submit"], .t-submit');
     if (submitBtnEl) {
       submitBtnEl.style.setProperty('pointer-events', 'auto', 'important');
@@ -5479,9 +5508,11 @@
       submitBtnEl.removeAttribute('disabled');
 
       submitBtnEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
         if (submitBtnEl.tildaSendingStatus === '1') {
-          submitBtnEl.tildaSendingStatus = '0';
-          submitBtnEl.classList.remove('t-btn_sending');
+          return false;
         }
 
         clearCustomErrors(form);
@@ -5489,8 +5520,6 @@
         var nameInp = form.querySelector('input[name="Name"]');
         var nameVal = (nameInp ? nameInp.value : '').trim();
         if (!nameVal) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
           showCustomError(nameInp, 'Пожалуйста, укажите имя');
           return false;
         }
@@ -5501,9 +5530,12 @@
         var digits = rawTel.replace(/\D/g, '');
 
         if (!digits || digits.length < 10) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
           showCustomError(telInp, 'Пожалуйста, укажите номер телефона');
+          return false;
+        }
+
+        var trapInp = form.querySelector('input[name="hp_user_website_trap"]');
+        if (trapInp && trapInp.value) {
           return false;
         }
 
@@ -5513,21 +5545,90 @@
         var cleanPhone = '+7' + digits.slice(-10);
         if (telInp) telInp.value = cleanPhone;
         if (resInp) resInp.value = cleanPhone;
-        form.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
+        form.querySelectorAll('input[type="tel"], input[name*="phone" i], input[name*="Phone" i], input[name="messenger-id"], .js-phonemask-result, input[name="tildaspec-phone-part[]"]').forEach(function(inp) {
           inp.value = cleanPhone;
           inp.disabled = false;
         });
+
+        sanitizeInactiveMessengerInputs(form);
 
         form.querySelectorAll('.t-input-error, .js-errorbox-all, .hp-field-error-msg').forEach(function(el) {
           el.style.display = 'none';
           el.innerHTML = '';
         });
+
+        submitBtnEl.classList.add('t-btn_sending');
+        submitBtnEl.tildaSendingStatus = '1';
+        var origBtnText = submitBtnEl.textContent;
+        submitBtnEl.textContent = 'Отправка заявки...';
+
+        function handleSuccess() {
+          submitBtnEl.tildaSendingStatus = '0';
+          submitBtnEl.classList.remove('t-btn_sending');
+          var sBox = form.querySelector('.js-successbox');
+          if (sBox) {
+            sBox.style.setProperty('display', 'block', 'important');
+            sBox.innerHTML = '<div style="font-size:18px;font-weight:700;margin-bottom:8px;color:#10B981;">✓ Заявка успешно отправлена!</div><div style="color:#e2e8f0;font-size:15px;">Мастер уже подбирает срез и свяжется с вами в течение 10 минут.</div>';
+          }
+          var inputsWrap = form.querySelector('.t-form__inputsbox') || form.querySelector('.t-form__wrapper');
+          if (inputsWrap) inputsWrap.style.display = 'none';
+          submitBtnEl.style.display = 'none';
+
+          if (typeof window.sendLeadConversionGoals === 'function') {
+            window.sendLeadConversionGoals();
+          }
+          document.dispatchEvent(new CustomEvent('tildaform:success', { detail: { form: form } }));
+          if (typeof window.jQuery !== 'undefined') {
+            window.jQuery(document).trigger('tildaform:success', [form]);
+          }
+        }
+
+        function handleError() {
+          submitBtnEl.tildaSendingStatus = '0';
+          submitBtnEl.classList.remove('t-btn_sending');
+          submitBtnEl.textContent = origBtnText;
+        }
+
+        var allRecords = document.getElementById('allrecords');
+        var formsKey = allRecords ? allRecords.getAttribute('data-tilda-formskey') : '';
+        var formActionType = parseInt(form.getAttribute('data-formactiontype') || '2', 10);
+
+        var sent = false;
+        if (window.tildaForm && typeof window.tildaForm.send === 'function') {
+          try {
+            var $form = (typeof window.jQuery !== 'undefined') ? window.jQuery(form) : form;
+            window.tildaForm.send($form, submitBtnEl, formActionType, formsKey);
+            sent = true;
+          } catch(err) {
+            console.error('tildaForm.send error:', err);
+            sent = false;
+          }
+        }
+
+        if (!sent) {
+          var actionUrl = form.getAttribute('action') || 'https://forms.tildacdn.com/procces/';
+          var formData = new FormData(form);
+          fetch(actionUrl, {
+            method: 'POST',
+            body: formData,
+            mode: 'cors'
+          }).then(function(res) {
+            handleSuccess();
+          }).catch(function(e) {
+            try {
+              form.submit();
+            } catch(subErr) {
+              handleError();
+            }
+          });
+        }
       });
     }
 
     var nameInp = form.querySelector('input[name="Name"]');
     if (nameInp) {
       nameInp.placeholder = 'Ваше имя';
+      nameInp.setAttribute('autocomplete', 'name');
     }
 
     function initPhoneMasks() {
@@ -5573,7 +5674,7 @@
           var fullNum = '+7' + tVal.slice(-10);
           if (t) t.value = fullNum;
           if (resInp) resInp.value = fullNum;
-          f.querySelectorAll('input[name="messenger-id"], .js-phonemask-result').forEach(function(inp) {
+          f.querySelectorAll('input[type="tel"], input[name*="phone" i], input[name*="Phone" i], input[name="messenger-id"], .js-phonemask-result, input[name="tildaspec-phone-part[]"]').forEach(function(inp) {
             inp.value = fullNum;
             inp.disabled = false;
           });
