@@ -4029,7 +4029,7 @@
 
         <div class="hp-logo">hi, pretty!</div>
 
-        <div class="hp-logo-sub">магазин волос • москва</div>
+        <div class="hp-logo-sub">магазин волос • москва • доставка по всей рф</div>
 
       </a>
 
