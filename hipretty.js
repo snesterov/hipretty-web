@@ -246,7 +246,7 @@
 
       .hp-header-actions { display: flex; align-items: center; gap: 10px; }
       .hp-hdr-msg-btn {
-        display: inline-flex;
+        display: none !important; /* Убрано из шапки, чтобы не сливать платный трафик мимо формы */
         align-items: center;
         justify-content: center;
         width: 36px;
@@ -4329,10 +4329,10 @@
         </p>
 
         <div class="hp-hero-cta-box">
-          <button type="button" class="hp-btn-main hp-open-form-btn">✦ Подобрать идеальный срез</button>
+          <button type="button" class="hp-btn-main hp-open-form-btn">✦ Подобрать срез по моим параметрам</button>
 
           <div class="hp-hero-delivery-sub" style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:#fce7f3;margin-top:14px;background:rgba(255,255,255,0.06);padding:8px 16px;border-radius:20px;border:1px solid rgba(244,114,182,0.25);">
-            <span>🚚</span> <b>Доставка СДЭК по РФ 1–3 дня</b> • Подбор среза за 1 минуту
+            <span>🚚</span> <b>Самовывоз в Москве сегодня</b> • Доставка СДЭК по всей РФ от 1 дня
           </div>
         </div>
 
@@ -5148,7 +5148,7 @@
             <p class="hp-cut-desc">${item.desc}</p>
 
             <div class="hp-cut-actions">
-              <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
+              <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
               </div>
           </div>
         </div>
