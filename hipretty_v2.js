@@ -5983,16 +5983,14 @@
       var clientName = (nVal || 'Клиент').trim();
 
       var waLink = 'https://wa.me/' + intDigits;
-      var maxLink = 'https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE';
-
+      
       var tgMsg = '🔥 <b>Новая заявка с сайта!</b>\n\n' +
                   '👤 <b>Имя:</b> ' + clientName + '\n' +
                   '📞 <b>Телефон:</b> <code>' + fPhone + '</code>\n' +
                   '💬 <b>Способ связи:</b> ' + methodText + '\n' +
                   '✂️ <b>Срез/запрос:</b> ' + selectedCut + '\n\n' +
                   '⚡ <b>Связь с клиентом в 1 клик:</b>\n' +
-                  '• WhatsApp: ' + waLink + '\n' +
-                  '• Мессенджер MAX: ' + maxLink + '\n\n' +
+                  '• WhatsApp: ' + waLink + '\n\n' +
                   '📊 <b>Трафик и маркетинг:</b>\n' +
                   '• Источник: <code>' + utmSource + '</code>\n' +
                   '• Кампания: <code>' + utmCampaign + '</code>\n' +
@@ -6001,7 +5999,7 @@
                   '• Страница: ' + window.location.href.split('?')[0];
 
       // 1. Формирование сопроводительного текста с быстрыми ссылками
-      var commentText = '✂️ Срез: ' + selectedCut + '\n💬 Связь: ' + methodText + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink + '\n📊 Источник: ' + utmSource + ' / ' + utmCampaign + '\n📱 Устройство: ' + deviceText;
+      var commentText = '✂️ Срез: ' + selectedCut + '\n💬 Связь: ' + methodText + '\nWhatsApp: ' + waLink + '\n📊 Источник: ' + utmSource + ' / ' + utmCampaign + '\n📱 Устройство: ' + deviceText;
 
       // 2. Заполнение скрытых полей формы перед отправкой
       var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
@@ -6084,8 +6082,7 @@
                        '💬 Способ связи: ' + methodText + '\n' +
                        '✂️ Срез/запрос: ' + selectedCut + '\n\n' +
                        '⚡ Быстрая связь:\n' +
-                       '• WhatsApp: ' + waLink + '\n' +
-                       '• MAX: ' + maxLink + '\n\n' +
+                       '• WhatsApp: ' + waLink + '\n\n' +
                        '📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n' +
                        '📱 Устройство: ' + deviceText + '\n' +
                        '🌐 Страница: ' + window.location.href.split('?')[0];
@@ -6488,16 +6485,14 @@ function mountTildaNativeForm() {
         var clientName = (nameVal || 'Клиент').trim();
 
         var waLink = 'https://wa.me/' + intDigits;
-        var maxLink = 'https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE';
-
+        
         var tgMsg = '🔥 <b>Новая заявка с сайта!</b>\n\n' +
                     '👤 <b>Имя:</b> ' + clientName + '\n' +
                     '📞 <b>Телефон:</b> <code>' + fPhone + '</code>\n' +
                     '💬 <b>Способ связи:</b> ' + methodText + '\n' +
                     '✂️ <b>Срез/запрос:</b> ' + selectedCut + '\n\n' +
                     '⚡ <b>Связь с клиентом в 1 клик:</b>\n' +
-                    '• WhatsApp: ' + waLink + '\n' +
-                    '• Мессенджер MAX: ' + maxLink + '\n\n' +
+                    '• WhatsApp: ' + waLink + '\n\n' +
                     '📊 <b>Трафик и маркетинг:</b>\n' +
                     '• Источник: <code>' + utmSource + '</code>\n' +
                     '• Кампания: <code>' + utmCampaign + '</code>\n' +
@@ -6523,7 +6518,7 @@ function mountTildaNativeForm() {
             })
           }).then(function(res) {
             if (!res.ok) {
-              var plainMsg = '🔥 Новая заявка с сайта!\n\nИмя: ' + clientName + '\nТелефон: ' + fPhone + '\nСпособ связи: ' + methodText + '\nСрез: ' + selectedCut + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink;
+              var plainMsg = '🔥 Новая заявка с сайта!\n\nИмя: ' + clientName + '\nТелефон: ' + fPhone + '\nСпособ связи: ' + methodText + '\nСрез: ' + selectedCut + '\nWhatsApp: ' + waLink;
               fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -6572,7 +6567,7 @@ function mountTildaNativeForm() {
           p.append('messenger-type', methodType);
           p.append('messenger-id', fPhone);
           p.append('cut', selectedCut);
-          p.append('Textarea', '✂️ Срез: ' + selectedCut + '\n💬 Способ связи: ' + methodText + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink + '\n📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n📱 Устройство: ' + deviceText);
+          p.append('Textarea', '✂️ Срез: ' + selectedCut + '\n💬 Способ связи: ' + methodText + '\nWhatsApp: ' + waLink + '\n📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n📱 Устройство: ' + deviceText);
           p.append('Checkbox', 'yes');
           var capInp = form.querySelector('#js-tildaspec-captcha, input[name="tildaspec-captcha"]');
           if (capInp && capInp.value) {
