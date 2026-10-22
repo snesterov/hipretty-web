@@ -6462,7 +6462,7 @@ function mountTildaNativeForm() {
           var leadKey = fPhone + '_' + clientName;
           window.hpSentLeads = window.hpSentLeads || {};
           var nowTime = Date.now();
-          if (!window.hpSentLeads[leadKey] || (nowTime - window.hpSentLeads[leadKey] > 60000)) {
+          if (!window.hpSentLeads[leadKey] || (nowTime - window.hpSentLeads[leadKey] > 5000)) {
             window.hpSentLeads[leadKey] = nowTime;
             fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
             method: 'POST',
