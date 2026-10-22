@@ -457,58 +457,49 @@
       }
 
       .hp-badge-geo {
-
         display: inline-flex;
-
         align-items: center;
-
-        gap: 8px;
-
+        flex-wrap: wrap;
+        gap: 6px 12px;
         background: rgba(244, 114, 182, 0.12);
-
         border: 1px solid var(--hp-border-active);
-
         color: #fce7f3;
-
-        padding: 8px 18px;
-
-        border-radius: 30px;
-
-        font-size: 12px;
-
+        padding: 6px 16px;
+        border-radius: 9999px;
+        font-size: 11.5px;
         font-weight: 600;
-
-        letter-spacing: 1px;
-
+        letter-spacing: 0.5px;
         text-transform: uppercase;
-
-        margin-bottom: 20px;
-
+        margin-bottom: 22px;
+        max-width: 100%;
+        line-height: 1.4;
       }
-
-      .hp-badge-geo span {
-
+      .hp-badge-geo-loc {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .hp-badge-geo span.hp-dot {
         width: 8px; height: 8px;
-
         border-radius: 50%;
-
         background: #10B981;
-
         display: inline-block;
-
         box-shadow: 0 0 10px #10B981;
-
+        flex-shrink: 0;
       }
-
       .hp-badge-delivery-tag {
         background: rgba(244, 114, 182, 0.35);
         color: #ffffff !important;
         font-weight: 800;
-        padding: 3px 10px;
-        border-radius: 12px;
+        padding: 4px 12px;
+        border-radius: 9999px;
         border: 1px solid rgba(244, 114, 182, 0.6);
         box-shadow: 0 0 12px rgba(244, 114, 182, 0.3);
-        display: inline-block;
+        white-space: nowrap !important;
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
       }
 
       .hp-hero-title {
@@ -1657,6 +1648,21 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
+      }
+      .hp-fp-head {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-bottom: 2px;
+      }
+      .hp-fp-head-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      .hp-fp-head-hint {
+        font-size: 11.5px;
+        color: var(--hp-text-muted);
       }
       .hp-fp-row {
         display: flex;
@@ -4379,7 +4385,7 @@
 
       <div class="hp-hero-info">
 
-        <div class="hp-badge-geo"><span></span> Шоурум в Москве (Арбат) • <span class="hp-badge-delivery-tag">Доставка СДЭК по всей РФ от 1 дня</span></div>
+        <div class="hp-badge-geo"><span class="hp-badge-geo-loc"><span class="hp-dot"></span> Шоурум в Москве (Арбат)</span><span class="hp-badge-delivery-tag">Доставка СДЭК по РФ от 1 дня</span></div>
 
         <h1 class="hp-hero-title">Натуральные детские<br>славянские срезы <span>высшего качества</span></h1>
 
@@ -4619,7 +4625,7 @@
           <strong>Не хотите листать или не нашли нужный оттенок?</strong>
           <span>На складе в Москве более 35 кг отборных волос от одного донора. Мастер снимет живое видео среза и подберет под вашу структуру за 1 минуту.</span>
         </div>
-        <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор и видео ✦</button>
+        <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор ✦</button>
       </div>
     </div>
 
@@ -4689,18 +4695,22 @@
 
         <!-- ИНТЕРАКТИВНЫЙ ВЫБОР ПАРАМЕТРОВ СРЕЗА ПРЯМО В ФОРМЕ -->
         <div class="hp-form-params-picker">
+          <div class="hp-fp-head">
+            <span class="hp-fp-head-title">Параметры для быстрого подбора (или оставьте пустым):</span>
+            <span class="hp-fp-head-hint">Мастер отберет подходящие срезы из 35 кг со склада и пришлет видео</span>
+          </div>
           <div class="hp-fp-row">
             <span class="hp-fp-label">Желаемая длина:</span>
             <div class="hp-fp-chips" id="hp-fp-length">
               <button type="button" class="hp-fp-chip" data-val="40–50 см">40–50 см</button>
-              <button type="button" class="hp-fp-chip active" data-val="55–65 см">55–65 см</button>
+              <button type="button" class="hp-fp-chip" data-val="55–65 см">55–65 см</button>
               <button type="button" class="hp-fp-chip" data-val="70–80 см">70–80 см</button>
             </div>
           </div>
           <div class="hp-fp-row">
             <span class="hp-fp-label">Тип структуры:</span>
             <div class="hp-fp-chips" id="hp-fp-type">
-              <button type="button" class="hp-fp-chip active" data-val="Детский шелк">Детский шелк</button>
+              <button type="button" class="hp-fp-chip" data-val="Детский шелк">Детский шелк</button>
               <button type="button" class="hp-fp-chip" data-val="Славянский шелк">Славянский шелк</button>
               <button type="button" class="hp-fp-chip" data-val="Природная волна">Природная волна</button>
             </div>
@@ -5159,7 +5169,7 @@
           <div style="font-size: 32px; margin-bottom: 12px;">🔎</div>
           <h3 style="font-size: 20px; color: #fff; margin: 0 0 10px;">Срезов с такими параметрами сейчас нет в витрине</h3>
           <p style="color: var(--hp-text-muted); font-size: 14px; margin: 0 0 20px;">На складе более 35 кг отборных волос! Оставьте заявку — мастер снимет живое видео и подберет срез индивидуально.</p>
-          <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор и видео ✦</button>
+          <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор ✦</button>
         </div>
       `;
       setupActionButtons();
@@ -6021,7 +6031,7 @@
         '</div>' +
         '<div class="t-form__submit">' +
           '<button type="submit" id="hp-builtin-submit-btn" class="t-submit" style="width:100%!important;height:56px!important;background:linear-gradient(135deg,#ec4899,#d946ef)!important;color:#ffffff!important;border:none!important;border-radius:14px!important;font-weight:700!important;font-size:16px!important;cursor:pointer!important;box-shadow:0 8px 25px rgba(236,72,153,0.4)!important;transition:all 0.2s!important;font-family:\'Montserrat\',sans-serif!important;">' +
-            'Заказать индивидуальный подбор и видео ✦' +
+            'Заказать индивидуальный подбор ✦' +
           '</button>' +
           '<div class="hp-form-security-note">' +
             '🔒 Ваши данные защищены (152-ФЗ РФ). Консультация и подбор среза бесплатны и ни к чему вас не обязывают.' +
@@ -6413,7 +6423,7 @@ function mountTildaNativeForm() {
 
     var subBtn = form.querySelector('.t-btnflex__text, .t-submit');
     if (subBtn) {
-      subBtn.textContent = 'Заказать индивидуальный подбор и видео ✦';
+      subBtn.textContent = 'Заказать индивидуальный подбор ✦';
     }
 
     function showCustomError(inputEl, msg) {
@@ -7195,17 +7205,22 @@ installBulletproofTildaValidator();
       function updateFromChips() {
         var actLen = document.querySelector('#hp-fp-length .hp-fp-chip.active');
         var actType = document.querySelector('#hp-fp-type .hp-fp-chip.active');
-        var lenVal = actLen ? actLen.getAttribute('data-val') : '55–65 см';
-        var typeVal = actType ? actType.getAttribute('data-val') : 'Детский шелк';
-        var combined = lenVal + ' • ' + typeVal;
-        setSelectedCutBadge(combined, true);
+        var parts = [];
+        if (actLen) parts.push(actLen.getAttribute('data-val'));
+        if (actType) parts.push(actType.getAttribute('data-val'));
+        if (parts.length > 0) {
+          setSelectedCutBadge(parts.join(' • '), true);
+        } else {
+          setSelectedCutBadge('', false);
+        }
       }
 
       lenChips.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
+          var wasActive = btn.classList.contains('active');
           lenChips.forEach(function(c) { c.classList.remove('active'); });
-          btn.classList.add('active');
+          if (!wasActive) btn.classList.add('active');
           updateFromChips();
         });
       });
@@ -7213,8 +7228,9 @@ installBulletproofTildaValidator();
       typeChips.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
+          var wasActive = btn.classList.contains('active');
           typeChips.forEach(function(c) { c.classList.remove('active'); });
-          btn.classList.add('active');
+          if (!wasActive) btn.classList.add('active');
           updateFromChips();
         });
       });
@@ -7272,7 +7288,7 @@ installBulletproofTildaValidator();
 
     leadWidget.id = 'hp-widget-lead';
 
-    leadWidget.innerHTML = '<button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><div class="hp-widget-btn-content"><span class="hp-widget-btn-main">✦ Подобрать срез и видео</span><span class="hp-widget-btn-sub">🚗 Шоурум Арбат • 📦 Доставка СДЭК по РФ</span></div></button>';
+    leadWidget.innerHTML = '<button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><div class="hp-widget-btn-content"><span class="hp-widget-btn-main">✦ Заказать подбор среза</span><span class="hp-widget-btn-sub">🚗 Шоурум Арбат • 📦 Доставка СДЭК по РФ</span></div></button>';
 
     document.body.appendChild(leadWidget);
 
