@@ -6074,27 +6074,12 @@
         xhr2.send(p2.toString());
       } catch(e) {}
 
-      // 3D. Прямой запрос в Telegram Bot API для пользователей вне РФ / с VPN
+      // 3D. Локальный архив заявки
       try {
-        var pureText = '🔥 Новая заявка с сайта!\n\n' +
-                       '👤 Имя: ' + clientName + '\n' +
-                       '📞 Телефон: ' + fPhone + '\n' +
-                       '💬 Способ связи: ' + methodText + '\n' +
-                       '✂️ Срез/запрос: ' + selectedCut + '\n\n' +
-                       '⚡ Быстрая связь:\n' +
-                       '• WhatsApp: ' + waLink + '\n\n' +
-                       '📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n' +
-                       '📱 Устройство: ' + deviceText + '\n' +
-                       '🌐 Страница: ' + window.location.href.split('?')[0];
-
-        fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: '-1004296582963',
-            text: pureText
-          })
-        }).catch(function(err) {});
+        var leadRecordB = { time: new Date().toISOString(), name: clientName, phone: fPhone, method: methodText, cut: selectedCut };
+        var arch = JSON.parse(localStorage.getItem('hp_leads_archive') || '[]');
+        arch.push(leadRecordB);
+        localStorage.setItem('hp_leads_archive', JSON.stringify(arch));
       } catch(e) {}
 
       // 3. Отправка целей в Яндекс Метрику для Директа
@@ -6500,38 +6485,12 @@ function mountTildaNativeForm() {
                     '• Устройство: ' + deviceText + '\n' +
                     '• Страница: ' + window.location.href.split('?')[0];
 
-        // 1. Моментальная отправка в Telegram Бот (с дедупликацией при срабатывании капчи)
+        // 1. Прямая отправка в бот отключена по запросу (уведомления идут только через Тильду без дублей)
         try {
-          var leadKey = fPhone + '_' + clientName;
-          window.hpSentLeads = window.hpSentLeads || {};
-          var nowTime = Date.now();
-          if (!window.hpSentLeads[leadKey] || (nowTime - window.hpSentLeads[leadKey] > 60000)) {
-            window.hpSentLeads[leadKey] = nowTime;
-            fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: '-1004296582963',
-              text: tgMsg,
-              parse_mode: 'HTML',
-              disable_web_page_preview: true
-            })
-          }).then(function(res) {
-            if (!res.ok) {
-              var plainMsg = '🔥 Новая заявка с сайта!\n\nИмя: ' + clientName + '\nТелефон: ' + fPhone + '\nСпособ связи: ' + methodText + '\nСрез: ' + selectedCut + '\nWhatsApp: ' + waLink;
-              fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  chat_id: '-1004296582963',
-                  text: plainMsg
-                })
-              }).catch(function() {});
-            }
-          }).catch(function(tgErr) {
-            console.error('TG send error:', tgErr);
-          });
-          }
+          var leadRecord = { time: new Date().toISOString(), name: clientName, phone: fPhone, method: methodText, cut: selectedCut, utm: utmSource + ' | ' + utmCampaign };
+          var existingLeads = JSON.parse(localStorage.getItem('hp_leads_archive') || '[]');
+          existingLeads.push(leadRecord);
+          localStorage.setItem('hp_leads_archive', JSON.stringify(existingLeads));
         } catch(e) {}
 
         // 2. Отправка через нативный механизм Tilda и официальный шлюз forms.tildacdn.com
