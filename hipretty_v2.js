@@ -4096,7 +4096,7 @@
     "cat": "wave",
     "length": 55,
     "weight": "106 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
     "tgUrl": "https://t.me/hi_pretty/4201",
     "desc": "#1561 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
@@ -4120,7 +4120,7 @@
     "cat": "wave",
     "length": 55,
     "weight": "106 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4187.jpg",
     "tgUrl": "https://t.me/hi_pretty/4187",
     "desc": "#1555 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
@@ -4144,7 +4144,7 @@
     "cat": "silk",
     "length": 54,
     "weight": "96 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4167.jpg",
     "tgUrl": "https://t.me/hi_pretty/4167",
     "desc": "#1560 • Самый настоящий шелк • Нежнейший детский хвостик с тончайшей волосинкой"
@@ -4156,7 +4156,7 @@
     "cat": "silk",
     "length": 55,
     "weight": "156 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4157.jpg",
     "tgUrl": "https://t.me/hi_pretty/4157",
     "desc": "Детские  💎 • Природный блонд • Корень холодный 8-9"
@@ -4192,7 +4192,7 @@
     "cat": "straight",
     "length": 58,
     "weight": "188 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
     "tgUrl": "https://t.me/hi_pretty/4127",
     "desc": "#1218 • Детский,идеально прямой срез • Волосинка между тонкой и средней"
@@ -4252,7 +4252,7 @@
     "cat": "wave",
     "length": 66,
     "weight": "86 гр",
-    "price": "Уточняйте в TG",
+    "price": "от 45 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4076.jpg",
     "tgUrl": "https://t.me/hi_pretty/4076",
     "desc": "#1387 • Детский срез с волной • Волосинка между тонкой и средней,мягкий,воздушный"
@@ -5143,7 +5143,7 @@
 
 
 
-  var visibleCutsCount = 6;
+  var visibleCutsCount = 3;
 
   function renderCatalogCards() {
     var container = document.getElementById('hp-catalog-cards');
@@ -5186,7 +5186,7 @@
     if (moreBtn) {
       if (filtered.length > visibleCutsCount) {
         var remaining = filtered.length - visibleCutsCount;
-        var nextBatch = Math.min(6, remaining);
+        var nextBatch = Math.min(3, remaining);
         moreBtn.innerHTML = 'Показать еще срезы (+' + nextBatch + ') ↓';
         moreBtn.style.display = 'inline-flex';
       } else {
@@ -5201,7 +5201,7 @@
           <div class="hp-cut-img-wrap">
             <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.id}')">
             <span class="hp-cut-badge">${badgeText}</span>${item.id === cutsDatabase[0].id ? '<span class="hp-cut-new-badge">★ Свежий (Пост #' + item.id + ')</span>' : ''}
-            <span class="hp-cut-price-tag">${item.price}</span>
+            <span class="hp-cut-price-tag">${(!item.price || item.price.includes('TG')) ? 'от 45 000 ₽' : item.price}</span>
             <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть видео среза в Telegram">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               <span>Видео среза в TG <i>(нужен VPN)</i></span>
@@ -7069,7 +7069,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedType = btn.getAttribute('data-type');
-        visibleCutsCount = 6;
+        visibleCutsCount = 3;
         renderCatalogCards();
 
 
@@ -7093,7 +7093,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedLen = btn.getAttribute('data-len');
-        visibleCutsCount = 6;
+        visibleCutsCount = 3;
         renderCatalogCards();
 
       });
@@ -7115,7 +7115,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedShade = btn.getAttribute('data-shade');
-        visibleCutsCount = 6;
+        visibleCutsCount = 3;
         renderCatalogCards();
 
       });
@@ -7132,7 +7132,7 @@ installBulletproofTildaValidator();
     if (moreBtn && !moreBtn.dataset.bound) {
       moreBtn.dataset.bound = 'true';
       moreBtn.addEventListener('click', function() {
-        visibleCutsCount += 6;
+        visibleCutsCount += 3;
         renderCatalogCards();
       });
     }
