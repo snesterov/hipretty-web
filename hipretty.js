@@ -6122,8 +6122,18 @@ function mountTildaNativeForm() {
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
 
-    var rec = document.getElementById('rec4673146901');
-    var form = document.querySelector('form#form4673146901') || (rec ? rec.querySelector('form') : null);
+    // Ищем любой нативный блок формы Тильды на странице (кроме блока нашего скрипта и аккордеона)
+    var allForms = document.querySelectorAll('form.js-form-proccess');
+    var form = null;
+    for (var i = 0; i < allForms.length; i++) {
+      var f = allForms[i];
+      if (f.id !== 'form546191949' && !slot.contains(f)) {
+        form = f;
+        break;
+      }
+    }
+
+    var rec = form ? form.closest('.r') : document.getElementById('rec4673146901');
     if (!form) {
       renderBuiltinLeadForm(slot);
       return;
