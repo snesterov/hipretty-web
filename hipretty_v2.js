@@ -4102,28 +4102,8 @@
         <div class="hp-hero-cta-box">
           <button type="button" class="hp-btn-main hp-open-form-btn">✦ Подобрать идеальный срез</button>
 
-          <div class="hp-hero-messengers-split">
-            <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-hero-link-max" title="Написать в ЛС в MAX">
-              <svg viewBox="0 0 48 48" width="22" height="22" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5898 23.9727C35.5898 17.4255 30.4077 12.5 24.2314 12.5Z" fill="#A855F7"/></svg>
-              <div class="hp-hero-btn-texts">
-                <span class="hp-link-title">ЛС в MAX</span>
-                <span class="hp-link-sub hp-max-badge">✓ без VPN</span>
-              </div>
-            </a>
-
-            <div class="hp-hero-vpn-group">
-              <span class="hp-vpn-sub">(нужен VPN)</span>
-              <div class="hp-hero-vpn-btns">
-                <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-tg" title="Написать менеджеру в Telegram">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="#2AABEE"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.5 11.8l3.2 1.2 1.3 4.1c.2.5.8.6 1.1.2l1.9-1.9 3.8 2.8c.4.3 1 .1 1.1-.4l2.2-10.4c.1-.6-.4-1.1-1-.9L5.5 10.7c-.6.2-.6 1 0 1.1zm4.2 1l6.8-4.3c.2-.1.3.1.2.2l-5.6 5.1-.2 2.3-.8-2.6-.4-.7z" fill="#ffffff"/></svg>
-                  <span>Telegram</span>
-                </a>
-                <a href="https://wa.me/79933365357?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D1%81%D1%80%D0%B5%D0%B7%20%D0%B2%D0%BE%D0%BB%D0%BE%D1%81." target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-wa" title="Написать в WhatsApp">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2M12.05 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C16.6 3.67 20.3 7.37 20.3 11.92C20.29 16.46 16.59 20.15 12.05 20.15M16.57 14.33C16.32 14.21 15.1 13.61 14.87 13.53C14.65 13.44 14.48 13.4 14.32 13.65C14.15 13.9 13.68 14.45 13.54 14.62C13.39 14.78 13.25 14.8 13 14.68C12.75 14.55 11.95 14.29 11 13.45C10.26 12.79 9.76 11.97 9.61 11.72C9.47 11.47 9.6 11.34 9.72 11.22C9.83 11.11 9.97 10.93 10.1 10.78C10.22 10.64 10.27 10.53 10.35 10.37C10.43 10.2 10.39 10.06 10.33 9.94C10.27 9.81 9.77 8.58 9.57 8.08C9.37 7.6 9.17 7.66 9.02 7.65C8.88 7.65 8.71 7.65 8.55 7.65C8.38 7.65 8.11 7.71 7.88 7.96C7.65 8.21 7 8.82 7 10.06C7 11.31 7.91 12.51 8.03 12.68C8.16 12.84 9.82 15.4 12.35 16.5C12.95 16.76 13.42 16.91 13.78 17.03C14.38 17.22 14.93 17.19 15.36 17.13C15.84 17.06 16.84 16.52 17.05 15.94C17.26 15.36 17.26 14.86 17.2 14.76C17.14 14.65 16.82 14.46 16.57 14.33Z"/></svg>
-                  <span>WhatsApp</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
-                </a>
-              </div>
-            </div>
+          <div class="hp-hero-delivery-sub" style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:#fce7f3;margin-top:14px;background:rgba(255,255,255,0.06);padding:8px 16px;border-radius:20px;border:1px solid rgba(244,114,182,0.25);">
+            <span>🚚</span> <b>Доставка СДЭК по РФ 1–3 дня</b> • Подбор среза за 1 минуту
           </div>
         </div>
 
@@ -5012,26 +4992,9 @@
 
             <div class="hp-cut-actions">
               <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Забронировать срез ✦</button>
-              <div class="hp-cut-messengers-label">Написать мастеру в ЛС:</div>
-              <div class="hp-cut-messengers-split">
-                <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-cut-link-max" title="Написать в ЛС в MAX">
-                  <span class="hp-link-title">ЛС в MAX</span>
-                  <span class="hp-link-sub hp-max-badge">✓ без VPN</span>
-                </a>
-                <div class="hp-cut-vpn-group">
-                  <span class="hp-vpn-sub">(нужен VPN)</span>
-                  <div class="hp-vpn-btns">
-                    <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-tg" title="Написать в Telegram">TG</a>
-                    <a href="https://wa.me/79933365357?text=${encodeURIComponent('Здравствуйте! Интересует ' + item.title)}" target="_blank" rel="noopener" class="hp-vpn-btn hp-vpn-wa" title="Написать в WhatsApp">WhatsApp</a>
-                  </div>
-                </div>
               </div>
-            </div>
-
           </div>
-
         </div>
-
       `;
 
     }).join('');
