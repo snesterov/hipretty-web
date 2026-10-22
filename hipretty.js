@@ -6329,6 +6329,37 @@
     });
   }
 
+  function hpGetAnalyticsInfo() {
+    var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    var device = isMobile ? '📱 Смартфон' : '💻 ПК (десктоп)';
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var utmSource = urlParams.get('utm_source') || '';
+    var utmCamp = urlParams.get('utm_campaign') || '';
+    var utmTerm = urlParams.get('utm_term') || '';
+
+    var parts = [device];
+
+    if (utmCamp || utmSource) {
+      var campLabel = utmCamp;
+      if (utmCamp === '707367393') campLabel = 'Поиск (707367393)';
+      else if (utmCamp === '707364774') campLabel = 'РСЯ (707364774)';
+      parts.push((utmSource ? utmSource + ' ' : '') + campLabel);
+    } else {
+      parts.push('Прямой переход');
+    }
+
+    if (utmTerm) {
+      try {
+        parts.push('Ключ: ' + decodeURIComponent(utmTerm));
+      } catch(e) {
+        parts.push('Ключ: ' + utmTerm);
+      }
+    }
+
+    return parts.join(' • ');
+  }
+
 function mountTildaNativeForm() {
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
@@ -6736,6 +6767,7 @@ function mountTildaNativeForm() {
           p.append('messenger-id', fPhone);
           p.append('cut', selectedCut);
           p.append('Textarea', '✂️ Срез: ' + selectedCut + '\n💬 Способ связи: ' + methodText + '\nWhatsApp: ' + waLink + '\n📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n📱 Устройство: ' + deviceText);
+          p.append('comment', hpGetAnalyticsInfo());
           p.append('Checkbox', 'yes');
           var capInp = form.querySelector('#js-tildaspec-captcha, input[name="tildaspec-captcha"]');
           if (capInp && capInp.value) {
@@ -6974,7 +7006,7 @@ installBulletproofTildaValidator();
           commentInp.name = 'comment';
           form.appendChild(commentInp);
         }
-        commentInp.value = chosenCutParam;
+        commentInp.value = hpGetAnalyticsInfo();
       }
 
       form.addEventListener('submit', function() {
