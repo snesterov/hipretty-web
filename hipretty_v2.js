@@ -1050,6 +1050,85 @@
 
       .hp-catalog-counter strong { color: var(--hp-rose-light); }
 
+      .hp-catalog-footer {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .hp-catalog-more-btn {
+        background: rgba(244, 114, 182, 0.12);
+        color: var(--hp-rose-light);
+        border: 1px solid var(--hp-border-active);
+        padding: 13px 32px;
+        border-radius: 9999px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      .hp-catalog-more-btn:hover {
+        background: var(--hp-grad-btn);
+        color: #1a0818;
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(244, 114, 182, 0.4);
+      }
+
+      .hp-catalog-bridge-banner {
+        width: 100%;
+        background: linear-gradient(135deg, rgba(38, 26, 56, 0.95) 0%, rgba(25, 17, 38, 0.95) 100%);
+        border: 1px solid var(--hp-border);
+        border-radius: 20px;
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .hp-catalog-bridge-text {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .hp-catalog-bridge-text strong {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 20px;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .hp-catalog-bridge-text span {
+        font-size: 13px;
+        color: var(--hp-text-muted);
+        line-height: 1.45;
+      }
+
+      @media (max-width: 768px) {
+        .hp-catalog-bridge-banner {
+          flex-direction: column;
+          text-align: center;
+          padding: 20px 16px;
+        }
+        .hp-catalog-bridge-text strong {
+          font-size: 18px;
+        }
+        .hp-catalog-bridge-banner .hp-btn-main {
+          width: 100%;
+        }
+      }
+
 
 
       .hp-catalog-grid {
@@ -4470,7 +4549,7 @@
 
         Публикуем реальные хвостики из ленты Telegram с ценами, фото и точными параметрами. 
 
-        Поскольку срезы быстро разбирают, нажмите «Подобрать такой срез» — мастер проверит выбранный хвостик или подберет аналогичный из >35 кг со склада.
+        Поскольку срезы быстро разбирают, нажмите «Уточнить наличие и видео» — мастер проверит выбранный хвостик или подберет аналогичный из >35 кг со склада.
 
       </p>
 
@@ -4544,6 +4623,20 @@
 
     </div>
 
+    <!-- КНОПКА ПОКАЗАТЬ ЕЩЕ + МОСТ К ИНДИВИДУАЛЬНОМУ ПОДБОРУ -->
+    <div class="hp-catalog-footer" id="hp-catalog-footer">
+      <button type="button" class="hp-catalog-more-btn" id="hp-catalog-more-btn" style="display: none;">
+        Показать еще срезы (+6) ↓
+      </button>
+      <div class="hp-catalog-bridge-banner">
+        <div class="hp-catalog-bridge-text">
+          <strong>Не хотите листать или не нашли нужный оттенок?</strong>
+          <span>На складе в Москве более 35 кг отборных волос от одного донора. Мастер снимет живое видео среза и подберет под вашу структуру за 1 минуту.</span>
+        </div>
+        <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор и видео ✦</button>
+      </div>
+    </div>
+
   </section>
 
 
@@ -4551,14 +4644,15 @@
   <!-- ЦЕНТРАЛЬНЫЙ БЛОК ЗАХВАТА ЗАЯВКИ -->
 
   <section id="lead-box" class="hp-lead-section">
+    <div id="selection" style="position:relative;top:-80px;visibility:hidden;"></div>
 
     <div class="hp-container">
 
       <div class="hp-lead-box">
 
-        <span class="hp-lead-badge">Индивидуальный подбор</span>
+        <span class="hp-lead-badge">ИНДИВИДУАЛЬНЫЙ ПОДБОР</span>
 
-        <h2 class="hp-lead-title">Подберем идеальный срез <span>под ваш бюджет и структуру</span></h2>
+        <h2 class="hp-lead-title">Подберем идеальный срез <span>под ваш бюджет и структуру волос</span></h2>
 
         <p class="hp-lead-subtitle">
 
@@ -5049,78 +5143,61 @@
 
 
 
+  var visibleCutsCount = 6;
+
   function renderCatalogCards() {
-
     var container = document.getElementById('hp-catalog-cards');
-
     if (!container) return;
 
-
-
-        var filtered = cutsDatabase.filter(function(item) {
-
+    var filtered = cutsDatabase.filter(function(item) {
       if (selectedType !== 'all' && item.cat !== selectedType) return false;
-
       if (selectedLen !== 'all') {
-
         if (selectedLen === '50' && (item.length > 50)) return false;
-
         if (selectedLen === '60' && (item.length < 51 || item.length > 65)) return false;
-
         if (selectedLen === '70' && (item.length < 66)) return false;
-
       }
-
       return true;
-
     });
 
-
-
     var countEl = document.getElementById('hp-cuts-shown-count');
-
-    if (countEl) countEl.textContent = filtered.length;
-
     var totalEl = document.getElementById('hp-cuts-total-count');
-
     if (totalEl) totalEl.textContent = cutsDatabase.length;
 
-
+    var moreBtn = document.getElementById('hp-catalog-more-btn');
 
     if (filtered.length === 0) {
-
+      if (countEl) countEl.textContent = '0';
+      if (moreBtn) moreBtn.style.display = 'none';
       container.innerHTML = `
-
         <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: var(--hp-bg-card); border-radius: 20px; border: 1px dashed var(--hp-border);">
-
           <div style="font-size: 32px; margin-bottom: 12px;">🔎</div>
-
           <h3 style="font-size: 20px; color: #fff; margin: 0 0 10px;">Срезов с такими параметрами сейчас нет в витрине</h3>
-
-          <p style="color: var(--hp-text-muted); font-size: 14px; margin: 0 0 20px;">На складе более 35 кг отборных волос! Оставьте заявку — мастер подберет нужный срез индивидуально.</p>
-
-          <button type="button" class="hp-btn-main hp-open-form-btn">Запросить индивидуальный подбор ✦</button>
-
+          <p style="color: var(--hp-text-muted); font-size: 14px; margin: 0 0 20px;">На складе более 35 кг отборных волос! Оставьте заявку — мастер снимет живое видео и подберет срез индивидуально.</p>
+          <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор и видео ✦</button>
         </div>
-
       `;
-
       setupActionButtons();
-
       return;
-
     }
 
+    var visibleCuts = filtered.slice(0, visibleCutsCount);
+    if (countEl) countEl.textContent = visibleCuts.length;
 
+    if (moreBtn) {
+      if (filtered.length > visibleCutsCount) {
+        var remaining = filtered.length - visibleCutsCount;
+        var nextBatch = Math.min(6, remaining);
+        moreBtn.innerHTML = 'Показать еще срезы (+' + nextBatch + ') ↓';
+        moreBtn.style.display = 'inline-flex';
+      } else {
+        moreBtn.style.display = 'none';
+      }
+    }
 
-    var htmlCards = filtered.map(function(item) {
-
+    var htmlCards = visibleCuts.map(function(item) {
       var badgeText = item.cat === 'wave' ? 'Природная волна' : (item.cat === 'straight' ? 'Прямой шелк' : 'Детский шелк');
-
       return `
-
         <div class="hp-cut-card" data-id="${item.id}">
-
           <div class="hp-cut-img-wrap">
             <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.id}')">
             <span class="hp-cut-badge">${badgeText}</span>${item.id === cutsDatabase[0].id ? '<span class="hp-cut-new-badge">★ Свежий (Пост #' + item.id + ')</span>' : ''}
@@ -5130,43 +5207,25 @@
               <span>Видео среза в TG <i>(нужен VPN)</i></span>
             </a>
           </div>
-
           <div class="hp-cut-body">
-
             <h3 class="hp-cut-title">${item.title}</h3>
-
             <div class="hp-cut-meta">
-
               <span>${item.length} см</span>
-
               <span>${item.weight}</span>
-
               <span class="hp-cut-post-tag">Пост #${item.id}</span>
-
             </div>
-
             <p class="hp-cut-desc">${item.desc}</p>
-
             <div class="hp-cut-actions">
               <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
-              </div>
+            </div>
           </div>
         </div>
       `;
-
     }).join('');
 
-
-
     container.innerHTML = htmlCards;
-
     setupActionButtons();
-
   }
-
-
-
-
 
   var chosenCutParam = '';
 
@@ -7010,7 +7069,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedType = btn.getAttribute('data-type');
-
+        visibleCutsCount = 6;
         renderCatalogCards();
 
 
@@ -7034,7 +7093,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedLen = btn.getAttribute('data-len');
-
+        visibleCutsCount = 6;
         renderCatalogCards();
 
       });
@@ -7056,7 +7115,7 @@ installBulletproofTildaValidator();
         btn.classList.add('active');
 
         selectedShade = btn.getAttribute('data-shade');
-
+        visibleCutsCount = 6;
         renderCatalogCards();
 
       });
@@ -7068,6 +7127,23 @@ installBulletproofTildaValidator();
     // Инициализация каталога
 
     renderCatalogCards();
+
+    var moreBtn = document.getElementById('hp-catalog-more-btn');
+    if (moreBtn && !moreBtn.dataset.bound) {
+      moreBtn.dataset.bound = 'true';
+      moreBtn.addEventListener('click', function() {
+        visibleCutsCount += 6;
+        renderCatalogCards();
+      });
+    }
+
+    // Автопрокрутка к якорю из URL (например, из быстрых ссылок Яндекс Директ: #catalog, #contacts, #why-us, #selection)
+    if (window.location.hash) {
+      var hashTarget = window.location.hash.substring(1);
+      setTimeout(function() {
+        scrollToSection(hashTarget);
+      }, 350);
+    }
 
 
 
