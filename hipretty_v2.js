@@ -5667,6 +5667,11 @@
           dropdown.classList.remove('hp-show');
           if (inp) {
             inp.value = '';
+            if (c.code === '+') {
+              inp.placeholder = 'Код и номер (любая страна)';
+            } else {
+              inp.placeholder = '(999) 000-00-00';
+            }
             inp.focus();
           }
         });
@@ -5707,6 +5712,10 @@
       function formatPhoneValue() {
         var val = inp.value;
         if (!val) return;
+        if (hpCurrentCountry.code === '+') {
+          inp.value = val.replace(/[^\d\s\-\(\)\+]/g, '');
+          return;
+        }
         var digits = val.replace(/\D/g, '');
         if (!digits) {
           inp.value = '';
@@ -5915,9 +5924,17 @@
       }
 
       var digits = (bPhoneInp ? bPhoneInp.value : '').replace(/\D/g, '');
-      if (!digits || digits.length < 10) {
-        showCustomError(bPhoneInp, 'Пожалуйста, укажите номер телефона');
-        return false;
+      var isOtherCountry = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+');
+      if (isOtherCountry) {
+        if (!digits || digits.length < 6) {
+          showCustomError(bPhoneInp, 'Пожалуйста, укажите телефон с кодом страны');
+          return false;
+        }
+      } else {
+        if (!digits || digits.length < 10) {
+          showCustomError(bPhoneInp, 'Пожалуйста, укажите номер телефона');
+          return false;
+        }
       }
 
       window.hpLastLeadSubmitTime = now;
@@ -5937,9 +5954,19 @@
       var cutParamEl = document.getElementById('hp-selected-cut-text');
       var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
 
-      var lastDigits = digits.slice(-10);
-      var pCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
-      var fPhone = pCode + ' (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
+      var isOtherCountry = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+');
+      var fPhone;
+      var intDigits;
+      if (isOtherCountry) {
+        fPhone = '+' + digits;
+        intDigits = digits;
+      } else {
+        var lastDigits = digits.slice(-10);
+        var pCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
+        fPhone = pCode + ' (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
+        var rawDigits = digits.replace(/\D/g, '');
+        intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
+      }
 
       var searchParams = new URLSearchParams(window.location.search);
       var utmSource = searchParams.get('utm_source') || 'Прямой / Органика';
@@ -5948,9 +5975,6 @@
       var utmTerm = searchParams.get('utm_term') || '-';
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
-
-      var rawDigits = digits.replace(/\D/g, '');
-      var intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
       var clientName = (nVal || 'Клиент').trim();
 
       var waLink = 'https://wa.me/' + intDigits;
