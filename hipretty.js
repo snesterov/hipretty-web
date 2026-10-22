@@ -4314,7 +4314,7 @@
 
       <div class="hp-hero-info">
 
-        <div class="hp-badge-geo"><span></span> Шоурум и самовывоз в Москве (Арбат) • Доставка СДЭК от 1 дня</div>
+        <div class="hp-badge-geo"><span></span> Шоурум в Москве (Арбат) • <b style="color:#ffffff;font-weight:800;background:rgba(244,114,182,0.25);padding:2px 8px;border-radius:12px;">Доставка СДЭК по всей РФ от 1 дня</b></div>
 
         <h1 class="hp-hero-title">Натуральные детские<br>славянские срезы <span>высшего качества</span></h1>
 
