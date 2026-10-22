@@ -5980,7 +5980,16 @@
       var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
 
       // 3A. Вызов нативного метода Tilda
-      if (window.tildaForm && typeof window.tildaForm.send === 'function') {
+      var cutInpB = bForm.querySelector('input[name="cut"]');
+        if (!cutInpB) {
+          cutInpB = document.createElement('input');
+          cutInpB.type = 'hidden';
+          cutInpB.name = 'cut';
+          bForm.appendChild(cutInpB);
+        }
+        cutInpB.value = selectedCut;
+
+        if (window.tildaForm && typeof window.tildaForm.send === 'function') {
         try {
           window.tildaForm.send(bForm, submitBtn, 2, formsKey);
         } catch(err) {}
@@ -6455,6 +6464,15 @@ function mountTildaNativeForm() {
           var allRecords = document.getElementById('allrecords');
           var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
 
+
+          var cutInp = form.querySelector('input[name="cut"]');
+          if (!cutInp) {
+            cutInp = document.createElement('input');
+            cutInp.type = 'hidden';
+            cutInp.name = 'cut';
+            form.appendChild(cutInp);
+          }
+          cutInp.value = selectedCut;
 
           if (nameInp) nameInp.value = clientName;
           // 2A. Вызываем официальный метод Tilda для гарантированной обработки
