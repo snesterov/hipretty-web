@@ -3694,6 +3694,179 @@
 
       }
 
+
+      /* ===================== AIRTIGHT MOBILE ADAPTATION FOR CONTACTS & FOOTER ===================== */
+      @media (max-width: 768px) {
+        #contacts {
+          padding: 15px 12px 45px !important;
+          width: 100% !important;
+          max-width: 100vw !important;
+          box-sizing: border-box !important;
+          overflow: hidden !important;
+        }
+        .hp-contacts-card {
+          padding: 22px 14px !important;
+          border-radius: 18px !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          box-sizing: border-box !important;
+          overflow: hidden !important;
+        }
+        .hp-contact-title {
+          font-size: 24px !important;
+          margin-bottom: 16px !important;
+          text-align: center !important;
+        }
+        .hp-contact-item {
+          display: flex !important;
+          align-items: flex-start !important;
+          gap: 12px !important;
+          margin-bottom: 15px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .hp-ci-icon {
+          font-size: 20px !important;
+          flex-shrink: 0 !important;
+          margin-top: 2px !important;
+        }
+        .hp-contact-item > div:last-child {
+          min-width: 0 !important;
+          flex: 1 1 auto !important;
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+        }
+        .hp-ci-label {
+          font-size: 11px !important;
+          letter-spacing: 0.8px !important;
+          margin-bottom: 3px !important;
+        }
+        .hp-ci-val {
+          font-size: 13.5px !important;
+          line-height: 1.4 !important;
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+        }
+        .hp-contacts-messengers {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 8px !important;
+          width: 100% !important;
+          margin-top: 10px !important;
+          box-sizing: border-box !important;
+        }
+        .hp-m-link {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+          gap: 10px !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          box-sizing: border-box !important;
+          padding: 12px 12px !important;
+          background: rgba(255, 255, 255, 0.05) !important;
+          border: 1px solid rgba(244, 114, 182, 0.25) !important;
+          border-radius: 12px !important;
+          white-space: normal !important;
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+          font-size: 13px !important;
+          line-height: 1.35 !important;
+        }
+        .hp-m-link span {
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+          white-space: normal !important;
+        }
+        .hp-m-link svg {
+          flex-shrink: 0 !important;
+        }
+
+        /* FOOTER MOBILE FIX */
+        .hp-footer {
+          padding: 30px 12px 115px !important;
+          width: 100% !important;
+          max-width: 100vw !important;
+          box-sizing: border-box !important;
+          overflow: hidden !important;
+        }
+        .hp-footer-top {
+          grid-template-columns: 1fr !important;
+          gap: 24px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .hp-footer-brand {
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .hp-footer-logo {
+          font-size: 26px !important;
+        }
+        .hp-footer-requisites {
+          font-size: 11.5px !important;
+          line-height: 1.5 !important;
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+          margin-top: 10px !important;
+        }
+        .hp-footer-col-title {
+          font-size: 14px !important;
+          margin-bottom: 10px !important;
+        }
+        .hp-footer-menu {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 8px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .hp-footer-menu a, .hp-footer-menu button {
+          display: flex !important;
+          align-items: center !important;
+          gap: 8px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          white-space: normal !important;
+          word-break: break-word !important;
+          overflow-wrap: anywhere !important;
+          text-align: left !important;
+          font-size: 13px !important;
+          line-height: 1.35 !important;
+          padding: 6px 0 !important;
+        }
+        .hp-footer-bottom {
+          padding-top: 18px !important;
+          margin-top: 18px !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 12px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          font-size: 11px !important;
+          line-height: 1.45 !important;
+        }
+        .hp-footer-bottom-links {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 6px !important;
+          width: 100% !important;
+        }
+        .hp-footer-bottom-links span {
+          display: none !important;
+        }
+        .hp-footer-bottom-link {
+          text-align: left !important;
+          font-size: 11.5px !important;
+          padding: 0 !important;
+        }
+      }
+
     `;
 
     document.head.appendChild(s);
@@ -4626,7 +4799,7 @@
 
           <div class="hp-footer-menu">
 
-            <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+            <a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-m-link" style="display:inline-flex;align-items:center;gap:7px;">
 
               <svg viewBox="0 0 24 24" width="18" height="18" fill="#0088cc" style="flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
 
@@ -4634,7 +4807,7 @@
 
             </a>
 
-            <a href="https://t.me/hi_pretty" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+            <a href="https://t.me/hi_pretty" target="_blank" rel="noopener" class="hp-m-link" style="display:inline-flex;align-items:center;gap:7px;">
 
               <svg viewBox="0 0 24 24" width="18" height="18" fill="#0088cc" style="flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
 
@@ -4642,7 +4815,7 @@
 
             </a>
 
-            <a href="https://wa.me/79933365357" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+            <a href="https://wa.me/79933365357" target="_blank" rel="noopener" class="hp-m-link" style="display:inline-flex;align-items:center;gap:7px;">
 
               <svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366" style="flex-shrink:0;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2M12.05 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C16.6 3.67 20.3 7.37 20.3 11.92C20.29 16.46 16.59 20.15 12.05 20.15M16.57 14.33C16.32 14.21 15.1 13.61 14.87 13.53C14.65 13.44 14.48 13.4 14.32 13.65C14.15 13.9 13.68 14.45 13.54 14.62C13.39 14.78 13.25 14.8 13 14.68C12.75 14.55 11.95 14.29 11 13.45C10.26 12.79 9.76 11.97 9.61 11.72C9.47 11.47 9.6 11.34 9.72 11.22C9.83 11.11 9.97 10.93 10.1 10.78C10.22 10.64 10.27 10.53 10.35 10.37C10.43 10.2 10.39 10.06 10.33 9.94C10.27 9.81 9.77 8.58 9.57 8.08C9.37 7.6 9.17 7.66 9.02 7.65C8.88 7.65 8.71 7.65 8.55 7.65C8.38 7.65 8.11 7.71 7.88 7.96C7.65 8.21 7 8.82 7 10.06C7 11.31 7.91 12.51 8.03 12.68C8.16 12.84 9.82 15.4 12.35 16.5C12.95 16.76 13.42 16.91 13.78 17.03C14.38 17.22 14.93 17.19 15.36 17.13C15.84 17.06 16.84 16.52 17.05 15.94C17.26 15.36 17.26 14.86 17.2 14.76C17.14 14.65 16.82 14.46 16.57 14.33Z"/></svg>
 
@@ -4650,7 +4823,7 @@
 
             </a>
 
-            <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+            <a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-m-link" style="display:inline-flex;align-items:center;gap:7px;">
 
               <svg viewBox="0 0 48 48" width="20" height="20" fill="none" style="flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#A855F7"/></svg>
 
@@ -4658,7 +4831,7 @@
 
             </a>
 
-            <a href="tel:+79933365357" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;">
+            <a href="tel:+79933365357" class="hp-m-link" style="display:inline-flex;align-items:center;gap:7px;">
 
               <svg viewBox="0 0 24 24" width="18" height="18" fill="#E8A598" style="flex-shrink:0;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
 
