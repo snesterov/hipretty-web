@@ -5519,6 +5519,31 @@
       }
     });
 
+    // ПОСТОЯННО держим основной блок ввода телефона открытым и видимым
+    if (phoneVal) {
+      phoneVal.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
+      phoneVal.style.setProperty('display', 'block', 'important');
+      phoneVal.style.setProperty('visibility', 'visible', 'important');
+      phoneVal.style.setProperty('opacity', '1', 'important');
+      var pInp = phoneVal.querySelector('input');
+      if (pInp) {
+        pInp.disabled = false;
+        pInp.setAttribute('data-tilda-req', '1');
+        attachCleanPhoneMask(pInp);
+      }
+    }
+
+    // Скрытые блоки других мессенджеров прячем, но нейтрализуем их обязательность
+    var hiddenMethodBlocks = valContainer.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
+    hiddenMethodBlocks.forEach(function(b) {
+      b.style.setProperty('display', 'none', 'important');
+      b.querySelectorAll('input').forEach(function(inp) {
+        inp.removeAttribute('data-tilda-req');
+        inp.removeAttribute('required');
+        inp.classList.remove('js-tilda-rule');
+      });
+    });
+
     var currentSelectedMethod = 'phone';
 
     function selectMethod(methodType) {
@@ -5535,41 +5560,24 @@
         }
       });
 
-      // Переключаем отображение блоков мессенджеров без поломки обязательных полей Тильды
-      var allMethodBlocks = valContainer.querySelectorAll('.t-contact-method__phone-value, .t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
-      
-      allMethodBlocks.forEach(function(block) {
-        var isThisActive = block.classList.contains('t-contact-method__' + methodType + '-value');
-        if (isThisActive) {
-          block.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
-          block.style.setProperty('display', 'block', 'important');
-          block.style.setProperty('visibility', 'visible', 'important');
-          block.style.setProperty('opacity', '1', 'important');
-          block.querySelectorAll('input').forEach(function(inp) {
-            inp.disabled = false;
-            inp.setAttribute('data-tilda-req', '1');
-            inp.setAttribute('name', 'messenger-id');
-            inp.classList.add('js-tilda-rule');
-            attachCleanPhoneMask(inp);
-          });
-        } else {
-          block.classList.add('t-contact-method__hidden');
-          block.style.setProperty('display', 'none', 'important');
-          block.querySelectorAll('input').forEach(function(inp) {
-            inp.removeAttribute('data-tilda-req');
-            inp.removeAttribute('required');
-            inp.classList.remove('js-tilda-rule');
-          });
-        }
+      // Переключаем радио Тильды
+      var radios = form.querySelectorAll('input[name="messenger-type"]');
+      radios.forEach(function(r) {
+        r.checked = (r.value === methodType);
       });
 
-      // Синхронизируем значение из текущего активного поля во все остальные
-      var activeInp = valContainer.querySelector('.t-contact-method__' + methodType + '-value input:not([type="hidden"])');
-      var val = activeInp ? activeInp.value : '';
-      if (val) {
-        valContainer.querySelectorAll('input:not([type="hidden"])').forEach(function(inp) {
-          inp.value = val;
-        });
+      // Основной блок ввода телефона ВСЕГДА на виду и никогда не исчезает!
+      if (phoneVal) {
+        phoneVal.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
+        phoneVal.style.setProperty('display', 'block', 'important');
+        phoneVal.style.setProperty('visibility', 'visible', 'important');
+        phoneVal.style.setProperty('opacity', '1', 'important');
+        var pInp = phoneVal.querySelector('input');
+        if (pInp) {
+          pInp.disabled = false;
+          pInp.setAttribute('data-tilda-req', '1');
+          attachCleanPhoneMask(pInp);
+        }
       }
 
       var hints = {
@@ -5596,11 +5604,11 @@
       }
     }
 
-    // Слушатель ввода для мгновенной синхронизации номера между всеми мессенджерами
+    // Слушатель ввода: при вводе в видимый телефон синхронизируем значение во ВСЕ скрытые инпуты формы
     valContainer.addEventListener('input', function(e) {
       var v = e.target.value;
       valContainer.querySelectorAll('input:not([type="hidden"])').forEach(function(inp) {
-        if (inp !== e.target) inp.value = v;
+        inp.value = v;
       });
     });
 
@@ -6431,7 +6439,21 @@ function mountTildaNativeForm() {
           r.checked = (r.value === methodType);
         });
 
-        sanitizeInactiveMessengerInputs(form, methodType);
+        // Заполняем абсолютно все инпуты телефона
+        var allInputs = form.querySelectorAll('input[name="messenger-id"], input[name="phone"], input[type="tel"]');
+        allInputs.forEach(function(inp) {
+          inp.value = cleanPhone;
+        });
+
+        // Снимаем data-tilda-req со скрытых инпутов других мессенджеров
+        var hiddenMethodBlocks = form.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
+        hiddenMethodBlocks.forEach(function(b) {
+          b.querySelectorAll('input').forEach(function(inp) {
+            inp.removeAttribute('data-tilda-req');
+            inp.removeAttribute('required');
+            inp.classList.remove('js-tilda-rule');
+          });
+        });
         var methodLabels = {
           phone: '📞 Звонок по телефону',
           telegram: '✈️ Telegram',
