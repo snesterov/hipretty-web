@@ -4095,7 +4095,7 @@
 
         <a href="#why-us" class="hp-nav-link">Преимущества</a>
 
-        <a href="#selection" class="hp-nav-link">Подбор среза</a>
+        <a href="#lead-box" class="hp-nav-link">Подбор среза</a>
 
         <a href="#contacts" class="hp-nav-link">Контакты</a>
 
@@ -4368,98 +4368,6 @@
     <div class="hp-catalog-grid" id="hp-catalog-cards">
 
       <!-- Генерируется динамически через JS -->
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ОНЛАЙН-ПОДБОР СРЕЗА (КВИЗ) -->
-
-  <section class="hp-container hp-quiz-section" id="selection">
-
-    <div class="hp-sec-head">
-
-      <span class="hp-sec-badge">Индивидуальный подбор</span>
-
-      <h2 class="hp-sec-title">Подберите срез <span>под свои параметры</span></h2>
-
-      <p class="hp-sec-desc">Укажите желаемую длину и тип волос — мастер отберет 3 подходящих варианта со склада.</p>
-
-    </div>
-
-    <div class="hp-quiz-card">
-
-      <div class="hp-quiz-step-title">1. Желаемая длина волос:</div>
-
-      <div class="hp-quiz-options" id="quiz-length">
-
-        <div class="hp-quiz-opt" data-val="40-50 см">
-
-          <div class="hp-quiz-opt-val">40–50 см</div>
-
-          <div class="hp-quiz-opt-desc">Каре и длина до лопаток</div>
-
-        </div>
-
-        <div class="hp-quiz-opt selected" data-val="55-65 см">
-
-          <div class="hp-quiz-opt-val">55–65 см</div>
-
-          <div class="hp-quiz-opt-desc">Классическая длина до талии</div>
-
-        </div>
-
-        <div class="hp-quiz-opt" data-val="70-80 см">
-
-          <div class="hp-quiz-opt-val">70–80 см</div>
-
-          <div class="hp-quiz-opt-desc">Эксклюзивный длинный срез</div>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="hp-quiz-step-title">2. Тип структуры волос:</div>
-
-      <div class="hp-quiz-options" id="quiz-type">
-
-        <div class="hp-quiz-opt selected" data-val="Детский шелк">
-
-          <div class="hp-quiz-opt-val">Детский шелк</div>
-
-          <div class="hp-quiz-opt-desc">Тончайшая нежная волосинка</div>
-
-        </div>
-
-        <div class="hp-quiz-opt" data-val="Славянский стандарт">
-
-          <div class="hp-quiz-opt-val">Славянский шелк</div>
-
-          <div class="hp-quiz-opt-desc">Универсальный мягкий волос</div>
-
-        </div>
-
-        <div class="hp-quiz-opt" data-val="Природная волна">
-
-          <div class="hp-quiz-opt-val">Природная волна</div>
-
-          <div class="hp-quiz-opt-desc">Естественный текстурный завиток</div>
-
-        </div>
-
-      </div>
-
-
-
-      <div style="text-align:center;margin-top:20px;">
-
-        <button type="button" class="hp-btn-main hp-open-form-btn">Подобрать подходящие срезы ✦</button>
-
-      </div>
 
     </div>
 
@@ -5996,7 +5904,16 @@
       var methodText = methodLabels[activeMethod] || activeMethod;
 
       var cutParamEl = document.getElementById('hp-selected-cut-text');
-      var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
+      var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || '');
+        if (!selectedCut || selectedCut === 'Общий подбор (срез не указан)') {
+          var actLen = document.querySelector('#hp-fp-length .hp-fp-chip.active');
+          var actType = document.querySelector('#hp-fp-type .hp-fp-chip.active');
+          if (actLen || actType) {
+            selectedCut = (actLen ? actLen.getAttribute('data-val') : '55–65 см') + ' • ' + (actType ? actType.getAttribute('data-val') : 'Детский шелк');
+          } else {
+            selectedCut = 'Общий подбор (срез не указан)';
+          }
+        }
 
       var isOtherCountry = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+');
       var fPhone;
@@ -6100,7 +6017,8 @@
         p2.append('tildaspec-formname', 'Заявка на подбор со срезом (sale2)');
         p2.append('tildaspec-pageid', '297318909');
         p2.append('tildaspec-projectid', '5500437');
-        p2.append('Name', clientName);
+        var bNameWithCut = clientName + ' [✂️ ' + selectedCut + ']';
+        p2.append('Name', bNameWithCut);
         p2.append('Phone', fPhone);
         p2.append('cut', selectedCut);
         p2.append('messenger', methodText);
@@ -6578,6 +6496,9 @@ function mountTildaNativeForm() {
           var allRecords = document.getElementById('allrecords');
           var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
 
+
+          var tildaNameWithCut = clientName + " [✂️ " + selectedCut + "]";
+          if (nameInp) nameInp.value = tildaNameWithCut;
           // 2A. Вызываем официальный метод Tilda для гарантированной обработки
           if (window.tildaForm && typeof window.tildaForm.send === 'function') {
             try {
@@ -6601,7 +6522,9 @@ function mountTildaNativeForm() {
           p.append('tildaspec-formname', 'Запись на подбор волос');
           p.append('tildaspec-pageid', '297318909');
           p.append('tildaspec-projectid', '5500437');
-          p.append('Name', clientName);
+          var tildaNameWithCut = clientName + ' [✂️ ' + selectedCut + ']';
+          if (nameInp) nameInp.value = tildaNameWithCut;
+          p.append('Name', tildaNameWithCut);
           p.append('Phone', fPhone);
           p.append('messenger-type', methodType);
           p.append('messenger-id', fPhone);
