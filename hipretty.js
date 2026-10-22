@@ -500,6 +500,17 @@
 
       }
 
+      .hp-badge-delivery-tag {
+        background: rgba(244, 114, 182, 0.35);
+        color: #ffffff !important;
+        font-weight: 800;
+        padding: 3px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(244, 114, 182, 0.6);
+        box-shadow: 0 0 12px rgba(244, 114, 182, 0.3);
+        display: inline-block;
+      }
+
       .hp-hero-title {
 
         font-family: 'Cormorant Garamond', serif;
@@ -3613,93 +3624,68 @@
         z-index: 9990;
         display: flex;
         align-items: center;
-        gap: 8px;
         transition: opacity 0.3s ease, transform 0.3s ease;
       }
-      .hp-widget-msg-btn {
+      .hp-widget-pulse-btn {
+        background: var(--hp-grad-btn);
+        color: #1a0818 !important;
+        padding: 10px 22px;
+        border-radius: 9999px;
+        text-decoration: none;
+        box-shadow: 0 8px 25px rgba(244, 114, 182, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: rgba(22, 13, 34, 0.94);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        text-decoration: none;
-        flex-shrink: 0;
       }
-      .hp-widget-msg-btn:hover {
-        transform: scale(1.08);
+      .hp-widget-pulse-btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(244, 114, 182, 0.75);
       }
-      .hp-widget-msg-tg {
-        border: 1.5px solid rgba(0, 136, 204, 0.6);
+      .hp-widget-btn-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        line-height: 1.25;
       }
-      .hp-widget-msg-tg:hover {
-        box-shadow: 0 0 14px rgba(0, 136, 204, 0.55);
-        border-color: #0088cc;
+      .hp-widget-btn-main {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1a0818;
+        letter-spacing: -0.2px;
       }
-      .hp-widget-msg-max {
-        border: 1.5px solid rgba(168, 85, 247, 0.6);
-      }
-      .hp-widget-msg-max:hover {
-        box-shadow: 0 0 14px rgba(168, 85, 247, 0.55);
-        border-color: #A855F7;
+      .hp-widget-btn-sub {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #4a044e;
+        margin-top: 2px;
+        letter-spacing: 0.1px;
+        opacity: 0.95;
       }
       @media (max-width: 480px) {
         #hp-widget-lead {
-          bottom: 12px;
-          right: 10px;
-          gap: 6px;
-        }
-        .hp-widget-msg-btn {
-          display: none !important; /* На смартфонах убираем лишние кружки, оставляем только чистую главную кнопку */
-        }
-        .hp-widget-msg-btn svg {
-          width: 16px;
-          height: 16px;
+          bottom: 12px !important;
+          right: 12px !important;
+          left: 12px !important;
         }
         .hp-widget-pulse-btn {
-          padding: 10px 14px;
-          font-size: 12.5px;
+          width: 100%;
+          justify-content: center;
+          padding: 10px 16px;
+        }
+        .hp-widget-btn-content {
+          align-items: center;
+          text-align: center;
+        }
+        .hp-widget-btn-main {
+          font-size: 13px;
+        }
+        .hp-widget-btn-sub {
+          font-size: 10px;
         }
       }
-
-      .hp-widget-pulse-btn {
-
-        background: var(--hp-grad-btn);
-
-        color: #1a0818 !important;
-
-        padding: 12px 20px;
-
-        border-radius: 25px;
-
-        font-weight: 700;
-
-        font-size: 13.5px;
-
-        display: inline-flex;
-
-        align-items: center;
-
-        gap: 6px;
-
-        text-decoration: none;
-
-        box-shadow: 0 6px 20px rgba(244, 114, 182, 0.5);
-
-        cursor: pointer;
-
-        border: none;
-
-        transition: transform 0.2s ease;
-
-      }
-
-      .hp-widget-pulse-btn:hover { transform: scale(1.04); }
 
 
 
@@ -4393,7 +4379,7 @@
 
       <div class="hp-hero-info">
 
-        <div class="hp-badge-geo"><span></span> Шоурум в Москве (Арбат) • <b style="color:#ffffff;font-weight:800;background:rgba(244,114,182,0.25);padding:2px 8px;border-radius:12px;">Доставка СДЭК по всей РФ от 1 дня</b></div>
+        <div class="hp-badge-geo"><span></span> Шоурум в Москве (Арбат) • <span class="hp-badge-delivery-tag">Доставка СДЭК по всей РФ от 1 дня</span></div>
 
         <h1 class="hp-hero-title">Натуральные детские<br>славянские срезы <span>высшего качества</span></h1>
 
@@ -7286,7 +7272,7 @@ installBulletproofTildaValidator();
 
     leadWidget.id = 'hp-widget-lead';
 
-    leadWidget.innerHTML = '<a href="https://t.me/hi_pretty_manager" target="_blank" rel="noopener" class="hp-widget-msg-btn hp-widget-msg-tg" title="Написать мастеру в Telegram"><svg viewBox="0 0 24 24" width="18" height="18" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg></a><a href="https://max.ru/u/f9LHodD0cOJDkOJa38G-aakmLO32B2FcARILKCnXhnJnzvKWD9r6yXfUCxE" target="_blank" rel="noopener" class="hp-widget-msg-btn hp-widget-msg-max" title="Написать мастеру в MAX"><svg viewBox="0 0 48 48" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0ZM24.2314 12.5C17.8663 12.5 12.4942 17.4255 12.4941 23.9727C12.4941 26.714 13.0015 28.6059 13.4482 30.3047C13.8233 31.6836 14.1543 32.9467 14.1543 34.4414C14.3143 36.4326 17.9823 35.2685 19.1406 33.7793C20.9718 35.1031 22.0251 35.4346 24.292 35.4346C30.5586 35.4011 35.6151 30.2999 35.5938 24.0332C35.5937 17.6682 30.602 12.5 24.2314 12.5ZM24.3857 18.1592V18.165C27.5981 18.349 30.0709 21.0719 29.9453 24.2871C29.7296 27.4955 26.9854 29.9406 23.7734 29.7861C22.768 29.7055 21.8016 29.3614 20.9717 28.7881C20.4699 29.2899 19.6648 29.9402 19.3447 29.8633C18.6774 29.6868 17.8938 26.2951 18.335 23.5098C18.87 20.1452 21.2859 17.9993 24.3857 18.1592Z" fill="#A855F7"/></svg></a><button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><span>✦</span> Подобрать срез</button>';
+    leadWidget.innerHTML = '<button type="button" class="hp-widget-pulse-btn hp-open-form-btn"><div class="hp-widget-btn-content"><span class="hp-widget-btn-main">✦ Подобрать срез и видео</span><span class="hp-widget-btn-sub">🚗 Шоурум Арбат • 📦 Доставка СДЭК по РФ</span></div></button>';
 
     document.body.appendChild(leadWidget);
 
