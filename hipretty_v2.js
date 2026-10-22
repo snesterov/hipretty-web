@@ -4556,13 +4556,13 @@
 
       <div class="hp-lead-box">
 
-        <span class="hp-lead-badge">Онлайн-подбор среза</span>
+        <span class="hp-lead-badge">Индивидуальный подбор</span>
 
-        <h2 class="hp-lead-title">Мечтаете о роскошных <span>натуральных волосах?</span></h2>
+        <h2 class="hp-lead-title">Подберем идеальный срез <span>под ваш бюджет и структуру</span></h2>
 
         <p class="hp-lead-subtitle">
 
-          Самовывоз в день заказа в Москве или отправка СДЭК с видео среза перед оплатой.
+          Снимем живое видео среза при дневном свете до оплаты. Заберите лично в шоуруме в Москве или получите экспресс-доставкой СДЭК.
 
         </p>
 
@@ -5976,7 +5976,7 @@
         '</div>' +
         '<div class="t-form__submit">' +
           '<button type="submit" id="hp-builtin-submit-btn" class="t-submit" style="width:100%!important;height:56px!important;background:linear-gradient(135deg,#ec4899,#d946ef)!important;color:#ffffff!important;border:none!important;border-radius:14px!important;font-weight:700!important;font-size:16px!important;cursor:pointer!important;box-shadow:0 8px 25px rgba(236,72,153,0.4)!important;transition:all 0.2s!important;font-family:\'Montserrat\',sans-serif!important;">' +
-            'Получить подбор и фото среза ✦' +
+            'Заказать индивидуальный подбор и видео ✦' +
           '</button>' +
           '<div class="hp-form-security-note">' +
             '🔒 Ваши данные защищены (152-ФЗ РФ). Консультация и подбор среза бесплатны и ни к чему вас не обязывают.' +
@@ -6368,7 +6368,7 @@ function mountTildaNativeForm() {
 
     var subBtn = form.querySelector('.t-btnflex__text, .t-submit');
     if (subBtn) {
-      subBtn.textContent = 'Получить подбор и фото среза ✦';
+      subBtn.textContent = 'Заказать индивидуальный подбор и видео ✦';
     }
 
     function showCustomError(inputEl, msg) {
