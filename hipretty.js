@@ -6018,7 +6018,7 @@
         p2.append('tildaspec-pageid', '297318909');
         p2.append('tildaspec-projectid', '5500437');
         var bNameWithCut = clientName + ' [✂️ ' + selectedCut + ']';
-        p2.append('Name', bNameWithCut);
+        p2.append('Name', clientName);
         p2.append('Phone', fPhone);
         p2.append('cut', selectedCut);
         p2.append('messenger', methodText);
@@ -6497,8 +6497,7 @@ function mountTildaNativeForm() {
           var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
 
 
-          var tildaNameWithCut = clientName + " [✂️ " + selectedCut + "]";
-          if (nameInp) nameInp.value = tildaNameWithCut;
+          if (nameInp) nameInp.value = clientName;
           // 2A. Вызываем официальный метод Tilda для гарантированной обработки
           if (window.tildaForm && typeof window.tildaForm.send === 'function') {
             try {
@@ -6522,9 +6521,8 @@ function mountTildaNativeForm() {
           p.append('tildaspec-formname', 'Запись на подбор волос');
           p.append('tildaspec-pageid', '297318909');
           p.append('tildaspec-projectid', '5500437');
-          var tildaNameWithCut = clientName + ' [✂️ ' + selectedCut + ']';
-          if (nameInp) nameInp.value = tildaNameWithCut;
-          p.append('Name', tildaNameWithCut);
+          if (nameInp) nameInp.value = clientName;
+          p.append('Name', clientName);
           p.append('Phone', fPhone);
           p.append('messenger-type', methodType);
           p.append('messenger-id', fPhone);
