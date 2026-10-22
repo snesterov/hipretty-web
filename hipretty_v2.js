@@ -6100,21 +6100,43 @@
         window.sendLeadConversionGoals();
       }
 
-      // 4. Мгновенная замена на красивую карточку подтверждения
-      var successHtml = '<div class="hp-success-card">' +
-        '<div class="hp-success-check">✓</div>' +
-        '<h3 class="hp-success-title">Заявка успешно принята!</h3>' +
-        '<p class="hp-success-desc">Мастер уже получил ваш запрос и свяжется с вами в течение 10 минут.</p>' +
-        '<div class="hp-success-info-box">' +
-          '<div class="hp-success-row"><span class="hp-s-label">Имя:</span><span class="hp-s-val">' + nVal + '</span></div>' +
-          '<div class="hp-success-row"><span class="hp-s-label">Телефон:</span><span class="hp-s-val">' + fPhone + '</span></div>' +
-          '<div class="hp-success-row"><span class="hp-s-label">Способ связи:</span><span class="hp-s-val">' + methodText + '</span></div>' +
-          '<div class="hp-success-row"><span class="hp-s-label">Срез/запрос:</span><span class="hp-s-val">' + selectedCut + '</span></div>' +
-        '</div>' +
-        '<div class="hp-success-tip">⚡ <b>Статус:</b> Заявка зафиксирована, мастер готовит видео среза. Пожалуйста, ожидайте ответа.</div>' +
-      '</div>';
+      // 4. Карточка подтверждения с поддержкой Tilda Captcha (без удаления формы из DOM)
+      function displayBuiltinSuccess() {
+        if (slot.querySelector('.hp-success-card')) return;
+        bForm.style.display = 'none';
+        var card = document.createElement('div');
+        card.className = 'hp-success-card';
+        card.innerHTML = '<div class="hp-success-check">✓</div>' +
+          '<h3 class="hp-success-title">Заявка успешно принята!</h3>' +
+          '<p class="hp-success-desc">Мастер уже получил ваш запрос и свяжется с вами в течение 10 минут.</p>' +
+          '<div class="hp-success-info-box">' +
+            '<div class="hp-success-row"><span class="hp-s-label">Имя:</span><span class="hp-s-val">' + nVal + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Телефон:</span><span class="hp-s-val">' + fPhone + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Способ связи:</span><span class="hp-s-val">' + methodText + '</span></div>' +
+            '<div class="hp-success-row"><span class="hp-s-label">Срез/запрос:</span><span class="hp-s-val">' + selectedCut + '</span></div>' +
+          '</div>' +
+          '<div class="hp-success-tip">⚡ <b>Статус:</b> Заявка зафиксирована, мастер готовит видео среза. Пожалуйста, ожидайте ответа.</div>';
+        slot.appendChild(card);
+      }
 
-      slot.innerHTML = successHtml;
+      bForm.addEventListener('tildaform:aftersend', function() {
+        displayBuiltinSuccess();
+      });
+
+      var builtinCheckInterval = setInterval(function() {
+        var captchaBox = document.getElementById('tildaformcaptchabox');
+        if (captchaBox) {
+          submitBtn.textContent = 'Подтвердите капчу выше ↑';
+        }
+      }, 500);
+
+      setTimeout(function() {
+        clearInterval(builtinCheckInterval);
+        var captchaBox = document.getElementById('tildaformcaptchabox');
+        if (!captchaBox) {
+          displayBuiltinSuccess();
+        }
+      }, 3000);
     });
   }
 
@@ -6512,26 +6534,45 @@ function mountTildaNativeForm() {
           window.sendLeadConversionGoals();
         }
 
-        // 4. Мгновенная замена формы на красивую карточку подтверждения
+        // 4. Карточка подтверждения с поддержкой Tilda Captcha (без удаления формы из DOM)
         var slot = document.getElementById('hp-tilda-form-slot');
-        var successHtml = '<div class="hp-success-card">' +
-          '<div class="hp-success-check">✓</div>' +
-          '<h3 class="hp-success-title">Заявка успешно принята!</h3>' +
-          '<p class="hp-success-desc">Мастер уже получил ваш запрос и свяжется с вами в течение 10 минут.</p>' +
-          '<div class="hp-success-info-box">' +
-            '<div class="hp-success-row"><span class="hp-s-label">Имя:</span><span class="hp-s-val">' + (nameVal || 'Клиент') + '</span></div>' +
-            '<div class="hp-success-row"><span class="hp-s-label">Телефон:</span><span class="hp-s-val">' + fPhone + '</span></div>' +
-            '<div class="hp-success-row"><span class="hp-s-label">Способ связи:</span><span class="hp-s-val">' + methodText + '</span></div>' +
-            '<div class="hp-success-row"><span class="hp-s-label">Срез/запрос:</span><span class="hp-s-val">' + selectedCut + '</span></div>' +
-          '</div>' +
-          '<div class="hp-success-tip">⚡ <b>Статус:</b> Заявка зафиксирована, мастер готовит видео среза. Пожалуйста, ожидайте ответа.</div>' +
-        '</div>';
-
-        if (slot) {
-          slot.innerHTML = successHtml;
-        } else {
-          form.innerHTML = successHtml;
+        function displayNativeSuccess() {
+          if (slot && slot.querySelector('.hp-success-card')) return;
+          form.style.display = 'none';
+          var card = document.createElement('div');
+          card.className = 'hp-success-card';
+          card.innerHTML = '<div class="hp-success-check">✓</div>' +
+            '<h3 class="hp-success-title">Заявка успешно принята!</h3>' +
+            '<p class="hp-success-desc">Мастер уже получил ваш запрос и свяжется с вами в течение 10 минут.</p>' +
+            '<div class="hp-success-info-box">' +
+              '<div class="hp-success-row"><span class="hp-s-label">Имя:</span><span class="hp-s-val">' + (nameVal || 'Клиент') + '</span></div>' +
+              '<div class="hp-success-row"><span class="hp-s-label">Телефон:</span><span class="hp-s-val">' + fPhone + '</span></div>' +
+              '<div class="hp-success-row"><span class="hp-s-label">Способ связи:</span><span class="hp-s-val">' + methodText + '</span></div>' +
+              '<div class="hp-success-row"><span class="hp-s-label">Срез/запрос:</span><span class="hp-s-val">' + selectedCut + '</span></div>' +
+            '</div>' +
+            '<div class="hp-success-tip">⚡ <b>Статус:</b> Заявка зафиксирована, мастер готовит видео среза. Пожалуйста, ожидайте ответа.</div>';
+          if (slot) slot.appendChild(card);
+          else form.parentElement.appendChild(card);
         }
+
+        form.addEventListener('tildaform:aftersend', function() {
+          displayNativeSuccess();
+        });
+
+        var nativeCheckInterval = setInterval(function() {
+          var captchaBox = document.getElementById('tildaformcaptchabox');
+          if (captchaBox) {
+            submitBtnEl.textContent = 'Подтвердите капчу выше ↑';
+          }
+        }, 500);
+
+        setTimeout(function() {
+          clearInterval(nativeCheckInterval);
+          var captchaBox = document.getElementById('tildaformcaptchabox');
+          if (!captchaBox) {
+            displayNativeSuccess();
+          }
+        }, 3000);
       });
     }
 
