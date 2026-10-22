@@ -6505,9 +6505,14 @@ function mountTildaNativeForm() {
                     '• Устройство: ' + deviceText + '\n' +
                     '• Страница: ' + window.location.href.split('?')[0];
 
-        // 1. Моментальная отправка в Telegram Бот (без проблемных кнопок)
+        // 1. Моментальная отправка в Telegram Бот (с дедупликацией при срабатывании капчи)
         try {
-          fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
+          var leadKey = fPhone + '_' + clientName;
+          window.hpSentLeads = window.hpSentLeads || {};
+          var nowTime = Date.now();
+          if (!window.hpSentLeads[leadKey] || (nowTime - window.hpSentLeads[leadKey] > 60000)) {
+            window.hpSentLeads[leadKey] = nowTime;
+            fetch('https://api.telegram.org/bot8944107532:AAERRuVDGLnNLu_ONW8wqG-Ra8mqujdern8/sendMessage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -6531,6 +6536,7 @@ function mountTildaNativeForm() {
           }).catch(function(tgErr) {
             console.error('TG send error:', tgErr);
           });
+          }
         } catch(e) {}
 
         // 2. Отправка через нативный механизм Tilda и официальный шлюз forms.tildacdn.com
