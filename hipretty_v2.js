@@ -2457,6 +2457,7 @@
         box-shadow: 0 12px 35px rgba(244, 114, 182, 0.6) !important;
       }
       #hp-tilda-form-slot .t-btn_wrap-effects { display: none !important; }
+      #hp-tilda-form-slot.hp-submitted form, #hp-tilda-form-slot:has(.hp-success-card) form { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; pointer-events: none !important; }
       .hp-success-card {
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.08) 100%) !important;
         border: 2px solid #10B981 !important;
@@ -6107,7 +6108,12 @@
       // 4. Карточка подтверждения с поддержкой Tilda Captcha (без удаления формы из DOM)
       function displayBuiltinSuccess() {
         if (slot.querySelector('.hp-success-card')) return;
-        bForm.style.display = 'none';
+        bForm.style.setProperty('display', 'none', 'important');
+        bForm.style.setProperty('visibility', 'hidden', 'important');
+        bForm.style.setProperty('height', '0', 'important');
+        bForm.style.setProperty('overflow', 'hidden', 'important');
+        bForm.style.setProperty('pointer-events', 'none', 'important');
+        if (slot) slot.classList.add('hp-submitted');
         var card = document.createElement('div');
         card.className = 'hp-success-card';
         card.innerHTML = '<div class="hp-success-check">✓</div>' +
@@ -6582,7 +6588,12 @@ function mountTildaNativeForm() {
         var slot = document.getElementById('hp-tilda-form-slot');
         function displayNativeSuccess() {
           if (slot && slot.querySelector('.hp-success-card')) return;
-          form.style.display = 'none';
+          form.style.setProperty('display', 'none', 'important');
+          form.style.setProperty('visibility', 'hidden', 'important');
+          form.style.setProperty('height', '0', 'important');
+          form.style.setProperty('overflow', 'hidden', 'important');
+          form.style.setProperty('pointer-events', 'none', 'important');
+          if (slot) slot.classList.add('hp-submitted');
           var card = document.createElement('div');
           card.className = 'hp-success-card';
           card.innerHTML = '<div class="hp-success-check">✓</div>' +
