@@ -1557,6 +1557,62 @@
         flex-shrink: 0;
       }
 
+      
+      .hp-form-params-picker {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(244, 114, 182, 0.22);
+        border-radius: 16px;
+        padding: 16px 20px;
+        margin: 18px 0 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .hp-fp-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .hp-fp-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fce7f3;
+        min-width: 125px;
+      }
+      .hp-fp-chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .hp-fp-chip {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: #fff;
+        padding: 7px 15px;
+        border-radius: 20px;
+        font-size: 12.5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .hp-fp-chip:hover {
+        background: rgba(244, 114, 182, 0.15);
+        border-color: rgba(244, 114, 182, 0.4);
+      }
+      .hp-fp-chip.active {
+        background: var(--hp-grad-btn, linear-gradient(135deg, #f472b6 0%, #ec4899 100%));
+        color: #1a0818 !important;
+        font-weight: 700;
+        border-color: transparent;
+        box-shadow: 0 0 12px rgba(244, 114, 182, 0.35);
+      }
+      @media (max-width: 600px) {
+        .hp-form-params-picker { padding: 14px 12px; margin: 14px 0 18px; }
+        .hp-fp-label { width: 100%; min-width: auto; margin-bottom: 2px; }
+        .hp-fp-chip { font-size: 11.5px; padding: 6px 11px; }
+      }
+      
       .hp-lead-box {
 
         background: linear-gradient(135deg, rgba(38, 22, 54, 0.95) 0%, rgba(22, 12, 34, 0.98) 100%);
@@ -4470,6 +4526,26 @@
 
         <!-- СЛОТ ДЛЯ ОФИЦИАЛЬНОЙ РОДНОЙ TILDA-ФОРМЫ -->
 
+        <!-- ИНТЕРАКТИВНЫЙ ВЫБОР ПАРАМЕТРОВ СРЕЗА ПРЯМО В ФОРМЕ -->
+        <div class="hp-form-params-picker">
+          <div class="hp-fp-row">
+            <span class="hp-fp-label">Желаемая длина:</span>
+            <div class="hp-fp-chips" id="hp-fp-length">
+              <button type="button" class="hp-fp-chip" data-val="40–50 см">40–50 см</button>
+              <button type="button" class="hp-fp-chip active" data-val="55–65 см">55–65 см</button>
+              <button type="button" class="hp-fp-chip" data-val="70–80 см">70–80 см</button>
+            </div>
+          </div>
+          <div class="hp-fp-row">
+            <span class="hp-fp-label">Тип структуры:</span>
+            <div class="hp-fp-chips" id="hp-fp-type">
+              <button type="button" class="hp-fp-chip active" data-val="Детский шелк">Детский шелк</button>
+              <button type="button" class="hp-fp-chip" data-val="Славянский шелк">Славянский шелк</button>
+              <button type="button" class="hp-fp-chip" data-val="Природная волна">Природная волна</button>
+            </div>
+          </div>
+        </div>
+
         <div id="hp-tilda-form-slot"></div>
 
       </div>
@@ -6978,6 +7054,41 @@ installBulletproofTildaValidator();
 
 
 
+    // Привязка кликабельных чипсов в самой форме
+    function setupFormParamsPicker() {
+      var lenChips = document.querySelectorAll('#hp-fp-length .hp-fp-chip');
+      var typeChips = document.querySelectorAll('#hp-fp-type .hp-fp-chip');
+
+      function updateFromChips() {
+        var actLen = document.querySelector('#hp-fp-length .hp-fp-chip.active');
+        var actType = document.querySelector('#hp-fp-type .hp-fp-chip.active');
+        var lenVal = actLen ? actLen.getAttribute('data-val') : '55–65 см';
+        var typeVal = actType ? actType.getAttribute('data-val') : 'Детский шелк';
+        var combined = lenVal + ' • ' + typeVal;
+        setSelectedCutBadge(combined, true);
+      }
+
+      lenChips.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          lenChips.forEach(function(c) { c.classList.remove('active'); });
+          btn.classList.add('active');
+          updateFromChips();
+        });
+      });
+
+      typeChips.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          typeChips.forEach(function(c) { c.classList.remove('active'); });
+          btn.classList.add('active');
+          updateFromChips();
+        });
+      });
+    }
+    setupFormParamsPicker();
+
+    
     mountTildaNativeForm();
 
     setTimeout(mountTildaNativeForm, 500);
