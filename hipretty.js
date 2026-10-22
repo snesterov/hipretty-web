@@ -5519,72 +5519,58 @@
       }
     });
 
-    function sanitizeInputs() {
-      var inactives = form.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
-      inactives.forEach(function(block, bIdx) {
-        block.style.setProperty('display', 'none', 'important');
-        block.querySelectorAll('input').forEach(function(inp, iIdx) {
-          inp.disabled = true;
-          inp.removeAttribute('data-tilda-req');
-          inp.removeAttribute('required');
-          inp.classList.remove('js-tilda-rule');
-          inp.removeAttribute('name');
-          inp.id = 'hp_inert_' + bIdx + '_' + iIdx;
-        });
-      });
-
-      if (valContainer) {
-        valContainer.classList.remove('t-contact-method__hidden');
-        valContainer.style.setProperty('display', 'block', 'important');
-        valContainer.style.setProperty('visibility', 'visible', 'important');
-        valContainer.style.setProperty('opacity', '1', 'important');
-      }
-      if (phoneVal) {
-        phoneVal.classList.remove('t-contact-method__hidden');
-        phoneVal.style.setProperty('display', 'block', 'important');
-        phoneVal.style.setProperty('visibility', 'visible', 'important');
-        phoneVal.style.setProperty('opacity', '1', 'important');
-      }
-      var pInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]');
-      if (pInp) {
-        pInp.disabled = false;
-        pInp.setAttribute('data-tilda-req', '1');
-        pInp.classList.add('js-tilda-rule');
-        pInp.setAttribute('name', 'phone');
-        pInp.setAttribute('autocomplete', 'tel');
-        pInp.setAttribute('inputmode', 'tel');
-        pInp.setAttribute('type', 'tel');
-        pInp.id = 'input_1770920801992';
-        pInp.style.setProperty('display', 'block', 'important');
-        pInp.style.setProperty('visibility', 'visible', 'important');
-        pInp.style.setProperty('opacity', '1', 'important');
-        pInp.style.setProperty('pointer-events', 'auto', 'important');
-        var wrap = pInp.closest('.t-input-block') || pInp.closest('.t-input-phonemask__wrap');
-        if (wrap) {
-          wrap.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
-          wrap.style.setProperty('display', 'flex', 'important');
-          wrap.style.setProperty('visibility', 'visible', 'important');
-          wrap.style.setProperty('opacity', '1', 'important');
-        }
-      }
-    }
+    var currentSelectedMethod = 'phone';
 
     function selectMethod(methodType) {
+      currentSelectedMethod = methodType;
       methodBtns.forEach(function(btn) {
         var bType = btn.getAttribute('data-method-type');
         var r = btn.querySelector('input[type="radio"]');
         if (bType === methodType) {
           btn.classList.add('hp-active');
-          if (r) {
-            r.checked = true;
-            r.dispatchEvent(new Event('change', { bubbles: true }));
-          }
+          if (r) r.checked = true;
         } else {
           btn.classList.remove('hp-active');
           if (r) r.checked = false;
         }
       });
-      sanitizeInputs();
+
+      // Переключаем отображение блоков мессенджеров без поломки обязательных полей Тильды
+      var allMethodBlocks = valContainer.querySelectorAll('.t-contact-method__phone-value, .t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
+      
+      allMethodBlocks.forEach(function(block) {
+        var isThisActive = block.classList.contains('t-contact-method__' + methodType + '-value');
+        if (isThisActive) {
+          block.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
+          block.style.setProperty('display', 'block', 'important');
+          block.style.setProperty('visibility', 'visible', 'important');
+          block.style.setProperty('opacity', '1', 'important');
+          block.querySelectorAll('input').forEach(function(inp) {
+            inp.disabled = false;
+            inp.setAttribute('data-tilda-req', '1');
+            inp.setAttribute('name', 'messenger-id');
+            inp.classList.add('js-tilda-rule');
+            attachCleanPhoneMask(inp);
+          });
+        } else {
+          block.classList.add('t-contact-method__hidden');
+          block.style.setProperty('display', 'none', 'important');
+          block.querySelectorAll('input').forEach(function(inp) {
+            inp.removeAttribute('data-tilda-req');
+            inp.removeAttribute('required');
+            inp.classList.remove('js-tilda-rule');
+          });
+        }
+      });
+
+      // Синхронизируем значение из текущего активного поля во все остальные
+      var activeInp = valContainer.querySelector('.t-contact-method__' + methodType + '-value input:not([type="hidden"])');
+      var val = activeInp ? activeInp.value : '';
+      if (val) {
+        valContainer.querySelectorAll('input:not([type="hidden"])').forEach(function(inp) {
+          inp.value = val;
+        });
+      }
 
       var hints = {
         phone: '📞 <b>Звонок по телефону:</b> Мастер свяжется с вами в течение 10 минут, ответит на все вопросы и бесплатно подберет срез.',
@@ -5609,6 +5595,14 @@
         }
       }
     }
+
+    // Слушатель ввода для мгновенной синхронизации номера между всеми мессенджерами
+    valContainer.addEventListener('input', function(e) {
+      var v = e.target.value;
+      valContainer.querySelectorAll('input:not([type="hidden"])').forEach(function(inp) {
+        if (inp !== e.target) inp.value = v;
+      });
+    });
 
     methodBtns.forEach(function(btn) {
       if (btn.dataset.hpSwitchInit) return;
@@ -6293,14 +6287,29 @@ function mountTildaNativeForm() {
       form.appendChild(trap);
     }
 
-    function sanitizeInactiveMessengerInputs(targetForm) {
+    function sanitizeInactiveMessengerInputs(targetForm, currentMethod) {
       if (!targetForm) return;
-      var inactives = targetForm.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
-      inactives.forEach(function(wrap) {
-        wrap.querySelectorAll('input').forEach(function(inp) {
-          inp.removeAttribute('data-tilda-req');
-          inp.removeAttribute('required');
-        });
+      var methods = ['phone', 'telegram', 'whatsapp', 'max_messenger'];
+      methods.forEach(function(m) {
+        var wrap = targetForm.querySelector('.t-contact-method__' + m + '-value');
+        if (!wrap) return;
+        if (m === currentMethod) {
+          wrap.classList.remove('t-contact-method__hidden', 'hp-block-hidden');
+          wrap.style.setProperty('display', 'block', 'important');
+          wrap.querySelectorAll('input').forEach(function(inp) {
+            inp.disabled = false;
+            inp.setAttribute('data-tilda-req', '1');
+            inp.setAttribute('name', 'messenger-id');
+          });
+        } else {
+          wrap.classList.add('t-contact-method__hidden');
+          wrap.style.setProperty('display', 'none', 'important');
+          wrap.querySelectorAll('input').forEach(function(inp) {
+            inp.removeAttribute('data-tilda-req');
+            inp.removeAttribute('required');
+            inp.classList.remove('js-tilda-rule');
+          });
+        }
       });
     }
 
@@ -6413,11 +6422,16 @@ function mountTildaNativeForm() {
           inp.disabled = false;
         });
 
-        sanitizeInactiveMessengerInputs(form);
+        var activeMethodEl = form.querySelector('.t-contact-method__type.hp-active, .t-contact-method__type.t-contact-method__type_active');
+        var methodType = activeMethodEl ? (activeMethodEl.getAttribute('data-method-type') || activeMethodEl.getAttribute('data-method')) : 'phone';
 
-        // Сбор данных
-        var activeMethodEl = form.querySelector('.t-contact-method__type.t-contact-method__type_active');
-        var methodType = activeMethodEl ? activeMethodEl.getAttribute('data-method-type') : 'phone';
+        // Активируем радио-кнопку нужного мессенджера для валидатора Тильды
+        var radios = form.querySelectorAll('input[name="messenger-type"]');
+        radios.forEach(function(r) {
+          r.checked = (r.value === methodType);
+        });
+
+        sanitizeInactiveMessengerInputs(form, methodType);
         var methodLabels = {
           phone: '📞 Звонок по телефону',
           telegram: '✈️ Telegram',
