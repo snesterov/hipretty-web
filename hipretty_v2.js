@@ -3630,6 +3630,9 @@
         z-index: 9990;
         display: flex;
         align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
         transition: opacity 0.3s ease, transform 0.3s ease;
       }
       .hp-widget-pulse-btn {
@@ -7294,19 +7297,35 @@ installBulletproofTildaValidator();
 
     setupActionButtons();
 
-    window.addEventListener('scroll', function() {
+    function updateLeadWidgetVisibility() {
+      if (!leadWidget) return;
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
       var leadSec = document.getElementById('lead-box');
-      if (leadSec && leadWidget) {
+
+      // Показываем плавающую кнопку ТОЛЬКО после ухода с первого экрана (проскроллили > 400px),
+      // чтобы на первом экране на смартфонах и ПК не было задвоения кнопок!
+      var isPastHero = scrollY > 400;
+
+      // Скрываем плавающую кнопку, когда пользователь доскроллил до самой формы (#lead-box)
+      var isInLeadBox = false;
+      if (leadSec) {
         var rect = leadSec.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 100) {
-          leadWidget.style.opacity = '0';
-          leadWidget.style.pointerEvents = 'none';
-        } else {
-          leadWidget.style.opacity = '1';
-          leadWidget.style.pointerEvents = 'auto';
-        }
+        isInLeadBox = (rect.top < window.innerHeight && rect.bottom > 80);
       }
-    });
+
+      if (isPastHero && !isInLeadBox) {
+        leadWidget.style.opacity = '1';
+        leadWidget.style.pointerEvents = 'auto';
+        leadWidget.style.transform = 'translateY(0)';
+      } else {
+        leadWidget.style.opacity = '0';
+        leadWidget.style.pointerEvents = 'none';
+        leadWidget.style.transform = 'translateY(20px)';
+      }
+    }
+
+    window.addEventListener('scroll', updateLeadWidgetVisibility, { passive: true });
+    updateLeadWidgetVisibility();
 
   }
 
