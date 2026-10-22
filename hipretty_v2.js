@@ -5910,8 +5910,10 @@
       e.preventDefault();
       e.stopPropagation();
 
+      var captchaInpB = bForm.querySelector('#js-tildaspec-captcha, input[name="tildaspec-captcha"]');
+      var hasCaptchaB = captchaInpB && captchaInpB.value && captchaInpB.value.trim().length > 0;
       var now = Date.now();
-      if (window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 5000)) {
+      if (!hasCaptchaB && window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 3000)) {
         return false;
       }
 
@@ -6326,9 +6328,11 @@ function mountTildaNativeForm() {
         e.preventDefault();
         e.stopPropagation();
 
-        // 1. Защита от спам-кликов (дебаунс 5 секунд)
+        // 1. Защита от спам-кликов (дебаунс не блокирует авто-отправку после капчи)
+        var captchaInpN = form.querySelector('#js-tildaspec-captcha, input[name="tildaspec-captcha"]');
+        var hasCaptchaN = captchaInpN && captchaInpN.value && captchaInpN.value.trim().length > 0;
         var now = Date.now();
-        if (window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 5000)) {
+        if (!hasCaptchaN && window.hpLastLeadSubmitTime && (now - window.hpLastLeadSubmitTime < 3000)) {
           return false;
         }
 
@@ -6522,6 +6526,10 @@ function mountTildaNativeForm() {
           p.append('cut', selectedCut);
           p.append('Textarea', '✂️ Срез: ' + selectedCut + '\n💬 Способ связи: ' + methodText + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink + '\n📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n📱 Устройство: ' + deviceText);
           p.append('Checkbox', 'yes');
+          var capInp = form.querySelector('#js-tildaspec-captcha, input[name="tildaspec-captcha"]');
+          if (capInp && capInp.value) {
+            p.append('tildaspec-captcha', capInp.value);
+          }
 
           var xhr = new XMLHttpRequest();
           xhr.open('POST', 'https://forms.tildacdn.com/procces/', true);
@@ -6562,6 +6570,10 @@ function mountTildaNativeForm() {
         var nativeCheckInterval = setInterval(function() {
           var captchaBox = document.getElementById('tildaformcaptchabox');
           if (captchaBox) {
+            submitBtnEl.removeAttribute('disabled');
+            submitBtnEl.disabled = false;
+            submitBtnEl.style.setProperty('pointer-events', 'auto', 'important');
+            submitBtnEl.style.setProperty('opacity', '1', 'important');
             submitBtnEl.textContent = 'Подтвердите капчу выше ↑';
           }
         }, 500);
