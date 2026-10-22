@@ -6465,15 +6465,46 @@ function mountTildaNativeForm() {
           });
         } catch(e) {}
 
-        // 2. Фоновое резервирование в Тильду
+        // 2. Отправка через нативный механизм Tilda и официальный шлюз forms.tildacdn.com
         try {
-          var actionUrl = form.getAttribute('action') || 'https://forms.tildacdn.com/procces/';
-          var formData = new FormData(form);
-          fetch(actionUrl, {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors'
-          }).catch(function(err) {});
+          var allRecords = document.getElementById('allrecords');
+          var formsKey = (allRecords && allRecords.getAttribute('data-tilda-formskey')) || 'a8a1a8151b151a0221d568e5a5500437';
+
+          // 2A. Вызываем официальный метод Tilda для гарантированной обработки
+          if (window.tildaForm && typeof window.tildaForm.send === 'function') {
+            try {
+              window.tildaForm.send(form, submitBtnEl, 2, formsKey);
+            } catch(tErr) {}
+          }
+
+          // 2B. Прямой резервный XHR POST со всеми 5 сервисами и привязкой к rec4673146901
+          var servicesList = [
+            'b50f30259e15e3d8d5212d867a1d4954',
+            'f84b098f0cddc52c587a2c2f5e0fadfc',
+            '9f2f90b847bfb45b6924b750bb155691',
+            '3de76a792e289629ff456561531ed0ca',
+            '079d3725ab062a821f281c7010b7677f'
+          ];
+
+          var p = new URLSearchParams();
+          servicesList.forEach(function(s) { p.append('formservices[]', s); });
+          p.append('formid', 'form4673146901');
+          p.append('tildaspec-formid', '4673146901');
+          p.append('tildaspec-formname', 'Запись на подбор волос');
+          p.append('tildaspec-pageid', '297318909');
+          p.append('tildaspec-projectid', '5500437');
+          p.append('Name', clientName);
+          p.append('Phone', fPhone);
+          p.append('messenger-type', methodType);
+          p.append('messenger-id', fPhone);
+          p.append('cut', selectedCut);
+          p.append('Textarea', '✂️ Срез: ' + selectedCut + '\n💬 Способ связи: ' + methodText + '\nWhatsApp: ' + waLink + '\nMAX: ' + maxLink + '\n📊 Источник: ' + utmSource + ' | ' + utmCampaign + '\n📱 Устройство: ' + deviceText);
+          p.append('Checkbox', 'yes');
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', 'https://forms.tildacdn.com/procces/', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+          xhr.send(p.toString());
         } catch(e) {}
 
         // 3. Отправка целей в Яндекс Метрику для Директа
