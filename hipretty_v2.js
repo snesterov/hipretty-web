@@ -8937,130 +8937,6 @@
 
 
 
-  <!-- ПРЕИМУЩЕСТВА -->
-
-
-
-  <section class="hp-container" id="why-us" style="padding: 20px 20px 40px;">
-
-
-
-    <div class="hp-sec-head">
-
-
-
-      <span class="hp-sec-badge">Честное качество</span>
-
-
-
-      <h2 class="hp-sec-title">Почему наши волосы выбирают <span>по всей России</span></h2>
-
-
-
-      <p class="hp-sec-desc">Мы лично отбираем каждый хвостик и гарантируем безупречное качество от первой примерки до многократных коррекций.</p>
-
-
-
-    </div>
-
-
-
-    <div class="hp-features-grid">
-
-
-
-      <div class="hp-feature-card">
-
-
-
-        <div class="hp-feat-icon">✨</div>
-
-
-
-        <h3 class="hp-feat-title">Один срез — один донор</h3>
-
-
-
-        <p class="hp-feat-desc">Волосы не смешиваются. Кутикула направлена строго в одну сторону, поэтому они не путаются после мытья.</p>
-
-
-
-      </div>
-
-
-
-      <div class="hp-feature-card">
-
-
-
-        <div class="hp-feat-icon">🌿</div>
-
-
-
-        <h3 class="hp-feat-title">Без силикона и химии</h3>
-
-
-
-        <p class="hp-feat-desc">Природный живой волос. Сохраняет естественную шелковистость и блеск даже после окрашивания и термоукладок.</p>
-
-
-
-      </div>
-
-
-
-      <div class="hp-feature-card">
-
-
-
-        <div class="hp-feat-icon">⚖️</div>
-
-
-
-        <h3 class="hp-feat-title">Честный вес и длина</h3>
-
-
-
-        <p class="hp-feat-desc">Показываем подробные фото и видео выбранного среза при дневном свете перед покупкой.</p>
-
-
-
-      </div>
-
-
-
-      <div class="hp-feature-card">
-
-
-
-        <div class="hp-feat-icon">🚚</div>
-
-
-
-        <h3 class="hp-feat-title">Быстрая доставка</h3>
-
-
-
-        <p class="hp-feat-desc">Быстрая отправка СДЭК в любой регион России (1–3 дня). Доставка по миру. Надежная упаковка.</p>
-
-
-
-      </div>
-
-
-
-    </div>
-
-
-
-  </section>
-
-
-
-
-
-
-
   <!-- ИНТЕРАКТИВНЫЙ КАТАЛОГ СРЕЗОВ (ПРЯМОЙ ЭФИР TELEGRAM @hi_pretty) -->
 
 
@@ -9288,6 +9164,132 @@
         <button type="button" class="hp-btn-main hp-open-form-btn">Заказать индивидуальный подбор ✦</button>
 
       </div>
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- ПРЕИМУЩЕСТВА -->
+
+
+
+  <section class="hp-container" id="why-us" style="padding: 20px 20px 40px;">
+
+
+
+    <div class="hp-sec-head">
+
+
+
+      <span class="hp-sec-badge">Честное качество</span>
+
+
+
+      <h2 class="hp-sec-title">Почему наши волосы выбирают <span>по всей России</span></h2>
+
+
+
+      <p class="hp-sec-desc">Мы лично отбираем каждый хвостик и гарантируем безупречное качество от первой примерки до многократных коррекций.</p>
+
+
+
+    </div>
+
+
+
+    <div class="hp-features-grid">
+
+
+
+      <div class="hp-feature-card">
+
+
+
+        <div class="hp-feat-icon">✨</div>
+
+
+
+        <h3 class="hp-feat-title">Один срез — один донор</h3>
+
+
+
+        <p class="hp-feat-desc">Волосы не смешиваются. Кутикула направлена строго в одну сторону, поэтому они не путаются после мытья.</p>
+
+
+
+      </div>
+
+
+
+      <div class="hp-feature-card">
+
+
+
+        <div class="hp-feat-icon">🌿</div>
+
+
+
+        <h3 class="hp-feat-title">Без силикона и химии</h3>
+
+
+
+        <p class="hp-feat-desc">Природный живой волос. Сохраняет естественную шелковистость и блеск даже после окрашивания и термоукладок.</p>
+
+
+
+      </div>
+
+
+
+      <div class="hp-feature-card">
+
+
+
+        <div class="hp-feat-icon">⚖️</div>
+
+
+
+        <h3 class="hp-feat-title">Честный вес и длина</h3>
+
+
+
+        <p class="hp-feat-desc">Показываем подробные фото и видео выбранного среза при дневном свете перед покупкой.</p>
+
+
+
+      </div>
+
+
+
+      <div class="hp-feature-card">
+
+
+
+        <div class="hp-feat-icon">🚚</div>
+
+
+
+        <h3 class="hp-feat-title">Быстрая доставка</h3>
+
+
+
+        <p class="hp-feat-desc">Быстрая отправка СДЭК в любой регион России (1–3 дня). Доставка по миру. Надежная упаковка.</p>
+
+
+
+      </div>
+
+
 
     </div>
 
