@@ -10406,7 +10406,7 @@
       return `
         <div class="hp-cut-card" data-id="${item.id}">
           <div class="hp-cut-img-wrap">
-            <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.id}')">
+            <img src="${item.img}" alt="${item.title}" class="hp-cut-img" loading="lazy" onerror="hpHandleImgError(this, '${item.img}')">
             <span class="hp-cut-badge">${badgeText}</span>
             ${freshBadge}
             <span class="hp-cut-price-tag">${(!item.price || item.price.includes('TG')) ? (hpActiveCategory === 'dyed' ? 'от 17 500 ₽' : 'от 45 000 ₽') : item.price}</span>
@@ -10526,24 +10526,25 @@
 
   // Быстрая безотказная доставка фото срезов (CDN jsDelivr -> Raw GitHub -> Statically)
 
-  window.hpHandleImgError = function(img, cutId) {
-
+  window.hpHandleImgError = function(img, imgSrcOrId) {
     var retries = parseInt(img.getAttribute('data-retries') || '0', 10);
-
     if (retries === 0) {
-
       img.setAttribute('data-retries', '1');
-
-      img.src = 'https://raw.githubusercontent.com/snesterov/hipretty-web/main/cuts/cut_' + cutId + '.jpg';
-
+      if (imgSrcOrId && typeof imgSrcOrId === 'string' && (imgSrcOrId.indexOf('http') === 0 || imgSrcOrId.indexOf('jsdelivr.net') !== -1)) {
+        img.src = imgSrcOrId.replace('cdn.jsdelivr.net/gh', 'raw.githubusercontent.com');
+      } else {
+        var prefix = (hpActiveCategory === 'dyed' || String(imgSrcOrId).indexOf('dyed') !== -1) ? 'cut_dyed_' : 'cut_';
+        img.src = 'https://raw.githubusercontent.com/snesterov/hipretty-web/main/cuts/' + prefix + imgSrcOrId + '.jpg';
+      }
     } else if (retries === 1) {
-
       img.setAttribute('data-retries', '2');
-
-      img.src = 'https://cdn.statically.io/gh/snesterov/hipretty-web/main/cuts/cut_' + cutId + '.jpg';
-
+      if (imgSrcOrId && typeof imgSrcOrId === 'string' && (imgSrcOrId.indexOf('http') === 0 || imgSrcOrId.indexOf('jsdelivr.net') !== -1)) {
+        img.src = imgSrcOrId.replace('cdn.jsdelivr.net/gh', 'cdn.statically.io/gh');
+      } else {
+        var prefix = (hpActiveCategory === 'dyed' || String(imgSrcOrId).indexOf('dyed') !== -1) ? 'cut_dyed_' : 'cut_';
+        img.src = 'https://cdn.statically.io/gh/snesterov/hipretty-web/main/cuts/' + prefix + imgSrcOrId + '.jpg';
+      }
     }
-
   };
 
 
