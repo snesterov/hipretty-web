@@ -8591,7 +8591,7 @@
 
 
 
-  var hpActiveCategory = 'natural';
+  var hpActiveCategory = 'dyed';
 
   window.hpUserCity = '';
 
@@ -8791,25 +8791,15 @@
 
 
 
-        <h1 class="hp-hero-title">Натуральные детские<br>славянские срезы <span>высшего качества</span></h1>
+        <h1 class="hp-hero-title">Натуральные срезы волос<br>в Москве: <span>от фабричных до детских</span></h1>
 
 
 
         <p class="hp-hero-desc">
 
+          Склад более 35 кг отборных волос в Москве: от срезов собственного производства (от 13 690 ₽) до эксклюзивного детского шелка от одного донора.
 
-
-          Коллекция отборных натуральных волос со склада в Москве (>35 кг). 
-
-
-
-          100% живой волос от одного донора без силикона и химии: ровные плотные концы, шелковистая структура. 
-
-
-
-          Быстрая отправка в любой город России и за рубеж.
-
-
+          100% живой волос без силикона и химии. Мастер снимет живое макро-видео срезов под ваш бюджет за 1 минуту!
 
         </p>
 
@@ -9081,9 +9071,9 @@
 
     <div class="hp-sec-head">
 
-      <span class="hp-sec-badge" id="hp-catalog-sec-badge">Прямой эфир с Telegram-канала @hi_pretty</span>
+      <span class="hp-sec-badge" id="hp-catalog-sec-badge">Прямой эфир с Telegram-канала @volosy_hi_pretty</span>
 
-      <h2 class="hp-sec-title" id="hp-catalog-sec-title">Примеры срезов <span>из нашего канала</span></h2>
+      <h2 class="hp-sec-title" id="hp-catalog-sec-title">Окрашенные срезы <span>собственного производства</span></h2>
 
       <p class="hp-sec-desc" id="hp-catalog-sec-desc">
 
@@ -9117,29 +9107,29 @@
 
     <div class="hp-cat-main-tabs">
 
-      <button type="button" class="hp-cat-main-tab active" id="hp-tab-natural" data-source="natural">
-
-        <span class="hp-tab-icon">✦</span>
-
-        <span class="hp-tab-info">
-
-          <span class="hp-tab-title">Детские некрашеные</span>
-
-          <span class="hp-tab-sub">Премиальный шелк • @hi_pretty</span>
-
-        </span>
-
-      </button>
-
-      <button type="button" class="hp-cat-main-tab" id="hp-tab-dyed" data-source="dyed">
+      <button type="button" class="hp-cat-main-tab active" id="hp-tab-dyed" data-source="dyed">
 
         <span class="hp-tab-icon">🎨</span>
 
         <span class="hp-tab-info">
 
-          <span class="hp-tab-title">Окрашенные срезы</span>
+          <span class="hp-tab-title">Доступные срезы (Свое пр-во)</span>
 
-          <span class="hp-tab-sub">Свое производство • @volosy_hi_pretty</span>
+          <span class="hp-tab-sub">Фабричное окрашивание от 13 690 ₽ • @volosy_hi_pretty</span>
+
+        </span>
+
+      </button>
+
+      <button type="button" class="hp-cat-main-tab" id="hp-tab-natural" data-source="natural">
+
+        <span class="hp-tab-icon">✦</span>
+
+        <span class="hp-tab-info">
+
+          <span class="hp-tab-title">Эксклюзив: Детские некрашеные</span>
+
+          <span class="hp-tab-sub">Премиальный люкс шелк • @hi_pretty</span>
 
         </span>
 
@@ -9167,19 +9157,19 @@
 
 
 
-          <button type="button" class="hp-filter-pill active" data-type="all">Все примеры (28)</button>
+          <button type="button" class="hp-filter-pill active" data-type="all">Все примеры (11)</button>
 
 
 
-          <button type="button" class="hp-filter-pill" data-type="silk">Детский шелк</button>
+          <button type="button" class="hp-filter-pill" data-type="silk">Блонды и светлые</button>
 
 
 
-          <button type="button" class="hp-filter-pill" data-type="wave">Природная волна</button>
+          <button type="button" class="hp-filter-pill" data-type="wave">Русые оттенки</button>
 
 
 
-          <button type="button" class="hp-filter-pill" data-type="straight">Прямые и гладкие</button>
+          <button type="button" class="hp-filter-pill" data-type="straight">Темные и шоколад</button>
 
 
 
@@ -10413,7 +10403,7 @@
       } else {
         actionButtons = `
           <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
-          <button type="button" class="hp-cut-alt-btn">✨ Подобрать аналог дешевле ↓</button>
+          <button type="button" class="hp-cut-alt-btn">✨ Нужен такой оттенок под ваш бюджет? Срезы от 13 690 ₽ ↓</button>
         `;
       }
 
