@@ -8036,727 +8036,407 @@
 
 
   var cutsDatabase = [
-
   {
-
-    "id": "4306",
-
-    "cutNum": "#1554",
-
-    "title": "Срез #1554 (54 см / 115 гр)",
-
-    "cat": "silk",
-
-    "length": 54,
-
-    "weight": "115 гр",
-
-    "price": "158 400 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4306.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4306",
-
-    "desc": "#1554   Детский нежный,натуральный блонд Тонкая волосинка  Природная легкая волна   8 тон,есть выгоревшие прядки 9 и 10 тона  54 см 115 гр 158.400"
-
-  },
-
-  {
-
-    "id": "4301",
-
-    "cutNum": "#1232",
-
-    "title": "Срез #1232 (91 см / 169 гр)",
-
-    "cat": "silk",
-
-    "length": 91,
-
-    "weight": "169 гр",
-
+    "id": "4342",
+    "cutNum": "#4342",
+    "title": "Срез #4342 (52 см / 120 гр)",
+    "cat": "blond",
+    "badge": "Окрашенный блонд",
+    "length": 52,
+    "weight": "120 гр",
     "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4301",
-
-    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  #1232  Детский шелк,волосок как паутинка,очень редко бывает в такой длине   Что бы уплотнить концы хвостик можно перетянуть по длинам и нарастить обратным каскадом   Такую работу выполнят наши мастера в студии  "
-
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4342.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4342",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Детский блондик  Тонкий, мягкий, нежный   52 см  120 гр  92400"
   },
-
   {
-
-    "id": "4291",
-
-    "cutNum": "#1556",
-
-    "title": "Срез #1556 (80 см / 174 гр)",
-
+    "id": "4338",
+    "cutNum": "#4338",
+    "title": "Срез #4338 (67 см / 110 гр)",
     "cat": "silk",
-
-    "length": 80,
-
-    "weight": "174 гр",
-
-    "price": "275 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4291",
-
-    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  #1556  Детский срез Тонкая волосинка,шелковый,нежнейший   80 см 174 гр 275.000"
-
-  },
-
-  {
-
-    "id": "4276",
-
-    "cutNum": "#1378",
-
-    "title": "Срез #1378 (50 см / 80 гр)",
-
-    "cat": "silk",
-
-    "length": 50,
-
-    "weight": "80 гр",
-
-    "price": "47 200 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4276.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4276",
-
-    "desc": "#1378 • Детский русский срез • Окрашен в щадящей технике без потери качества волос"
-
-  },
-
-  {
-
-    "id": "4271",
-
-    "cutNum": "#1387",
-
-    "title": "Срез #1387 (66 см / 86 гр)",
-
-    "cat": "silk",
-
-    "length": 66,
-
-    "weight": "86 гр",
-
-    "price": "48 400 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4271.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4271",
-
-    "desc": "Детские,шелковые,нежнейшие хвостики • #1387 66см/86гр - 48.400 • #1555 68см/140гр - 190.000"
-
-  },
-
-  {
-
-    "id": "4263",
-
-    "cutNum": "#1436",
-
-    "title": "Срез #1436 (50 см / 107 гр)",
-
-    "cat": "wave",
-
-    "length": 50,
-
-    "weight": "107 гр",
-
-    "price": "41 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4263.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4263",
-
-    "desc": "#1436 • Детский шелк • Природная волна,волосинка между тонкой и средней,есть выгоревшие прядки"
-
-  },
-
-  {
-
-    "id": "4258",
-
-    "cutNum": "#1247",
-
-    "title": "Срез #1247 (65 см / 181 гр)",
-
-    "cat": "straight",
-
-    "length": 65,
-
-    "weight": "181 гр",
-
-    "price": "113 750 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4258.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4258",
-
-    "desc": "Шелковые,маслянистые,нежнейшие,гладкие • #1247 65см/181гр - 113.750 • #1249 65см/144гр - 60.000"
-
-  },
-
-  {
-
-    "id": "4249",
-
-    "cutNum": "#1386",
-
-    "title": "Срез #1386 (60 см / 100 гр)",
-
-    "cat": "wave",
-
-    "length": 60,
-
-    "weight": "100 гр",
-
-    "price": "84 750 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4249.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4249",
-
-    "desc": "Детские срезы,выкрашены из славянских,русых хвостиков • Вычесаны от коротышей,подрезаны до густых концов • Волосинка нежная,мягкая,есть легкая волна"
-
-  },
-
-  {
-
-    "id": "4231",
-
-    "cutNum": "#770",
-
-    "title": "Срез #770 (50 см / 140 гр)",
-
-    "cat": "silk",
-
-    "length": 50,
-
-    "weight": "140 гр",
-
-    "price": "48 240 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4231.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4231",
-
-    "desc": "Пористые,воздушные детские хвостики • Не жесткие,мягкие,волосинка между тонкой и средней • Идеально придадут желаемый обьем,маленьким количеством грамм в наращивании"
-
-  },
-
-  {
-
-    "id": "4221",
-
-    "cutNum": "#1255",
-
-    "title": "Срез #1255 (62 см / 211 гр)",
-
-    "cat": "silk",
-
-    "length": 62,
-
-    "weight": "211 гр",
-
-    "price": "131 643 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4221.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4221",
-
-    "desc": "#1255 • Детский воздушный хвостик • Слегка пористый,не жесткий"
-
-  },
-
-  {
-
-    "id": "4211",
-
-    "cutNum": "#1562",
-
-    "title": "Срез #1562 (50 см / 115 гр)",
-
-    "cat": "wave",
-
-    "length": 50,
-
-    "weight": "115 гр",
-
-    "price": "115 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4211.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4211",
-
-    "desc": "#1562 • Эксклюзив   🤍 • Шелковый,нежный,натуральный блонд"
-
-  },
-
-  {
-
-    "id": "4201",
-
-    "cutNum": "#1561",
-
-    "title": "Срез #1561 (55 см / 106 гр)",
-
-    "cat": "wave",
-
-    "length": 55,
-
-    "weight": "106 гр",
-
-    "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4201",
-
-    "desc": "#1561 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
-
-  },
-
-  {
-
-    "id": "4194",
-
-    "cutNum": "#1373",
-
-    "title": "Срез #1373 (53 см / 117 гр)",
-
-    "cat": "silk",
-
-    "length": 53,
-
-    "weight": "117 гр",
-
-    "price": "68 300 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4194",
-
-    "desc": "#1373 • Детский,воздушный хвостик • Окрашен в щадящей технике,качество осталось прежним,срез мягкий,нежный"
-
-  },
-
-  {
-
-    "id": "4187",
-
-    "cutNum": "#1555",
-
-    "title": "Срез #1555 (55 см / 106 гр)",
-
-    "cat": "wave",
-
-    "length": 55,
-
-    "weight": "106 гр",
-
-    "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4187.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4187",
-
-    "desc": "#1555 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
-
-  },
-
-  {
-
-    "id": "4177",
-
-    "cutNum": "#1246",
-
-    "title": "Срез #1246 (67 см / 229 гр)",
-
-    "cat": "silk",
-
+    "badge": "Премиум шелк",
     "length": 67,
-
-    "weight": "229 гр",
-
-    "price": "87 350 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4177.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4177",
-
-    "desc": "#1246 • Детский,глянцевый срез • Шелковый,мягкий,волосинка ближе к средней"
-
+    "weight": "110 гр",
+    "price": "90 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4338.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4338",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Природный оттенок и структура  Мягкий, тонкий, нежный   1606 67 см   181 грамм  90.500"
   },
-
   {
-
-    "id": "4167",
-
-    "cutNum": "#1560",
-
-    "title": "Срез #1560 (54 см / 96 гр)",
-
+    "id": "4334",
+    "cutNum": "#4334",
+    "title": "Срез #4334 (67 см / 110 гр)",
     "cat": "silk",
-
+    "badge": "Премиум шелк",
+    "length": 67,
+    "weight": "110 гр",
+    "price": "90 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4334.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4334",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Природный оттенок и структура  Мягкий, тонкий, нежный   1606 67 см   181 грамм  90.500   Природный оттенок и структура, средней плотности  1598 60 см   114 грамм  54850"
+  },
+  {
+    "id": "4329",
+    "cutNum": "#4329",
+    "title": "Срез #4329 (67 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 67,
+    "weight": "110 гр",
+    "price": "90 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4329.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4329",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Природный оттенок и структура  Мягкий, тонкий, нежный   1606 67 см   181 грамм  90.500   Природный оттенок и структура   1605 68 см   146 грамм  83.400"
+  },
+  {
+    "id": "4325",
+    "cutNum": "#4325",
+    "title": "Срез #4325 (57 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 57,
+    "weight": "110 гр",
+    "price": "84 480 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4325.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4325",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1608 57 см   176 грамм  84.480"
+  },
+  {
+    "id": "4306",
+    "cutNum": "#1554",
+    "title": "Срез #1554 (54 см / 115 гр)",
+    "cat": "silk",
     "length": 54,
-
-    "weight": "96 гр",
-
-    "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4167.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4167",
-
-    "desc": "#1560 • Самый настоящий шелк • Нежнейший детский хвостик с тончайшей волосинкой"
-
+    "weight": "115 гр",
+    "price": "158 400 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4306.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4306",
+    "desc": "#1554   Детский нежный,натуральный блонд Тонкая волосинка  Природная легкая волна   8 тон,есть выгоревшие прядки 9 и 10 тона  54 см 115 гр 158.400"
   },
-
   {
-
-    "id": "4157",
-
-    "cutNum": "#1263",
-
-    "title": "Срез #1263 (55 см / 156 гр)",
-
+    "id": "4301",
+    "cutNum": "#1232",
+    "title": "Срез #1232 (91 см / 169 гр)",
     "cat": "silk",
-
-    "length": 55,
-
-    "weight": "156 гр",
-
+    "length": 91,
+    "weight": "169 гр",
     "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4157.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4157",
-
-    "desc": "Детские  💎 • Природный блонд • Корень холодный 8-9"
-
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4301",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  #1232  Детский шелк,волосок как паутинка,очень редко бывает в такой длине   Что бы уплотнить концы хвостик можно перетянуть по длинам и нарастить обратным каскадом   Такую работу выполнят наши мастера в студии  "
   },
-
   {
-
-    "id": "4147",
-
-    "cutNum": "#1434",
-
-    "title": "Срез #1434 (72 см / 153 гр)",
-
-    "cat": "straight",
-
-    "length": 72,
-
-    "weight": "153 гр",
-
-    "price": "73 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4147.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4147",
-
-    "desc": "#1434 • Детский струящийся шелк • Идеально прямой,блестящий"
-
-  },
-
-  {
-
-    "id": "4137",
-
-    "cutNum": "#993",
-
-    "title": "Срез #993 (53 см / 168 гр)",
-
-    "cat": "wave",
-
-    "length": 53,
-
-    "weight": "168 гр",
-
-    "price": "171 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4137.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4137",
-
-    "desc": "#993 • Детский,натуральный блонд,шелк • Волосинка между тонкой и средней"
-
-  },
-
-  {
-
-    "id": "4127",
-
-    "cutNum": "#1218",
-
-    "title": "Срез #1218 (58 см / 188 гр)",
-
-    "cat": "straight",
-
-    "length": 58,
-
-    "weight": "188 гр",
-
-    "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4127",
-
-    "desc": "#1218 • Детский,идеально прямой срез • Волосинка между тонкой и средней"
-
-  },
-
-  {
-
-    "id": "4117",
-
-    "cutNum": "#1261",
-
-    "title": "Срез #1261 (55 см / 117 гр)",
-
-    "cat": "wave",
-
-    "length": 55,
-
-    "weight": "117 гр",
-
-    "price": "90 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4117.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4117",
-
-    "desc": "#1261 • Детский шелковый срез с красивой природной,активной волной • Выгоревшие концы"
-
-  },
-
-  {
-
-    "id": "4106",
-
-    "cutNum": "#1221",
-
-    "title": "Срез #1221 (75 см / 197 гр)",
-
-    "cat": "wave",
-
-    "length": 75,
-
-    "weight": "197 гр",
-
-    "price": "149 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4106.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4106",
-
-    "desc": "#1221 • Детский срез с легкой волной • Волосинка между тонкой и средней,шелк"
-
-  },
-
-  {
-
-    "id": "4096",
-
-    "cutNum": "#1247",
-
-    "title": "Срез #1247 (65 см / 181 гр)",
-
-    "cat": "wave",
-
-    "length": 65,
-
-    "weight": "181 гр",
-
-    "price": "113 750 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4096.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4096",
-
-    "desc": "#1247 • Детский шелк • Легкая природная волна,блестящий,мягкий,волосинка ближе к тонкой"
-
-  },
-
-  {
-
-    "id": "4086",
-
-    "cutNum": "#1557",
-
-    "title": "Срез #1557 (55 см / 125 гр)",
-
-    "cat": "straight",
-
-    "length": 55,
-
-    "weight": "125 гр",
-
-    "price": "160 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4086",
-
-    "desc": "#1557 • Детский нежнейший срез • Гладкий,как маслянистый"
-
-  },
-
-  {
-
-    "id": "4076",
-
-    "cutNum": "#1387",
-
-    "title": "Срез #1387 (66 см / 86 гр)",
-
-    "cat": "wave",
-
-    "length": 66,
-
-    "weight": "86 гр",
-
-    "price": "от 45 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4076.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4076",
-
-    "desc": "#1387 • Детский срез с волной • Волосинка между тонкой и средней,мягкий,воздушный"
-
-  },
-
-  {
-
-    "id": "4066",
-
-    "cutNum": "#1557",
-
-    "title": "Срез #1557 (48 см / 157 гр)",
-
+    "id": "4291",
+    "cutNum": "#1556",
+    "title": "Срез #1556 (80 см / 174 гр)",
     "cat": "silk",
-
-    "length": 48,
-
-    "weight": "157 гр",
-
-    "price": "152 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4066.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4066",
-
-    "desc": "#1557 • Детская кудряшка • Эффектный хвостик с природной кудрей"
-
+    "length": 80,
+    "weight": "174 гр",
+    "price": "275 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4291",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  #1556  Детский срез Тонкая волосинка,шелковый,нежнейший   80 см 174 гр 275.000"
   },
-
   {
-
-    "id": "4056",
-
-    "cutNum": "#1272",
-
-    "title": "Срез #1272 (76 см / 162 гр)",
-
-    "cat": "straight",
-
-    "length": 76,
-
-    "weight": "162 гр",
-
-    "price": "132 678 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4056.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4056",
-
-    "desc": "#1272 • Детский,прямой,блестящий срез • Есть выгоревшие пряди"
-
-  },
-
-  {
-
-    "id": "4046",
-
-    "cutNum": "#990",
-
-    "title": "Срез #990 (50 см / 117 гр)",
-
+    "id": "4276",
+    "cutNum": "#1378",
+    "title": "Срез #1378 (50 см / 80 гр)",
     "cat": "silk",
-
     "length": 50,
-
-    "weight": "117 гр",
-
-    "price": "52 650 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4046.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4046",
-
-    "desc": "Детские,шелковые   🤍 • #990 50см/117гр - 52.650₽ продан • #1429 50см/112гр - 49.000₽"
-
+    "weight": "80 гр",
+    "price": "47 200 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4276.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4276",
+    "desc": "#1378 • Детский русский срез • Окрашен в щадящей технике без потери качества волос"
   },
-
   {
-
-    "id": "4036",
-
-    "cutNum": "#1162",
-
-    "title": "Срез #1162 (81 см / 252 гр)",
-
-    "cat": "wave",
-
-    "length": 81,
-
-    "weight": "252 гр",
-
-    "price": "85 500 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4036.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4036",
-
-    "desc": "#1162 • Детский хвостик,волосинка ближе к средней,легкая волна • 5 тон у корней,выгоревшие концы 6 тон"
-
+    "id": "4271",
+    "cutNum": "#1387",
+    "title": "Срез #1387 (66 см / 86 гр)",
+    "cat": "silk",
+    "length": 66,
+    "weight": "86 гр",
+    "price": "48 400 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4271.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4271",
+    "desc": "Детские,шелковые,нежнейшие хвостики • #1387 66см/86гр - 48.400 • #1555 68см/140гр - 190.000"
   },
-
   {
-
-    "id": "4016",
-
-    "cutNum": "#1555",
-
-    "title": "Срез #1555 (68 см / 140 гр)",
-
+    "id": "4263",
+    "cutNum": "#1436",
+    "title": "Срез #1436 (50 см / 107 гр)",
     "cat": "wave",
-
-    "length": 68,
-
+    "length": 50,
+    "weight": "107 гр",
+    "price": "41 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4263.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4263",
+    "desc": "#1436 • Детский шелк • Природная волна,волосинка между тонкой и средней,есть выгоревшие прядки"
+  },
+  {
+    "id": "4258",
+    "cutNum": "#1247",
+    "title": "Срез #1247 (65 см / 181 гр)",
+    "cat": "straight",
+    "length": 65,
+    "weight": "181 гр",
+    "price": "113 750 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4258.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4258",
+    "desc": "Шелковые,маслянистые,нежнейшие,гладкие • #1247 65см/181гр - 113.750 • #1249 65см/144гр - 60.000"
+  },
+  {
+    "id": "4249",
+    "cutNum": "#1386",
+    "title": "Срез #1386 (60 см / 100 гр)",
+    "cat": "wave",
+    "length": 60,
+    "weight": "100 гр",
+    "price": "84 750 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4249.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4249",
+    "desc": "Детские срезы,выкрашены из славянских,русых хвостиков • Вычесаны от коротышей,подрезаны до густых концов • Волосинка нежная,мягкая,есть легкая волна"
+  },
+  {
+    "id": "4231",
+    "cutNum": "#770",
+    "title": "Срез #770 (50 см / 140 гр)",
+    "cat": "silk",
+    "length": 50,
     "weight": "140 гр",
-
-    "price": "190 000 ₽",
-
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4016.jpg",
-
-    "tgUrl": "https://t.me/hi_pretty/4016",
-
-    "desc": "#1555 • Детский блондик • Природная активная волна,волосинка тонкая как паутинка"
-
+    "price": "48 240 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4231.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4231",
+    "desc": "Пористые,воздушные детские хвостики • Не жесткие,мягкие,волосинка между тонкой и средней • Идеально придадут желаемый обьем,маленьким количеством грамм в наращивании"
+  },
+  {
+    "id": "4221",
+    "cutNum": "#1255",
+    "title": "Срез #1255 (62 см / 211 гр)",
+    "cat": "silk",
+    "length": 62,
+    "weight": "211 гр",
+    "price": "131 643 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4221.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4221",
+    "desc": "#1255 • Детский воздушный хвостик • Слегка пористый,не жесткий"
+  },
+  {
+    "id": "4211",
+    "cutNum": "#1562",
+    "title": "Срез #1562 (50 см / 115 гр)",
+    "cat": "wave",
+    "length": 50,
+    "weight": "115 гр",
+    "price": "115 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4211.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4211",
+    "desc": "#1562 • Эксклюзив   🤍 • Шелковый,нежный,натуральный блонд"
+  },
+  {
+    "id": "4201",
+    "cutNum": "#1561",
+    "title": "Срез #1561 (55 см / 106 гр)",
+    "cat": "wave",
+    "length": 55,
+    "weight": "106 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4201",
+    "desc": "#1561 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
+  },
+  {
+    "id": "4194",
+    "cutNum": "#1373",
+    "title": "Срез #1373 (53 см / 117 гр)",
+    "cat": "silk",
+    "length": 53,
+    "weight": "117 гр",
+    "price": "68 300 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4194",
+    "desc": "#1373 • Детский,воздушный хвостик • Окрашен в щадящей технике,качество осталось прежним,срез мягкий,нежный"
+  },
+  {
+    "id": "4187",
+    "cutNum": "#1555",
+    "title": "Срез #1555 (55 см / 106 гр)",
+    "cat": "wave",
+    "length": 55,
+    "weight": "106 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4187.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4187",
+    "desc": "#1555 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
+  },
+  {
+    "id": "4177",
+    "cutNum": "#1246",
+    "title": "Срез #1246 (67 см / 229 гр)",
+    "cat": "silk",
+    "length": 67,
+    "weight": "229 гр",
+    "price": "87 350 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4177.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4177",
+    "desc": "#1246 • Детский,глянцевый срез • Шелковый,мягкий,волосинка ближе к средней"
+  },
+  {
+    "id": "4167",
+    "cutNum": "#1560",
+    "title": "Срез #1560 (54 см / 96 гр)",
+    "cat": "silk",
+    "length": 54,
+    "weight": "96 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4167.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4167",
+    "desc": "#1560 • Самый настоящий шелк • Нежнейший детский хвостик с тончайшей волосинкой"
+  },
+  {
+    "id": "4157",
+    "cutNum": "#1263",
+    "title": "Срез #1263 (55 см / 156 гр)",
+    "cat": "silk",
+    "length": 55,
+    "weight": "156 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4157.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4157",
+    "desc": "Детские  💎 • Природный блонд • Корень холодный 8-9"
+  },
+  {
+    "id": "4147",
+    "cutNum": "#1434",
+    "title": "Срез #1434 (72 см / 153 гр)",
+    "cat": "straight",
+    "length": 72,
+    "weight": "153 гр",
+    "price": "73 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4147.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4147",
+    "desc": "#1434 • Детский струящийся шелк • Идеально прямой,блестящий"
+  },
+  {
+    "id": "4137",
+    "cutNum": "#993",
+    "title": "Срез #993 (53 см / 168 гр)",
+    "cat": "wave",
+    "length": 53,
+    "weight": "168 гр",
+    "price": "171 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4137.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4137",
+    "desc": "#993 • Детский,натуральный блонд,шелк • Волосинка между тонкой и средней"
+  },
+  {
+    "id": "4127",
+    "cutNum": "#1218",
+    "title": "Срез #1218 (58 см / 188 гр)",
+    "cat": "straight",
+    "length": 58,
+    "weight": "188 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4127",
+    "desc": "#1218 • Детский,идеально прямой срез • Волосинка между тонкой и средней"
+  },
+  {
+    "id": "4117",
+    "cutNum": "#1261",
+    "title": "Срез #1261 (55 см / 117 гр)",
+    "cat": "wave",
+    "length": 55,
+    "weight": "117 гр",
+    "price": "90 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4117.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4117",
+    "desc": "#1261 • Детский шелковый срез с красивой природной,активной волной • Выгоревшие концы"
+  },
+  {
+    "id": "4106",
+    "cutNum": "#1221",
+    "title": "Срез #1221 (75 см / 197 гр)",
+    "cat": "wave",
+    "length": 75,
+    "weight": "197 гр",
+    "price": "149 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4106.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4106",
+    "desc": "#1221 • Детский срез с легкой волной • Волосинка между тонкой и средней,шелк"
+  },
+  {
+    "id": "4096",
+    "cutNum": "#1247",
+    "title": "Срез #1247 (65 см / 181 гр)",
+    "cat": "wave",
+    "length": 65,
+    "weight": "181 гр",
+    "price": "113 750 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4096.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4096",
+    "desc": "#1247 • Детский шелк • Легкая природная волна,блестящий,мягкий,волосинка ближе к тонкой"
+  },
+  {
+    "id": "4086",
+    "cutNum": "#1557",
+    "title": "Срез #1557 (55 см / 125 гр)",
+    "cat": "straight",
+    "length": 55,
+    "weight": "125 гр",
+    "price": "160 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4086",
+    "desc": "#1557 • Детский нежнейший срез • Гладкий,как маслянистый"
+  },
+  {
+    "id": "4076",
+    "cutNum": "#1387",
+    "title": "Срез #1387 (66 см / 86 гр)",
+    "cat": "wave",
+    "length": 66,
+    "weight": "86 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4076.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4076",
+    "desc": "#1387 • Детский срез с волной • Волосинка между тонкой и средней,мягкий,воздушный"
+  },
+  {
+    "id": "4066",
+    "cutNum": "#1557",
+    "title": "Срез #1557 (48 см / 157 гр)",
+    "cat": "silk",
+    "length": 48,
+    "weight": "157 гр",
+    "price": "152 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4066.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4066",
+    "desc": "#1557 • Детская кудряшка • Эффектный хвостик с природной кудрей"
+  },
+  {
+    "id": "4056",
+    "cutNum": "#1272",
+    "title": "Срез #1272 (76 см / 162 гр)",
+    "cat": "straight",
+    "length": 76,
+    "weight": "162 гр",
+    "price": "132 678 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4056.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4056",
+    "desc": "#1272 • Детский,прямой,блестящий срез • Есть выгоревшие пряди"
+  },
+  {
+    "id": "4046",
+    "cutNum": "#990",
+    "title": "Срез #990 (50 см / 117 гр)",
+    "cat": "silk",
+    "length": 50,
+    "weight": "117 гр",
+    "price": "52 650 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4046.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4046",
+    "desc": "Детские,шелковые   🤍 • #990 50см/117гр - 52.650₽ продан • #1429 50см/112гр - 49.000₽"
   }
-
 ];
 
 
@@ -8764,85 +8444,150 @@
   // БАЗА ОКРАШЕННЫХ СРЕЗОВ СОБСТВЕННОГО ПРОИЗВОДСТВА (@volosy_hi_pretty)
 
   var dyedCutsDatabase = [
-    {
-      "id": "501",
-      "cutNum": "#204",
-      "title": "Срез #204 (60 см / 110 гр)",
-      "cat": "blond",
-      "badge": "Холодный блонд (10 тон)",
-      "length": 60,
-      "weight": "110 гр",
-      "price": "от 18 500 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Холодный пепельный блонд (10 тон). Тонкий шелковистый волос, плотные концы без пересушивания. 60 см, 110 гр."
-    },
-    {
-      "id": "502",
-      "cutNum": "#218",
-      "title": "Срез #218 (55 см / 115 гр)",
-      "cat": "blond",
-      "badge": "Пшеничный блонд (9.3 тон)",
-      "length": 55,
-      "weight": "115 гр",
-      "price": "от 19 000 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Теплый пшеничный блонд (9.3 тон). Мягкая природная текстура, шелковистый волос. 55 см, 115 гр."
-    },
-    {
-      "id": "503",
-      "cutNum": "#305",
-      "title": "Срез #305 (65 см / 125 гр)",
-      "cat": "wave",
-      "badge": "Русый балаяж (8-9 тон)",
-      "length": 65,
-      "weight": "125 гр",
-      "price": "от 24 500 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Натуральный русый балаяж с мягким переходом (8-9 тон). Длина 65 см, 125 гр."
-    },
-    {
-      "id": "504",
-      "cutNum": "#412",
-      "title": "Срез #412 (70 см / 140 гр)",
-      "cat": "straight",
-      "badge": "Горький шоколад (4 тон)",
-      "length": 70,
-      "weight": "140 гр",
-      "price": "от 28 000 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Горький шоколад с мягкой волной (4 тон). Густые концы, без силикона. 70 см, 140 гр."
-    },
-    {
-      "id": "505",
-      "cutNum": "#225",
-      "title": "Срез #225 (50 см / 100 гр)",
-      "cat": "blond",
-      "badge": "Жемчужный блонд (10.1 тон)",
-      "length": 50,
-      "weight": "100 гр",
-      "price": "от 17 500 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Жемчужный блонд (10.1 тон). Идеально ровный тон по всей длине. 50 см, 100 гр."
-    },
-    {
-      "id": "506",
-      "cutNum": "#319",
-      "title": "Срез #319 (60 см / 120 гр)",
-      "cat": "straight",
-      "badge": "Темно-русый глянец (6 тон)",
-      "length": 60,
-      "weight": "120 гр",
-      "price": "от 22 500 ₽",
-      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
-      "tgUrl": "https://t.me/volosy_hi_pretty",
-      "desc": "Окрашенный срез нашего производства. Гладкий темно-русый (6 тон), ровный плотный срез, зеркальный блеск. 60 см, 120 гр."
-    }
-  ];
+  {
+    "id": "1792",
+    "cutNum": "#33",
+    "title": "Срез #33 (58 см / 74 гр)",
+    "cat": "wave",
+    "badge": "Окрашенный русый",
+    "length": 58,
+    "weight": "74 гр",
+    "price": "13 690 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1792.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1792",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум   Холодные русые 🩶  Оттенки,которые всегда в тренде   В наличии разные длины,структуры,оттенки ✅  Слева направо   #1471 58см/74гр - 13.690 #1479 59см/99гр - 18.315 #1153 66см/162гр - 35.640 #1574 68см/14"
+  },
+  {
+    "id": "1788",
+    "cutNum": "#33",
+    "title": "Срез #33 (58 см / 145 гр)",
+    "cat": "straight",
+    "badge": "Прямой шелк",
+    "length": 58,
+    "weight": "145 гр",
+    "price": "26 825 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1788.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1788",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум   Наши белоснежные блонды 🤍  Шелковые,идеально прямые,вычесаны от коротких,концы подрезаны до густоты   #1579 58см/145гр - 26.825 #1582 62см/74гр - 14.800 #1583 62см/111гр - 22.200"
+  },
+  {
+    "id": "1782",
+    "cutNum": "#33",
+    "title": "Срез #33 (75 см / 122 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 75,
+    "weight": "122 гр",
+    "price": "32 940 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1782.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1782",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум   #1423  Срез с легкой,еле заметной волной  Воздушный,мягкий   75 см 122 гр   32.940₽"
+  },
+  {
+    "id": "1778",
+    "cutNum": "#33",
+    "title": "Срез #33 (64 см / 151 гр)",
+    "cat": "straight",
+    "badge": "Прямой шелк",
+    "length": 64,
+    "weight": "151 гр",
+    "price": "37 750 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1778.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1778",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Эксклюзив  #1519  Детская Азия  Идеально прямой,тонкая волосинка,мягчайший   64 см 151 гр  37.750"
+  },
+  {
+    "id": "1774",
+    "cutNum": "#33",
+    "title": "Срез #33 (63 см / 131 гр)",
+    "cat": "blond",
+    "badge": "Окрашенный блонд",
+    "length": 63,
+    "weight": "131 гр",
+    "price": "24 890 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1774.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1774",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум категория   #1540  Вау оттенок  Шикарный блонд с блеском,нежный,волосинка ближе к тонкой   63 см 131 гр  24.890"
+  },
+  {
+    "id": "501",
+    "cutNum": "#204",
+    "title": "Срез #204 (60 см / 110 гр)",
+    "cat": "blond",
+    "badge": "Холодный блонд (10 тон)",
+    "length": 60,
+    "weight": "110 гр",
+    "price": "от 18 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Холодный пепельный блонд (10 тон). Тонкий шелковистый волос, плотные концы без пересушивания. 60 см, 110 гр."
+  },
+  {
+    "id": "502",
+    "cutNum": "#218",
+    "title": "Срез #218 (55 см / 115 гр)",
+    "cat": "blond",
+    "badge": "Пшеничный блонд (9.3 тон)",
+    "length": 55,
+    "weight": "115 гр",
+    "price": "от 19 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Теплый пшеничный блонд (9.3 тон). Мягкая природная текстура, шелковистый волос. 55 см, 115 гр."
+  },
+  {
+    "id": "503",
+    "cutNum": "#305",
+    "title": "Срез #305 (65 см / 125 гр)",
+    "cat": "wave",
+    "badge": "Русый балаяж (8-9 тон)",
+    "length": 65,
+    "weight": "125 гр",
+    "price": "от 24 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Натуральный русый балаяж с мягким переходом (8-9 тон). Длина 65 см, 125 гр."
+  },
+  {
+    "id": "504",
+    "cutNum": "#412",
+    "title": "Срез #412 (70 см / 140 гр)",
+    "cat": "straight",
+    "badge": "Горький шоколад (4 тон)",
+    "length": 70,
+    "weight": "140 гр",
+    "price": "от 28 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Горький шоколад с мягкой волной (4 тон). Густые концы, без силикона. 70 см, 140 гр."
+  },
+  {
+    "id": "505",
+    "cutNum": "#225",
+    "title": "Срез #225 (50 см / 100 гр)",
+    "cat": "blond",
+    "badge": "Жемчужный блонд (10.1 тон)",
+    "length": 50,
+    "weight": "100 гр",
+    "price": "от 17 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Жемчужный блонд (10.1 тон). Идеально ровный тон по всей длине. 50 см, 100 гр."
+  },
+  {
+    "id": "506",
+    "cutNum": "#319",
+    "title": "Срез #319 (60 см / 120 гр)",
+    "cat": "straight",
+    "badge": "Темно-русый глянец (6 тон)",
+    "length": 60,
+    "weight": "120 гр",
+    "price": "от 22 500 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty",
+    "desc": "Окрашенный срез нашего производства. Гладкий темно-русый (6 тон), ровный плотный срез, зеркальный блеск. 60 см, 120 гр."
+  }
+];
 
 
 
