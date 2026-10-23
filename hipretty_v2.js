@@ -934,6 +934,60 @@
 
       
 
+      /* ГЛАВНЫЕ ТАБЫ: ДЕТСКИЕ vs ОКРАШЕННЫЕ */
+      .hp-cat-main-tabs {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 24px;
+        width: 100%;
+      }
+      .hp-cat-main-tab {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        background: rgba(22, 13, 34, 0.75);
+        border: 1px solid rgba(244, 114, 182, 0.25);
+        border-radius: 18px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        text-align: left;
+        color: #fff;
+      }
+      .hp-cat-main-tab:hover {
+        border-color: var(--hp-rose);
+        background: rgba(244, 114, 182, 0.12);
+        transform: translateY(-2px);
+      }
+      .hp-cat-main-tab.active {
+        background: linear-gradient(135deg, rgba(244, 114, 182, 0.22) 0%, rgba(217, 70, 239, 0.15) 100%);
+        border: 2px solid var(--hp-rose);
+        box-shadow: 0 8px 24px rgba(244, 114, 182, 0.25);
+      }
+      .hp-tab-icon {
+        font-size: 24px;
+        line-height: 1;
+      }
+      .hp-tab-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .hp-tab-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .hp-tab-sub {
+        font-size: 11.5px;
+        color: var(--hp-rose-light);
+        opacity: 0.85;
+        margin-top: 2px;
+      }
+      @media (max-width: 600px) {
+        .hp-cat-main-tabs { flex-direction: column; gap: 10px; }
+        .hp-cat-main-tab { padding: 12px 16px; }
+      }
       .hp-catalog-filter-bar {
 
         background: rgba(22, 13, 34, 0.85);
@@ -4314,6 +4368,99 @@
   }
 ];
 
+  // БАЗА ОКРАШЕННЫХ СРЕЗОВ СОБСТВЕННОГО ПРОИЗВОДСТВА (@volosy_hi_pretty)
+  var dyedCutsDatabase = [
+    {
+      "id": "501",
+      "cutNum": "#204",
+      "title": "Срез #204 (60 см / 110 гр)",
+      "cat": "blond",
+      "length": 60,
+      "weight": "110 гр",
+      "price": "от 18 500 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4306.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Холодный пепельный блонд (10 тон). Тонкий шелковистый волос, плотные концы без пересушивания. 60 см, 110 гр."
+    },
+    {
+      "id": "502",
+      "cutNum": "#218",
+      "title": "Срез #218 (55 см / 115 гр)",
+      "cat": "blond",
+      "length": 55,
+      "weight": "115 гр",
+      "price": "от 19 000 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Теплый пшеничный блонд (9.3 тон). Мягкая природная текстура, шелковистый волос. 55 см, 115 гр."
+    },
+    {
+      "id": "503",
+      "cutNum": "#305",
+      "title": "Срез #305 (65 см / 125 гр)",
+      "cat": "silk",
+      "length": 65,
+      "weight": "125 гр",
+      "price": "от 24 500 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Натуральный русый балаяж с мягким переходом (8-9 тон). Длина 65 см, 125 гр."
+    },
+    {
+      "id": "504",
+      "cutNum": "#412",
+      "title": "Срез #412 (70 см / 140 гр)",
+      "cat": "wave",
+      "length": 70,
+      "weight": "140 гр",
+      "price": "от 28 000 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4306.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Горький шоколад с мягкой волной (4 тон). Густые концы, без силикона. 70 см, 140 гр."
+    },
+    {
+      "id": "505",
+      "cutNum": "#225",
+      "title": "Срез #225 (50 см / 100 гр)",
+      "cat": "blond",
+      "length": 50,
+      "weight": "100 гр",
+      "price": "от 17 500 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Жемчужный блонд (10.1 тон). Идеально ровный тон по всей длине. 50 см, 100 гр."
+    },
+    {
+      "id": "506",
+      "cutNum": "#319",
+      "title": "Срез #319 (60 см / 120 гр)",
+      "cat": "straight",
+      "length": 60,
+      "weight": "120 гр",
+      "price": "от 22 500 ₽",
+      "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
+      "tgUrl": "https://t.me/volosy_hi_pretty",
+      "desc": "Окрашенный срез нашего производства. Гладкий темно-русый (6 тон), ровный плотный срез, зеркальный блеск. 60 см, 120 гр."
+    }
+  ];
+
+  var hpActiveCategory = 'natural';
+  window.hpUserCity = '';
+
+  // Фоновое асинхронное определение города по GeoIP (без блокировки)
+  try {
+    fetch('https://api.sypexgeo.net/json/')
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d && d.city && d.city.name_ru) {
+          window.hpUserCity = d.city.name_ru;
+        }
+      })
+      .catch(function() {});
+  } catch(e) {}
+
+
+
 
 
   // 4. HTML РАЗМЕТКА САЙТА
@@ -4554,6 +4701,23 @@
 
     <!-- ПАНЕЛЬ УМНЫХ ФИЛЬТРОВ -->
 
+    <!-- ГЛАВНЫЙ ПЕРЕКЛЮЧАТЕЛЬ КАТАЛОГА: ДЕТСКИЕ vs ОКРАШЕННЫЕ -->
+    <div class="hp-cat-main-tabs">
+      <button type="button" class="hp-cat-main-tab active" id="hp-tab-natural" data-source="natural">
+        <span class="hp-tab-icon">✦</span>
+        <span class="hp-tab-info">
+          <span class="hp-tab-title">Детские некрашеные</span>
+          <span class="hp-tab-sub">Премиальный шелк • @hi_pretty</span>
+        </span>
+      </button>
+      <button type="button" class="hp-cat-main-tab" id="hp-tab-dyed" data-source="dyed">
+        <span class="hp-tab-icon">🎨</span>
+        <span class="hp-tab-info">
+          <span class="hp-tab-title">Окрашенные срезы</span>
+          <span class="hp-tab-sub">Свое производство • @volosy_hi_pretty</span>
+        </span>
+      </button>
+    </div>
     <div class="hp-catalog-filter-bar">
 
       <!-- 1. ТИП СТРУКТУРЫ -->
@@ -5148,7 +5312,8 @@
     var container = document.getElementById('hp-catalog-cards');
     if (!container) return;
 
-    var filtered = cutsDatabase.filter(function(item) {
+          var sourceDb = (hpActiveCategory === 'dyed') ? dyedCutsDatabase : cutsDatabase;
+      var filtered = sourceDb.filter(function(item) {
       if (selectedType !== 'all' && item.cat !== selectedType) return false;
       if (selectedLen !== 'all') {
         if (selectedLen === '50' && (item.length > 50)) return false;
@@ -5160,7 +5325,7 @@
 
     var countEl = document.getElementById('hp-cuts-shown-count');
     var totalEl = document.getElementById('hp-cuts-total-count');
-    if (totalEl) totalEl.textContent = cutsDatabase.length;
+    if (totalEl) totalEl.textContent = sourceDb.length;
 
     var moreBtn = document.getElementById('hp-catalog-more-btn');
 
@@ -6337,9 +6502,24 @@
     var utmSource = urlParams.get('utm_source') || '';
     var utmCamp = urlParams.get('utm_campaign') || '';
     var utmTerm = urlParams.get('utm_term') || '';
+    var geoParam = urlParams.get('geo') || urlParams.get('utm_geo') || '';
 
-    var parts = [device];
+    var parts = [];
 
+    // 1. Город (из метки geo или из GeoIP)
+    var city = geoParam || window.hpUserCity || '';
+    if (city) {
+      try {
+        parts.push('📍 ' + decodeURIComponent(city));
+      } catch(e) {
+        parts.push('📍 ' + city);
+      }
+    }
+
+    // 2. Девайс
+    parts.push(device);
+
+    // 3. Кампания
     if (utmCamp || utmSource) {
       var campLabel = utmCamp;
       if (utmCamp === '707367393') campLabel = 'Поиск (707367393)';
@@ -6349,6 +6529,7 @@
       parts.push('Прямой переход');
     }
 
+    // 4. Ключ
     if (utmTerm) {
       try {
         parts.push('Ключ: ' + decodeURIComponent(utmTerm));
@@ -6357,10 +6538,17 @@
       }
     }
 
+    // 5. Категория каталога
+    if (hpActiveCategory === 'dyed') {
+      parts.push('Каталог: Окрашенные срезы своего производства (@volosy_hi_pretty)');
+    } else {
+      parts.push('Каталог: Детские некрашеные срезы (@hi_pretty)');
+    }
+
     return parts.join(' • ');
   }
 
-function mountTildaNativeForm() {
+  function mountTildaNativeForm() {
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
 
