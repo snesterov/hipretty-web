@@ -8441,7 +8441,7 @@
 
 
 
-  // БАЗА ОКРАШЕННЫХ СРЕЗОВ СОБСТВЕННОГО ПРОИЗВОДСТВА (@volosy_hi_pretty)
+  // БАЗА ОКРАШЕННЫХ СРЕЗОВ HIPRETTY (@volosy_hi_pretty)
 
   var dyedCutsDatabase = [
   {
@@ -8520,7 +8520,7 @@
     "price": "от 18 500 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Холодный пепельный блонд (10 тон). Тонкий шелковистый волос, плотные концы без пересушивания. 60 см, 110 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Холодный пепельный блонд (10 тон). Тонкий шелковистый волос, плотные концы без пересушивания. 60 см, 110 гр."
   },
   {
     "id": "502",
@@ -8533,7 +8533,7 @@
     "price": "от 19 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Теплый пшеничный блонд (9.3 тон). Мягкая природная текстура, шелковистый волос. 55 см, 115 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Теплый пшеничный блонд (9.3 тон). Мягкая природная текстура, шелковистый волос. 55 см, 115 гр."
   },
   {
     "id": "503",
@@ -8546,7 +8546,7 @@
     "price": "от 24 500 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Натуральный русый балаяж с мягким переходом (8-9 тон). Длина 65 см, 125 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Натуральный русый балаяж с мягким переходом (8-9 тон). Длина 65 см, 125 гр."
   },
   {
     "id": "504",
@@ -8559,7 +8559,7 @@
     "price": "от 28 000 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Горький шоколад с мягкой волной (4 тон). Густые концы, без силикона. 70 см, 140 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Горький шоколад с мягкой волной (4 тон). Густые концы, без силикона. 70 см, 140 гр."
   },
   {
     "id": "505",
@@ -8572,7 +8572,7 @@
     "price": "от 17 500 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4291.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Жемчужный блонд (10.1 тон). Идеально ровный тон по всей длине. 50 см, 100 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Жемчужный блонд (10.1 тон). Идеально ровный тон по всей длине. 50 см, 100 гр."
   },
   {
     "id": "506",
@@ -8585,7 +8585,7 @@
     "price": "от 22 500 ₽",
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4301.jpg",
     "tgUrl": "https://t.me/volosy_hi_pretty",
-    "desc": "Окрашенный срез нашего производства. Гладкий темно-русый (6 тон), ровный плотный срез, зеркальный блеск. 60 см, 120 гр."
+    "desc": "Окрашенный срез от студии HiPretty. Гладкий темно-русый (6 тон), ровный плотный срез, зеркальный блеск. 60 см, 120 гр."
   }
 ];
 
@@ -8797,7 +8797,7 @@
 
         <p class="hp-hero-desc">
 
-          Склад более 35 кг отборных волос с доставкой по всей России: от срезов собственного производства (от 13 690 ₽) до эксклюзивного детского шелка от одного донора.
+          Склад более 35 кг отборных волос с доставкой по всей России: от окрашенных срезов (от 13 690 ₽) до эксклюзивного детского шелка от одного донора.
 
           100% живой волос без силикона и химии. Мастер снимет живое макро-видео срезов под ваш бюджет за 1 минуту!
 
@@ -8949,7 +8949,7 @@
 
       <span class="hp-sec-badge" id="hp-catalog-sec-badge">Прямой эфир с Telegram-канала @volosy_hi_pretty</span>
 
-      <h2 class="hp-sec-title" id="hp-catalog-sec-title">Окрашенные срезы <span>собственного производства</span></h2>
+      <h2 class="hp-sec-title" id="hp-catalog-sec-title">Окрашенные срезы <span>студии HiPretty</span></h2>
 
       <p class="hp-sec-desc" id="hp-catalog-sec-desc">
 
@@ -8989,9 +8989,9 @@
 
         <span class="hp-tab-info">
 
-          <span class="hp-tab-title">Доступные срезы (Свое пр-во)</span>
+          <span class="hp-tab-title">Окрашенные срезы HiPretty</span>
 
-          <span class="hp-tab-sub">Фабричное окрашивание от 13 690 ₽ • @volosy_hi_pretty</span>
+          <span class="hp-tab-sub">Бережное окрашивание от 13 690 ₽ • @volosy_hi_pretty</span>
 
         </span>
 
@@ -10466,8 +10466,8 @@
     var secDesc = document.getElementById('hp-catalog-sec-desc');
     if (source === 'dyed') {
       if (secBadge) secBadge.textContent = 'Прямой эфир с Telegram-канала @volosy_hi_pretty';
-      if (secTitle) secTitle.innerHTML = 'Окрашенные срезы <span>собственного производства</span>';
-      if (secDesc) secDesc.textContent = 'Собственное бережное окрашивание от Виктории: блонды без пересушивания, холодные русые и шоколадные оттенки. Доступные цены от производителя!';
+      if (secTitle) secTitle.innerHTML = 'Окрашенные срезы <span>студии HiPretty</span>';
+      if (secDesc) secDesc.textContent = 'Бережное окрашивание от колористов HiPretty: блонды без пересушивания, холодные русые и шоколадные оттенки. Цены от 13 690 ₽!'; 
     } else {
       if (secBadge) secBadge.textContent = 'Прямой эфир с Telegram-канала @hi_pretty';
       if (secTitle) secTitle.innerHTML = 'Эксклюзив: Детские <span>некрашеные срезы</span>';
@@ -12819,7 +12819,7 @@
 
     if (hpActiveCategory === 'dyed') {
 
-      parts.push('Каталог: Окрашенные срезы своего производства (@volosy_hi_pretty)');
+      parts.push('Каталог: Окрашенные срезы студии HiPretty (@volosy_hi_pretty)');
 
     } else {
 
