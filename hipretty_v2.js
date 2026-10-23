@@ -11591,9 +11591,9 @@
 
         telegram: '✈️ <b>Подбор в Telegram:</b> Укажите номер телефона. Мастер пришлет персональную подборку, фото и видео срезов в Telegram.',
 
-        whatsapp: '💬 <b>Подбор в WhatsApp <span style="color:#f87171;">(нужен VPN)</span>:</b> Укажите номер телефона. Мастер отправит видео срезов в WhatsApp.',
+        whatsapp: '💬 <b>Подбор в WhatsApp:</b> Укажите номер телефона. Мастер отправит видео срезов при дневном свете и проконсультирует в чате WhatsApp.',
 
-        max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет варианты срезов без потери качества и без VPN.'
+        max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет персональную подборку срезов в высоком качестве.'
 
       };
 
@@ -11615,11 +11615,11 @@
 
         } else if (methodType === 'whatsapp') {
 
-          pLbl.innerHTML = 'Номер WhatsApp <span style="font-size:12px;font-weight:400;color:#f87171;">(нужен VPN)</span>';
+          pLbl.innerHTML = 'Номер WhatsApp <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для отправки видео)</span>';
 
         } else if (methodType === 'max_messenger') {
 
-          pLbl.innerHTML = 'Номер телефона для MAX <span style="font-size:12px;font-weight:400;color:#b8acc7;">(без VPN)</span>';
+          pLbl.innerHTML = 'Номер телефона для MAX <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для отправки вариантов)</span>';
 
         } else {
 
@@ -12079,7 +12079,7 @@
 
                 '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="vertical-align:middle;flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.892.525 3.662 1.438 5.176L2.1 21.9l4.872-1.306A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.07 14.168c-.214.604-1.244 1.157-1.722 1.218-.456.058-1.042.083-1.684-.122-.39-.124-.892-.29-1.543-.573-2.723-1.182-4.502-3.953-4.639-4.135-.136-.182-1.1-1.464-1.1-2.793 0-1.328.694-1.982.94-2.247.246-.265.536-.331.715-.331.18 0 .358.002.513.01.166.008.388-.063.608.465.226.542.77 1.88.837 2.018.067.137.112.298.022.477-.09.18-.135.292-.269.448-.134.157-.282.35-.403.47-.135.135-.276.282-.119.55.157.269.697 1.148 1.493 1.856 1.026.912 1.892 1.194 2.161 1.328.269.135.426.113.583-.067.157-.18.672-.784.851-1.053.18-.269.358-.224.604-.134.246.09 1.566.738 1.834.872.269.135.448.202.515.314.067.112.067.65-.147 1.254z" fill="#25D366"/></svg>' +
 
-                '<span class="t-contact-method__title" style="color:#fdfafd!important;">WhatsApp <span style="font-size:10px;opacity:0.8;color:#f87171;">(VPN)</span></span>' +
+                '<span class="t-contact-method__title" style="color:#fdfafd!important;">WhatsApp</span>' +
 
               '</div>' +
 
@@ -12185,9 +12185,9 @@
 
       telegram: '✈️ <b>Подбор в Telegram:</b> Укажите номер телефона. Мастер пришлет персональную подборку, фото и видео срезов в Telegram.',
 
-      whatsapp: '💬 <b>Подбор в WhatsApp <span style="color:#f87171;">(нужен VPN)</span>:</b> Укажите номер телефона. Мастер отправит видео срезов в WhatsApp.',
+      whatsapp: '💬 <b>Подбор в WhatsApp:</b> Укажите номер телефона. Мастер отправит видео срезов при дневном свете и проконсультирует в чате WhatsApp.',
 
-      max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет варианты срезов без потери качества и без VPN.'
+      max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет персональную подборку срезов в высоком качестве.'
 
     };
 
@@ -12215,11 +12215,11 @@
 
           } else if (activeMethod === 'whatsapp') {
 
-            phoneLabel.innerHTML = 'Номер WhatsApp <span style="font-size:12px;font-weight:400;color:#f87171;">(нужен VPN)</span>';
+            phoneLabel.innerHTML = 'Номер WhatsApp <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для отправки видео)</span>';
 
           } else if (activeMethod === 'max_messenger') {
 
-            phoneLabel.innerHTML = 'Номер телефона для MAX <span style="font-size:12px;font-weight:400;color:#b8acc7;">(без VPN)</span>';
+            phoneLabel.innerHTML = 'Номер телефона для MAX <span style="font-size:12px;font-weight:400;color:#b8acc7;">(для отправки вариантов)</span>';
 
           } else {
 
