@@ -10558,6 +10558,7 @@
 
 
     chosenCutParam = text || '';
+    if (typeof window.hpUpdateAllCutInputs === 'function') window.hpUpdateAllCutInputs(chosenCutParam);
 
 
 
@@ -13575,7 +13576,7 @@
 
           }
 
-          cutInp.value = selectedCut;
+          if (typeof window.hpUpdateAllCutInputs === 'function') { window.hpUpdateAllCutInputs(selectedCut); } else { cutInp.value = selectedCut; }
 
 
 
@@ -14072,55 +14073,17 @@ installBulletproofTildaValidator();
 
 
       function injectCutDetails() {
-
-        if (!chosenCutParam) return;
-
-        // НЕ меняем nameInp, чтобы не триггерить валидатор Тильды на спецсимволы.
-
-        // Записываем срез в tildaspec-formname — бот Telegram и Тильда выводят это как Form Name!
-
-        var formNameInp = form.querySelector('input[name="tildaspec-formname"]');
-
-        if (formNameInp) {
-
-          if (formNameInp.value.indexOf(chosenCutParam) === -1) {
-
-            formNameInp.value = 'Заявка [' + chosenCutParam + ']';
-
-          }
-
-        } else {
-
-          var hiddenName = document.createElement('input');
-
-          hiddenName.type = 'hidden';
-
-          hiddenName.name = 'tildaspec-formname';
-
-          hiddenName.value = 'Заявка [' + chosenCutParam + ']';
-
-          form.appendChild(hiddenName);
-
+        if (typeof window.hpUpdateAllCutInputs === 'function') {
+          window.hpUpdateAllCutInputs();
         }
-
-
-
         var commentInp = form.querySelector('input[name="comment"]');
-
         if (!commentInp) {
-
           commentInp = document.createElement('input');
-
           commentInp.type = 'hidden';
-
           commentInp.name = 'comment';
-
           form.appendChild(commentInp);
-
         }
-
         commentInp.value = hpGetAnalyticsInfo();
-
       }
 
 
