@@ -14457,6 +14457,15 @@ installBulletproofTildaValidator();
 
 
 
+        // Обработка глубоких ссылок Яндекса: переключение на окрашенные срезы при ?cat=dyed или #dyed
+    try {
+      var urlParamsInit = new URLSearchParams(window.location.search);
+      var catFromUrl = urlParamsInit.get('cat');
+      if (catFromUrl === 'dyed' || window.location.hash === '#dyed' || window.location.hash === '#catalog-dyed') {
+        window.hpSwitchCatalog('dyed');
+      }
+    } catch(eCat) {}
+
     // Автопрокрутка к якорю из URL (например, из быстрых ссылок Яндекс Директ: #catalog, #contacts, #why-us, #selection)
 
     if (window.location.hash) {
