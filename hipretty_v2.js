@@ -10399,7 +10399,7 @@
       } else {
         actionButtons = `
           <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
-          <button type="button" class="hp-cut-alt-btn">✨ Подобрать аналог дешевле (от 17 500 ₽) ↓</button>
+          <button type="button" class="hp-cut-alt-btn">✨ Подобрать аналог дешевле ↓</button>
         `;
       }
 
@@ -10460,7 +10460,7 @@
     if (source === 'dyed') {
       if (secBadge) secBadge.textContent = 'Прямой эфир с Telegram-канала @volosy_hi_pretty';
       if (secTitle) secTitle.innerHTML = 'Окрашенные срезы <span>собственного производства</span>';
-      if (secDesc) secDesc.textContent = 'Собственное бережное окрашивание от Виктории: блонды без пересушивания, холодные русые и шоколадные оттенки. Цены от 17 500 ₽ за готовый срез!';
+      if (secDesc) secDesc.textContent = 'Собственное бережное окрашивание от Виктории: блонды без пересушивания, холодные русые и шоколадные оттенки. Доступные цены от производителя!';
     } else {
       if (secBadge) secBadge.textContent = 'Прямой эфир с Telegram-канала @hi_pretty';
       if (secTitle) secTitle.innerHTML = 'Примеры срезов <span>из нашего канала</span>';
