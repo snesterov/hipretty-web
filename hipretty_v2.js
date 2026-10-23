@@ -9617,7 +9617,7 @@
 
 
 
-              <span>Менеджер в TG: @hi_pretty_manager</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
+              <span>Менеджер в TG: @hi_pretty_manager</span>
 
 
 
@@ -9633,7 +9633,7 @@
 
 
 
-              <span>Канал: @hi_pretty</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
+              <span>Канал: @hi_pretty</span>
 
 
 
@@ -9649,7 +9649,7 @@
 
 
 
-              <span>WhatsApp</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
+              <span>WhatsApp</span>
 
 
 
@@ -9821,7 +9821,7 @@
 
 
 
-              <span>Менеджер в TG: @hi_pretty_manager</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
+              <span>Менеджер в TG: @hi_pretty_manager</span>
 
 
 
@@ -9853,7 +9853,7 @@
 
 
 
-              <span>WhatsApp: +7 (993) 336-53-57</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
+              <span>WhatsApp: +7 (993) 336-53-57</span>
 
 
 
@@ -13015,7 +13015,7 @@
 
       secNoteEl.className = 'hp-form-security-note';
 
-      secNoteEl.innerHTML = '🔒 Ваши данные защищены (152-ФЗ РФ). Консультация и подбор среза бесплатны и ни к чему вас не обязывают.';
+      secNoteEl.innerHTML = '🔥 <strong>Каждый срез — донорский волос в единственном экземпляре.</strong> Мастер бронирует хвостик за вами на 2 часа.<br>🔒 Консультация и видеоподбор бесплатны (152-ФЗ РФ).';
 
       submitWrapEl.appendChild(secNoteEl);
 
