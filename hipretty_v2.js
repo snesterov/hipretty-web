@@ -8446,8 +8446,8 @@
   var dyedCutsDatabase = [
   {
     "id": "1792",
-    "cutNum": "#33",
-    "title": "Срез #33 (58 см / 74 гр)",
+    "cutNum": "#1471",
+    "title": "Срез #1471 (58 см / 74 гр)",
     "cat": "wave",
     "badge": "Окрашенный русый",
     "length": 58,
@@ -8459,8 +8459,8 @@
   },
   {
     "id": "1788",
-    "cutNum": "#33",
-    "title": "Срез #33 (58 см / 145 гр)",
+    "cutNum": "#1579",
+    "title": "Срез #1579 (58 см / 145 гр)",
     "cat": "straight",
     "badge": "Прямой шелк",
     "length": 58,
@@ -8472,8 +8472,8 @@
   },
   {
     "id": "1782",
-    "cutNum": "#33",
-    "title": "Срез #33 (75 см / 122 гр)",
+    "cutNum": "#1423",
+    "title": "Срез #1423 (75 см / 122 гр)",
     "cat": "wave",
     "badge": "Природная волна",
     "length": 75,
@@ -8485,8 +8485,8 @@
   },
   {
     "id": "1778",
-    "cutNum": "#33",
-    "title": "Срез #33 (64 см / 151 гр)",
+    "cutNum": "#1519",
+    "title": "Срез #1519 (64 см / 151 гр)",
     "cat": "straight",
     "badge": "Прямой шелк",
     "length": 64,
@@ -8498,8 +8498,8 @@
   },
   {
     "id": "1774",
-    "cutNum": "#33",
-    "title": "Срез #33 (63 см / 131 гр)",
+    "cutNum": "#1540",
+    "title": "Срез #1540 (63 см / 131 гр)",
     "cat": "blond",
     "badge": "Окрашенный блонд",
     "length": 63,
@@ -10417,7 +10417,7 @@
             <span class="hp-cut-price-tag">${(!item.price || item.price.includes('TG')) ? (hpActiveCategory === 'dyed' ? 'от 17 500 ₽' : 'от 45 000 ₽') : item.price}</span>
             <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть срез в Telegram">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <span>Пост в Telegram <i>(нужен VPN)</i></span>
+              <span>Смотреть видео хвостика ✦</span>
             </a>
           </div>
           <div class="hp-cut-body">
