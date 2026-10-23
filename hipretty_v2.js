@@ -9617,7 +9617,7 @@
 
 
 
-              <span>Менеджер в TG: @hi_pretty_manager</span>
+              <span>Менеджер в TG: @hi_pretty_manager</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
 
 
 
@@ -9633,7 +9633,7 @@
 
 
 
-              <span>Канал: @hi_pretty</span>
+              <span>Канал: @hi_pretty</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
 
 
 
@@ -9821,7 +9821,7 @@
 
 
 
-              <span>Менеджер в TG: @hi_pretty_manager</span>
+              <span>Менеджер в TG: @hi_pretty_manager</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
 
 
 
@@ -9837,7 +9837,7 @@
 
 
 
-              <span>Наш канал: @hi_pretty</span>
+              <span>Наш канал: @hi_pretty</span> <span style="font-size:11px;opacity:0.75;margin-left:4px;">(нужен VPN)</span>
 
 
 
@@ -10399,12 +10399,12 @@
       if (hpActiveCategory === 'dyed') {
         actionButtons = `
           <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
-          <button type="button" class="hp-cut-alt-btn" onclick="window.hpSwitchCatalog('natural')">✦ Посмотреть премиальный детский шелк ↑</button>
+          <button type="button" class="hp-cut-alt-btn" data-target-source="natural">✦ Посмотреть премиальный детский шелк ↑</button>
         `;
       } else {
         actionButtons = `
           <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
-          <button type="button" class="hp-cut-alt-btn">✨ Нужен такой оттенок под ваш бюджет? Срезы от 13 690 ₽ ↓</button>
+          <button type="button" class="hp-cut-alt-btn" data-target-source="dyed">✨ Нужен такой оттенок под ваш бюджет? Срезы от 13 690 ₽ ↓</button>
         `;
       }
 
@@ -10415,9 +10415,9 @@
             <span class="hp-cut-badge">${badgeText}</span>
             ${freshBadge}
             <span class="hp-cut-price-tag">${(!item.price || item.price.includes('TG')) ? (hpActiveCategory === 'dyed' ? 'от 17 500 ₽' : 'от 45 000 ₽') : item.price}</span>
-            <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть срез в Telegram">
+            <a href="${item.tgUrl}" target="_blank" rel="noopener" class="hp-cut-video-badge" title="Смотреть срез в Telegram (нужен VPN)">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <span>Смотреть видео хвостика ✦</span>
+              <span>Смотреть видео хвостика ✦ <i>(нужен VPN)</i></span>
             </a>
           </div>
           <div class="hp-cut-body">
@@ -14280,9 +14280,16 @@ installBulletproofTildaValidator();
       var altBtn = e.target.closest('.hp-cut-alt-btn');
       if (altBtn) {
         e.preventDefault();
-        window.hpSwitchCatalog('dyed');
+        e.stopPropagation();
+        var targetSrc = altBtn.getAttribute('data-target-source');
+        if (!targetSrc) {
+          targetSrc = (hpActiveCategory === 'dyed') ? 'natural' : 'dyed';
+        }
+        window.hpSwitchCatalog(targetSrc);
         var catSec = document.getElementById('catalog');
-        if (catSec) catSec.scrollIntoView({ behavior: 'smooth' });
+        if (catSec) {
+          catSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
 
@@ -14454,6 +14461,8 @@ installBulletproofTildaValidator();
       var catFromUrl = urlParamsInit.get('cat');
       if (catFromUrl === 'dyed' || window.location.hash === '#dyed' || window.location.hash === '#catalog-dyed') {
         window.hpSwitchCatalog('dyed');
+      } else if (catFromUrl === 'natural' || window.location.hash === '#natural' || window.location.hash === '#catalog-natural') {
+        window.hpSwitchCatalog('natural');
       }
     } catch(eCat) {}
 
