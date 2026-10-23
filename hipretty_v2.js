@@ -8597,27 +8597,41 @@
 
 
 
-  // Фоновое асинхронное определение города по GeoIP (без блокировки)
-
+    // Фоновое асинхронное определение города по GeoIP (ipwho.is с валидным SSL + fallbacks)
   try {
-
-    fetch('https://api.sypexgeo.net/json/')
-
-      .then(function(r) { return r.json(); })
-
-      .then(function(d) {
-
-        if (d && d.city && d.city.name_ru) {
-
-          window.hpUserCity = d.city.name_ru;
-
-        }
-
-      })
-
-      .catch(function() {});
-
-  } catch(e) {}
+    var pInit = new URLSearchParams(window.location.search);
+    var gInit = pInit.get('geo') || pInit.get('utm_geo');
+    if (gInit) {
+      window.hpUserCity = decodeURIComponent(gInit);
+      if (typeof window.hpUpdateAllCutInputs === 'function') {
+        window.hpUpdateAllCutInputs();
+      }
+    } else {
+      fetch('https://ipwho.is/?lang=ru')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && d.success && d.city) {
+            window.hpUserCity = d.city;
+            if (typeof window.hpUpdateAllCutInputs === 'function') {
+              window.hpUpdateAllCutInputs();
+            }
+          }
+        })
+        .catch(function() {
+          fetch('https://freeipapi.com/api/json/')
+            .then(function(r2) { return r2.json(); })
+            .then(function(d2) {
+              if (d2 && d2.cityName) {
+                window.hpUserCity = d2.cityName;
+                if (typeof window.hpUpdateAllCutInputs === 'function') {
+                  window.hpUpdateAllCutInputs();
+                }
+              }
+            })
+            .catch(function() {});
+        });
+    }
+  } catch(eInit) {}
 
 
 
