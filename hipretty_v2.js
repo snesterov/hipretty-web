@@ -10398,7 +10398,8 @@
       var actionButtons = '';
       if (hpActiveCategory === 'dyed') {
         actionButtons = `
-          <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}" style="background: linear-gradient(135deg, #a855f7, #ec4899);">Заказать окрашенный срез ✦</button>
+          <button type="button" class="hp-cut-btn hp-open-form-btn" data-cut="${item.title}">Уточнить наличие и видео ✦</button>
+          <button type="button" class="hp-cut-alt-btn" onclick="window.hpSwitchCatalog('natural')">✦ Посмотреть премиальный детский шелк ↑</button>
         `;
       } else {
         actionButtons = `
