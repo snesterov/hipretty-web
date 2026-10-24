@@ -78,15 +78,15 @@
 
 
 
-      #allrecords > .r:not(#rec4673156001):not(#rec4673146901):not(#rec4673150901):not(#rec1935129061),
+      #allrecords > .r:not(#rec4673156001):not([data-record-type="702"]):not(.t702):not(#rec4673146901):not(#rec5106316401):not(#rec4673150901):not(#rec1935129061),
 
 
 
-      #allrecords > div.r:not(#rec4673156001):not(#rec4673146901):not(#rec4673150901):not(#rec1935129061),
+      #allrecords > div.r:not(#rec4673156001):not([data-record-type="702"]):not(.t702):not(#rec4673146901):not(#rec5106316401):not(#rec4673150901):not(#rec1935129061),
 
 
 
-      .t-records > .r:not(#rec4673156001):not(#rec4673146901):not(#rec4673150901):not(#rec1935129061) {
+      .t-records > .r:not(#rec4673156001):not([data-record-type="702"]):not(.t702):not(#rec4673146901):not(#rec5106316401):not(#rec4673150901):not(#rec1935129061) {
 
 
 
@@ -4521,7 +4521,7 @@
 
 /* rec4673146901 внутри слота: статичный блок в потоке страницы */
 
-      #hp-tilda-form-slot #rec4673146901,
+      #hp-tilda-form-slot .r, #hp-tilda-form-slot [data-record-type="702"], #hp-tilda-form-slot #rec4673146901, #hp-tilda-form-slot #rec5106316401,
 
       #hp-tilda-form-slot .t702,
 
@@ -4599,7 +4599,7 @@
 
       #hp-tilda-form-slot form.t-form,
 
-      #hp-tilda-form-slot #form4673146901 {
+      #hp-tilda-form-slot form.t-form, #hp-tilda-form-slot #form4673146901, #hp-tilda-form-slot #form5106316401 {
 
         display: block !important;
 
@@ -5429,7 +5429,7 @@
 
       .t702__wrapper,
 
-      #rec4673146901:not(#hp-tilda-form-slot *),
+      .r[data-record-type="702"]:not(#hp-tilda-form-slot *), #rec4673146901:not(#hp-tilda-form-slot *), #rec5106316401:not(#hp-tilda-form-slot *),
 
       body > .t-popup,
 
@@ -11207,7 +11207,7 @@
 
     window.reachYmGoal('form_submit');
 
-    window.reachYmGoal('form4673146901');
+    window.reachYmGoal('form' + (typeof recId !== 'undefined' ? recId : '4673146901'));
 
   };
 
@@ -12534,11 +12534,20 @@
     var slot = document.getElementById('hp-tilda-form-slot');
     if (!slot) return;
 
-    var rec = document.getElementById('rec4673146901');
+    var rec = document.querySelector('.r[data-record-type="702"]') ||
+              document.querySelector('.r.t702') ||
+              (document.querySelector('.t-input-group_contact_method') ? document.querySelector('.t-input-group_contact_method').closest('.r') : null) ||
+              document.getElementById('rec5106316401') ||
+              document.getElementById('rec4673146901');
+
     if (!rec) {
       setTimeout(mountTildaNativeForm, 300);
       return;
     }
+
+    var recId = rec.id ? rec.id.replace('rec', '') : '4673146901';
+    var cmField = rec.querySelector('.t-input-group_contact_method');
+    var lid = cmField ? cmField.getAttribute('data-input-lid') : '1770920801992';
 
     // Move rec4673146901 directly into slot as an inline block
     if (rec.parentElement !== slot) {
@@ -12590,12 +12599,12 @@
         window.t_loadJsFile('https://static.tildacdn.com/js/tilda-phone-mask-1.1.min.js', function() {
           window.t_loadJsFile('https://static.tildacdn.com/js/tilda-contact-method-1.0.min.js', function() {
             if (typeof window.t_contactMethod__init === 'function') {
-              try { window.t_contactMethod__init('4673146901', '1770920801992'); } catch(e) {}
+              try { window.t_contactMethod__init(recId, lid); } catch(e) {}
             }
           });
         });
       } else if (typeof window.t_contactMethod__init === 'function') {
-        try { window.t_contactMethod__init('4673146901', '1770920801992'); } catch(e) {}
+        try { window.t_contactMethod__init(recId, lid); } catch(e) {}
       }
     }
 
