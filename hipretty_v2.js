@@ -5034,18 +5034,21 @@
         margin-right: 10px !important;
         height: 32px !important;
         user-select: none !important;
+        flex-shrink: 0 !important;
       }
       #hp-tilda-form-slot .t-input-phonemask__wrap input.t-input {
         background: transparent !important;
         border: none !important;
         color: #111111 !important;
         height: 100% !important;
-        padding: 0 !important;
+        padding: 0 6px !important;
         flex: 1 !important;
         font-size: 16px !important;
         font-weight: 600 !important;
         font-family: 'Montserrat', sans-serif !important;
         outline: none !important;
+        text-align: left !important;
+        min-width: 0 !important;
       }
       #hp-tilda-form-slot input::placeholder,
       #hp-tilda-form-slot input::-webkit-input-placeholder {
@@ -5257,9 +5260,9 @@
       }
 
       #hp-tilda-form-slot .t-contact-method__phone-value input[type="tel"] {
-
-        padding-left: 92px !important;
-
+        padding: 0 6px !important;
+        text-align: left !important;
+        min-width: 0 !important;
       }
 
       #hp-tilda-form-slot .hp-field-error-msg {
