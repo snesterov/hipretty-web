@@ -4974,6 +4974,80 @@
       .hp-country-prefix, .hp-country-dropdown {
         display: none !important;
       }
+      /* High-contrast bright inputs & readable placeholders */
+      #hp-tilda-form-slot input.t-input:not(.t-input-phonemask__wrap input) {
+        background: #ffffff !important;
+        color: #111111 !important;
+        border: 1.5px solid rgba(244, 114, 182, 0.45) !important;
+        border-radius: 14px !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        padding: 0 18px !important;
+        box-sizing: border-box !important;
+        outline: none !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+      }
+      #hp-tilda-form-slot .t-input-phonemask__wrap {
+        background: #ffffff !important;
+        border: 1.5px solid rgba(244, 114, 182, 0.45) !important;
+        border-radius: 14px !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+      }
+      #hp-tilda-form-slot .t-input-phonemask__select {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        color: #111111 !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        cursor: pointer !important;
+        padding-right: 10px !important;
+        border-right: 1px solid #e4e4e7 !important;
+        margin-right: 10px !important;
+        height: 32px !important;
+        user-select: none !important;
+      }
+      #hp-tilda-form-slot .t-input-phonemask__wrap input.t-input {
+        background: transparent !important;
+        border: none !important;
+        color: #111111 !important;
+        height: 100% !important;
+        padding: 0 !important;
+        flex: 1 !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        outline: none !important;
+      }
+      #hp-tilda-form-slot input::placeholder,
+      #hp-tilda-form-slot input::-webkit-input-placeholder {
+        color: #71717a !important;
+        opacity: 1 !important;
+      }
+      #hp-tilda-form-slot .t-input-phonemask__wrap:focus-within,
+      #hp-tilda-form-slot input.t-input:focus {
+        border-color: #f472b6 !important;
+        box-shadow: 0 0 16px rgba(244, 114, 182, 0.4) !important;
+      }
+      .hp-form-label {
+        color: #fce7f3 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+        text-align: left !important;
+      }
+
 
       #hp-tilda-form-slot input.t-input:not(.t-input-phonemask):focus,
 
@@ -12612,15 +12686,70 @@
     setTimeout(runTildaNativeInit, 300);
     setTimeout(runTildaNativeInit, 800);
 
+    // Add visible bright labels above Name and Phone
+    var nameInp = rec.querySelector('input[name="Name"]');
+    if (nameInp) {
+      nameInp.placeholder = 'Например, Анна';
+      nameInp.setAttribute('placeholder', 'Например, Анна');
+      var nameGroup = nameInp.closest('.t-input-group') || nameInp.parentElement;
+      if (nameGroup && !nameGroup.querySelector('.hp-form-label')) {
+        var nLbl = document.createElement('div');
+        nLbl.className = 'hp-form-label';
+        nLbl.innerHTML = 'Ваше имя <span style="font-weight:400;color:#c084fc;">(как к вам обращаться)</span>';
+        nameGroup.insertBefore(nLbl, nameGroup.firstChild);
+      }
+    }
+
+    var phoneWrap = rec.querySelector('.t-input-phonemask__wrap');
+    if (phoneWrap) {
+      var phoneGroup = phoneWrap.closest('.t-input-group') || phoneWrap.parentElement;
+      if (phoneGroup && !phoneGroup.querySelector('.hp-form-label')) {
+        var pLbl = document.createElement('div');
+        pLbl.className = 'hp-form-label';
+        pLbl.innerHTML = 'Номер телефона <span style="font-weight:400;color:#c084fc;">(для связи и подбора)</span>';
+        phoneGroup.insertBefore(pLbl, phoneGroup.firstChild);
+      }
+    }
+
+    // Function to ensure cut and comment are always 100% injected
+    function updateLeadAttributes(targetForm) {
+      if (!targetForm) return;
+      var cutParamEl = document.getElementById('hp-selected-cut-text');
+      var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
+
+      var cutInp = targetForm.querySelector('input[name="cut"]');
+      if (!cutInp) {
+        cutInp = document.createElement('input');
+        cutInp.type = 'hidden';
+        cutInp.name = 'cut';
+        targetForm.appendChild(cutInp);
+      }
+      cutInp.value = selectedCut;
+
+      var commentInp = targetForm.querySelector('input[name="comment"]');
+      if (!commentInp) {
+        commentInp = document.createElement('input');
+        commentInp.type = 'hidden';
+        commentInp.name = 'comment';
+        targetForm.appendChild(commentInp);
+      }
+      commentInp.value = (typeof hpGetAnalyticsInfo === 'function') ? hpGetAnalyticsInfo() : '';
+    }
+
     var form = rec.querySelector('form');
+    if (form) {
+      updateLeadAttributes(form);
+    }
+
     if (form && !form.dataset.hpNativeBound) {
       form.dataset.hpNativeBound = 'true';
 
       var cb = form.querySelector('input[name="Checkbox"]');
       if (cb) cb.checked = true;
 
-      // In Tilda submit, inject cut and comment
+      // Update cut & analytics on submit
       form.addEventListener('submit', function() {
+        updateLeadAttributes(form);
         var cutParamEl = document.getElementById('hp-selected-cut-text');
         var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
 
