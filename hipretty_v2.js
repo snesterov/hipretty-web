@@ -8791,7 +8791,7 @@
 
 
 
-        <h1 class="hp-hero-title">Натуральные срезы волос:<br><span>от 13 690 ₽ до детского люкса</span></h1>
+        <h1 class="hp-hero-title">Натуральные срезы волос:<br><span>от 13 690 ₽ до детского шелка</span></h1>
 
 
 
@@ -9005,7 +9005,7 @@
 
           <span class="hp-tab-title">Эксклюзив: Детские некрашеные</span>
 
-          <span class="hp-tab-sub">Премиальный люкс шелк • @hi_pretty</span>
+          <span class="hp-tab-sub">Некрашеный детский шелк • @hi_pretty</span>
 
         </span>
 
