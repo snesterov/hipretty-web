@@ -11692,231 +11692,17 @@
 
 
     function renderCountryPrefix(valBlock, inp) {
-
-      if (!valBlock || valBlock.querySelector('#hp-country-prefix')) return;
-
-      var tBlock = valBlock.querySelector('.t-input-block') || valBlock;
-
-      tBlock.style.setProperty('position', 'relative', 'important');
-
-
-
-      var pref = document.createElement('div');
-
-      pref.id = 'hp-country-prefix';
-
-      pref.className = 'hp-country-prefix';
-
-      pref.innerHTML = '<span class="hp-flag">' + hpCurrentCountry.flag + '</span><span class="hp-code">' + hpCurrentCountry.code + '</span><svg class="hp-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/></svg>';
-
-
-
-      var dropdown = document.createElement('div');
-
-      dropdown.id = 'hp-country-dropdown';
-
-      dropdown.className = 'hp-country-dropdown';
-
-
-
-      var countries = [
-
-        { code: '+7', flag: '🇷🇺', name: 'Россия' },
-
-        { code: '+375', flag: '🇧🇾', name: 'Беларусь' },
-
-        { code: '+7', flag: '🇰🇿', name: 'Казахстан' },
-
-        { code: '+374', flag: '🇦🇲', name: 'Армения' },
-
-        { code: '+995', flag: '🇬🇪', name: 'Грузия' },
-
-        { code: '+994', flag: '🇦🇿', name: 'Азербайджан' },
-
-        { code: '+998', flag: '🇺🇿', name: 'Узбекистан' },
-
-        { code: '+', flag: '🌍', name: 'Другая страна' }
-
-      ];
-
-
-
-      countries.forEach(function(c) {
-
-        var item = document.createElement('div');
-
-        item.className = 'hp-country-item';
-
-        item.innerHTML = '<span>' + c.flag + '</span><span class="hp-c-name">' + c.name + '</span><span class="hp-c-code">' + c.code + '</span>';
-
-        item.addEventListener('click', function(ev) {
-
-          ev.stopPropagation();
-
-          hpCurrentCountry = c;
-
-          pref.querySelector('.hp-flag').textContent = c.flag;
-
-          pref.querySelector('.hp-code').textContent = c.code;
-
-          dropdown.classList.remove('hp-show');
-
-          if (inp) {
-
-            inp.value = '';
-
-            if (c.code === '+') {
-
-              inp.placeholder = 'Код и номер (любая страна)';
-
-            } else {
-
-              inp.placeholder = '(999) 000-00-00';
-
-            }
-
-            inp.focus();
-
-          }
-
-        });
-
-        dropdown.appendChild(item);
-
-      });
-
-
-
-      pref.addEventListener('click', function(ev) {
-
-        ev.stopPropagation();
-
-        dropdown.classList.toggle('hp-show');
-
-      });
-
-
-
-      document.addEventListener('click', function(ev) {
-
-        if (!pref.contains(ev.target)) {
-
-          dropdown.classList.remove('hp-show');
-
-        }
-
-      });
-
-
-
-      tBlock.appendChild(pref);
-
-      tBlock.appendChild(dropdown);
-
+      // Disabled: using 100% native Tilda phone mask
+      return;
     }
 
 
 
     function attachCleanPhoneMask(inp) {
-
-      if (!inp || inp.dataset.cleanMaskSet) return;
-
-      inp.dataset.cleanMaskSet = 'true';
-
-      inp.placeholder = '(999) 000-00-00';
-
-      inp.setAttribute('autocomplete', 'tel');
-
-      inp.setAttribute('inputmode', 'tel');
-
-      inp.setAttribute('type', 'tel');
-
-      inp.setAttribute('name', 'phone');
-
-      inp.style.setProperty('background', '#ffffff', 'important');
-
-      inp.style.setProperty('color', '#111111', 'important');
-
-      inp.style.setProperty('display', 'block', 'important');
-
-      inp.style.setProperty('padding-left', '92px', 'important');
-
-
-
-      var valBlock = inp.closest('.t-contact-method__phone-value') || inp.parentElement;
-
-      if (valBlock) renderCountryPrefix(valBlock, inp);
-
-
-
-      function formatPhoneValue() {
-
-        var val = inp.value;
-
-        if (!val) return;
-
-        if (hpCurrentCountry.code === '+') {
-
-          inp.value = val.replace(/[^\d\s\-\(\)\+]/g, '');
-
-          return;
-
-        }
-
-        var digits = val.replace(/\D/g, '');
-
-        if (!digits) {
-
-          inp.value = '';
-
-          return;
-
-        }
-
-
-
-        // Если введен код страны в поле (например из буфера +7999... или 8999...)
-
-        if (hpCurrentCountry.code === '+7') {
-
-          if ((digits.length >= 11 && (digits[0] === '7' || digits[0] === '8')) || (digits.length === 10 && digits[0] === '8')) {
-
-            digits = digits.substring(1);
-
-          }
-
-        } else if (hpCurrentCountry.code === '+375' && digits.indexOf('375') === 0) {
-
-          digits = digits.substring(3);
-
-        }
-
-
-
-        digits = digits.substring(0, 10);
-
-        var formatted = '';
-
-        if (digits.length > 0) formatted += '(' + digits.substring(0, 3);
-
-        if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
-
-        if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
-
-        if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
-
-        inp.value = formatted;
-
+      if (!inp) return;
+      if (!inp.placeholder || inp.placeholder === '') {
+        inp.placeholder = '+7 (999) 000-00-00';
       }
-
-
-
-      inp.addEventListener('input', formatPhoneValue);
-
-      inp.addEventListener('change', formatPhoneValue);
-
-      inp.addEventListener('paste', function() { setTimeout(formatPhoneValue, 10); });
-
     }
 
 
@@ -12297,7 +12083,7 @@
 
       } else {
 
-        if (!digits || digits.length < 10) {
+        if (!digits || digits.length < 7) {
 
           showCustomError(bPhoneInp, 'Пожалуйста, укажите номер телефона');
 
