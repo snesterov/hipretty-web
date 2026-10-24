@@ -4944,7 +4944,26 @@
       }
 
       /* 100% Native Tilda Phone Mask & Contact Method */
-      #hp-tilda-form-slot .t-input-phonemask__wrap {
+      /* Strictly ONE single phone value container visible */
+      #hp-tilda-form-slot .t-contact-method__phone-value {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        margin: 0 !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__telegram-value,
+      #hp-tilda-form-slot .t-contact-method__whatsapp-value,
+      #hp-tilda-form-slot .t-contact-method__max_messenger-value {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        pointer-events: none !important;
+      }
+      #hp-tilda-form-slot .t-contact-method__phone-value .t-input-phonemask__wrap {
         position: relative !important;
         display: flex !important;
         width: 100% !important;
@@ -12623,7 +12642,7 @@
     var cmField = rec.querySelector('.t-input-group_contact_method');
     var lid = cmField ? cmField.getAttribute('data-input-lid') : '1770920801992';
 
-    // Move rec4673146901 directly into slot as an inline block
+    // Move rec directly into slot as an inline block
     if (rec.parentElement !== slot) {
       slot.appendChild(rec);
     }
@@ -12664,7 +12683,7 @@
     document.body.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
     document.documentElement.classList.remove('t-body_popupshowed', 't-body_scroll-locked');
 
-    // Run Tilda's native initialization
+    // Run Tilda's native initialization for contact method and phone mask
     function runTildaNativeInit() {
       if (typeof window.t_loadCSSFile === 'function') {
         window.t_loadCSSFile('https://static.tildacdn.com/css/tilda-contact-method-1.0.min.css');
@@ -12683,37 +12702,91 @@
     }
 
     runTildaNativeInit();
-    setTimeout(runTildaNativeInit, 300);
-    setTimeout(runTildaNativeInit, 800);
+    setTimeout(runTildaNativeInit, 250);
+    setTimeout(runTildaNativeInit, 700);
 
-    // Add visible bright labels above Name and Phone
+    // 1. Add bright clear label above Name
     var nameInp = rec.querySelector('input[name="Name"]');
     if (nameInp) {
       nameInp.placeholder = 'Например, Анна';
       nameInp.setAttribute('placeholder', 'Например, Анна');
       var nameGroup = nameInp.closest('.t-input-group') || nameInp.parentElement;
-      if (nameGroup && !nameGroup.querySelector('.hp-form-label')) {
+      if (nameGroup && !nameGroup.querySelector('#hp-name-label')) {
         var nLbl = document.createElement('div');
+        nLbl.id = 'hp-name-label';
         nLbl.className = 'hp-form-label';
         nLbl.innerHTML = 'Ваше имя <span style="font-weight:400;color:#c084fc;">(как к вам обращаться)</span>';
         nameGroup.insertBefore(nLbl, nameGroup.firstChild);
       }
     }
 
-    var phoneWrap = rec.querySelector('.t-input-phonemask__wrap');
-    if (phoneWrap) {
-      var phoneGroup = phoneWrap.closest('.t-input-group') || phoneWrap.parentElement;
-      if (phoneGroup && !phoneGroup.querySelector('.hp-form-label')) {
-        var pLbl = document.createElement('div');
-        pLbl.className = 'hp-form-label';
-        pLbl.innerHTML = 'Номер телефона <span style="font-weight:400;color:#c084fc;">(для связи и подбора)</span>';
-        phoneGroup.insertBefore(pLbl, phoneGroup.firstChild);
-      }
+    // 2. Add bright clear label above Phone
+    var phoneBlock = rec.querySelector('.t-contact-method__phone-value');
+    var valContainer = rec.querySelector('.t-contact-method__value-container');
+    if (valContainer && !valContainer.querySelector('#hp-phone-label')) {
+      var pLbl = document.createElement('div');
+      pLbl.id = 'hp-phone-label';
+      pLbl.className = 'hp-form-label';
+      pLbl.innerHTML = 'Номер телефона <span style="font-weight:400;color:#c084fc;">(для звонка и подбора)</span>';
+      valContainer.insertBefore(pLbl, valContainer.firstChild);
     }
 
-    // Function to ensure cut and comment are always 100% injected
-    function updateLeadAttributes(targetForm) {
+    // 3. Add dynamic hint box below Phone input
+    if (valContainer && !valContainer.querySelector('#hp-contact-hint-box')) {
+      var hBox = document.createElement('div');
+      hBox.id = 'hp-contact-hint-box';
+      hBox.className = 'hp-contact-hint-box';
+      hBox.innerHTML = '📞 <b>Звонок по телефону:</b> Мастер свяжется с вами в течение 10 минут, ответит на все вопросы и бесплатно подберет срез.';
+      valContainer.appendChild(hBox);
+    }
+
+    // 4. Setup buttons switching (Телефон / Telegram / WhatsApp / Max)
+    var currentMethod = 'phone';
+    var methodBtns = rec.querySelectorAll('.t-contact-method__type');
+    var phoneLabel = valContainer ? valContainer.querySelector('#hp-phone-label') : null;
+    var hintBox = valContainer ? valContainer.querySelector('#hp-contact-hint-box') : null;
+
+    var hints = {
+      phone: '📞 <b>Звонок по телефону:</b> Мастер свяжется с вами в течение 10 минут, ответит на все вопросы и бесплатно подберет срез.',
+      telegram: '✈️ <b>Подбор в Telegram:</b> Укажите номер телефона. Мастер пришлет персональную подборку и детальные фото срезов в Telegram.',
+      whatsapp: '💬 <b>Подбор в WhatsApp:</b> Укажите номер телефона. Мастер отправит детальные фото срезов при дневном свете и проконсультирует в чате WhatsApp.',
+      max_messenger: '🟣 <b>Подбор в MAX:</b> Укажите номер телефона. Мастер пришлет персональную подборку срезов в высоком качестве.'
+    };
+
+    var labels = {
+      phone: 'Номер телефона <span style="font-weight:400;color:#c084fc;">(для звонка и подбора)</span>',
+      telegram: 'Номер для Telegram <span style="font-weight:400;color:#c084fc;">(для связи в чате)</span>',
+      whatsapp: 'Номер WhatsApp <span style="font-weight:400;color:#c084fc;">(для отправки фото)</span>',
+      max_messenger: 'Номер для MAX <span style="font-weight:400;color:#c084fc;">(для связи в мессенджере)</span>'
+    };
+
+    methodBtns.forEach(function(btn) {
+      if (btn.dataset.hpSwitchBound) return;
+      btn.dataset.hpSwitchBound = 'true';
+
+      btn.addEventListener('click', function() {
+        var m = btn.getAttribute('data-method-type') || 'phone';
+        currentMethod = m;
+
+        // Visual active state
+        methodBtns.forEach(function(b) {
+          if (b === btn) b.classList.add('hp-active');
+          else b.classList.remove('hp-active');
+        });
+
+        // Set radio for Tilda
+        var formRadios = rec.querySelectorAll('input[name="messenger-type"]');
+        formRadios.forEach(function(fr) { fr.checked = (fr.value === m); });
+
+        if (phoneLabel && labels[m]) phoneLabel.innerHTML = labels[m];
+        if (hintBox && hints[m]) hintBox.innerHTML = hints[m];
+      });
+    });
+
+    // 5. Function to synchronize single phone input to all Tilda fields + inject cut & comment
+    function syncAndInject(targetForm) {
       if (!targetForm) return;
+
       var cutParamEl = document.getElementById('hp-selected-cut-text');
       var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
 
@@ -12734,11 +12807,30 @@
         targetForm.appendChild(commentInp);
       }
       commentInp.value = (typeof hpGetAnalyticsInfo === 'function') ? hpGetAnalyticsInfo() : '';
+
+      // Get phone number from our SINGLE phone input
+      var mainPhoneInp = targetForm.querySelector('.t-contact-method__phone-value input[type="tel"]') || targetForm.querySelector('input[type="tel"]');
+      var resInp = targetForm.querySelector('.t-contact-method__phone-value .js-phonemask-result');
+      var phoneVal = (resInp && resInp.value) ? resInp.value.trim() : (mainPhoneInp ? mainPhoneInp.value.trim() : '');
+
+      // Copy phoneVal to all hidden inputs so Tilda receives it regardless of chosen method
+      var hiddenInputs = targetForm.querySelectorAll('.t-contact-method__telegram-value input, .t-contact-method__whatsapp-value input, .t-contact-method__max_messenger-value input, input[name="messenger-id"]');
+      hiddenInputs.forEach(function(inp) {
+        if (inp !== mainPhoneInp) {
+          inp.value = phoneVal;
+          inp.removeAttribute('data-tilda-req');
+          inp.removeAttribute('required');
+          inp.classList.remove('js-tilda-rule');
+        }
+      });
+
+      var formRadios = targetForm.querySelectorAll('input[name="messenger-type"]');
+      formRadios.forEach(function(fr) { fr.checked = (fr.value === currentMethod); });
     }
 
     var form = rec.querySelector('form');
     if (form) {
-      updateLeadAttributes(form);
+      syncAndInject(form);
     }
 
     if (form && !form.dataset.hpNativeBound) {
@@ -12747,36 +12839,23 @@
       var cb = form.querySelector('input[name="Checkbox"]');
       if (cb) cb.checked = true;
 
-      // Update cut & analytics on submit
+      // Submit listener
       form.addEventListener('submit', function() {
-        updateLeadAttributes(form);
-        var cutParamEl = document.getElementById('hp-selected-cut-text');
-        var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
-
-        var cutInp = form.querySelector('input[name="cut"]');
-        if (!cutInp) {
-          cutInp = document.createElement('input');
-          cutInp.type = 'hidden';
-          cutInp.name = 'cut';
-          form.appendChild(cutInp);
-        }
-        cutInp.value = selectedCut;
-
-        var commentInp = form.querySelector('input[name="comment"]');
-        if (!commentInp) {
-          commentInp = document.createElement('input');
-          commentInp.type = 'hidden';
-          commentInp.name = 'comment';
-          form.appendChild(commentInp);
-        }
-        commentInp.value = hpGetAnalyticsInfo();
-
+        syncAndInject(form);
         if (typeof window.sendLeadConversionGoals === 'function') {
           window.sendLeadConversionGoals();
         }
       });
 
-      // On successful submit
+      // Submit button listener
+      var subBtn = form.querySelector('button[type="submit"], .t-submit');
+      if (subBtn) {
+        subBtn.addEventListener('click', function() {
+          syncAndInject(form);
+        });
+      }
+
+      // Success card
       form.addEventListener('tildaform:aftersend', function() {
         if (slot.querySelector('.hp-success-card')) return;
         form.style.setProperty('display', 'none', 'important');
