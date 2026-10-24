@@ -11687,22 +11687,156 @@
 
     // Автоматическая маска телефона +7 (9XX) XXX-XX-XX
 
-    var hpCurrentCountry = { code: '+7', flag: '🇷🇺', name: 'Россия' };
+    var hpCurrentCountry = { code: '+7', flag: '🇷🇺', name: 'Россия', maxDigits: 10, placeholder: '(999) 000-00-00' };
 
-
+    var hpCountryList = [
+      { code: '+7', flag: '🇷🇺', name: 'Россия', maxDigits: 10, placeholder: '(999) 000-00-00' },
+      { code: '+998', flag: '🇺🇿', name: 'Узбекистан', maxDigits: 9, placeholder: '99 000-00-00' },
+      { code: '+7', flag: '🇰🇿', name: 'Казахстан', maxDigits: 10, placeholder: '(799) 000-00-00' },
+      { code: '+375', flag: '🇧🇾', name: 'Беларусь', maxDigits: 9, placeholder: '(99) 000-00-00' },
+      { code: '+374', flag: '🇦🇲', name: 'Армения', maxDigits: 8, placeholder: '(99) 000-000' },
+      { code: '+995', flag: '🇬🇪', name: 'Грузия', maxDigits: 9, placeholder: '(999) 00-00-00' },
+      { code: '+994', flag: '🇦🇿', name: 'Азербайджан', maxDigits: 9, placeholder: '(99) 000-00-00' },
+      { code: '+', flag: '🌍', name: 'Другая страна', maxDigits: 15, placeholder: 'Код страны и номер' }
+    ];
 
     function renderCountryPrefix(valBlock, inp) {
-      // Disabled: using 100% native Tilda phone mask
-      return;
+      if (!valBlock || valBlock.querySelector('#hp-country-prefix')) return;
+      var tBlock = valBlock.querySelector('.t-input-block') || valBlock;
+      tBlock.style.setProperty('position', 'relative', 'important');
+
+      var pref = document.createElement('div');
+      pref.id = 'hp-country-prefix';
+      pref.className = 'hp-country-prefix';
+      pref.innerHTML = '<span class="hp-flag">' + hpCurrentCountry.flag + '</span><span class="hp-code">' + hpCurrentCountry.code + '</span><svg class="hp-arrow" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+      var dropdown = document.createElement('div');
+      dropdown.id = 'hp-country-dropdown';
+      dropdown.className = 'hp-country-dropdown';
+
+      hpCountryList.forEach(function(c) {
+        var item = document.createElement('div');
+        item.className = 'hp-country-item';
+        item.innerHTML = '<span>' + c.flag + '</span><span class="hp-c-name">' + c.name + '</span><span class="hp-c-code">' + c.code + '</span>';
+        item.addEventListener('click', function(ev) {
+          ev.stopPropagation();
+          hpCurrentCountry = c;
+          pref.querySelector('.hp-flag').textContent = c.flag;
+          pref.querySelector('.hp-code').textContent = c.code;
+          dropdown.classList.remove('hp-show');
+          if (inp) {
+            inp.value = '';
+            inp.placeholder = c.placeholder;
+            var padLeft = (c.code.length > 2 ? '106px' : (c.code === '+' ? '82px' : '92px'));
+            inp.style.setProperty('padding-left', padLeft, 'important');
+            inp.focus();
+          }
+        });
+        dropdown.appendChild(item);
+      });
+
+      pref.addEventListener('click', function(ev) {
+        ev.stopPropagation();
+        dropdown.classList.toggle('hp-show');
+      });
+
+      document.addEventListener('click', function(ev) {
+        if (!pref.contains(ev.target)) {
+          dropdown.classList.remove('hp-show');
+        }
+      });
+
+      tBlock.appendChild(pref);
+      tBlock.appendChild(dropdown);
     }
 
-
-
     function attachCleanPhoneMask(inp) {
-      if (!inp) return;
-      if (!inp.placeholder || inp.placeholder === '') {
-        inp.placeholder = '+7 (999) 000-00-00';
+      if (!inp || inp.dataset.cleanMaskSet) return;
+      inp.dataset.cleanMaskSet = 'true';
+      inp.placeholder = hpCurrentCountry.placeholder || '(999) 000-00-00';
+      inp.setAttribute('autocomplete', 'tel');
+      inp.setAttribute('inputmode', 'tel');
+      inp.setAttribute('type', 'tel');
+      inp.setAttribute('name', 'phone');
+      inp.style.setProperty('background', '#ffffff', 'important');
+      inp.style.setProperty('color', '#111111', 'important');
+      inp.style.setProperty('display', 'block', 'important');
+      var initialPad = (hpCurrentCountry.code.length > 2 ? '106px' : '92px');
+      inp.style.setProperty('padding-left', initialPad, 'important');
+
+      var valBlock = inp.closest('.t-contact-method__phone-value') || inp.parentElement;
+      if (valBlock) renderCountryPrefix(valBlock, inp);
+
+      function formatPhoneValue() {
+        var val = inp.value;
+        if (!val) return;
+
+        if (hpCurrentCountry.code === '+') {
+          inp.value = val.replace(/[^\d\s\-\(\)\+]/g, '');
+          return;
+        }
+
+        var digits = val.replace(/\D/g, '');
+        if (!digits) {
+          inp.value = '';
+          return;
+        }
+
+        // Strip country code if pasted
+        if (hpCurrentCountry.code === '+7') {
+          if ((digits.length >= 11 && (digits[0] === '7' || digits[0] === '8')) || (digits.length === 10 && digits[0] === '8')) {
+            digits = digits.substring(1);
+          }
+        } else if (hpCurrentCountry.code === '+998' && digits.indexOf('998') === 0) {
+          digits = digits.substring(3);
+        } else if (hpCurrentCountry.code === '+375' && digits.indexOf('375') === 0) {
+          digits = digits.substring(3);
+        } else if (hpCurrentCountry.code === '+374' && digits.indexOf('374') === 0) {
+          digits = digits.substring(3);
+        } else if (hpCurrentCountry.code === '+995' && digits.indexOf('995') === 0) {
+          digits = digits.substring(3);
+        } else if (hpCurrentCountry.code === '+994' && digits.indexOf('994') === 0) {
+          digits = digits.substring(3);
+        }
+
+        var max = hpCurrentCountry.maxDigits || 10;
+        digits = digits.substring(0, max);
+
+        var formatted = '';
+        if (hpCurrentCountry.code === '+7') {
+          if (digits.length > 0) formatted += '(' + digits.substring(0, 3);
+          if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
+          if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
+          if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
+        } else if (hpCurrentCountry.code === '+998') {
+          if (digits.length > 0) formatted += digits.substring(0, 2);
+          if (digits.length >= 2) formatted += ' ' + digits.substring(2, 5);
+          if (digits.length >= 5) formatted += '-' + digits.substring(5, 7);
+          if (digits.length >= 7) formatted += '-' + digits.substring(7, 9);
+        } else if (hpCurrentCountry.code === '+375' || hpCurrentCountry.code === '+994') {
+          if (digits.length > 0) formatted += '(' + digits.substring(0, 2);
+          if (digits.length >= 2) formatted += ') ' + digits.substring(2, 5);
+          if (digits.length >= 5) formatted += '-' + digits.substring(5, 7);
+          if (digits.length >= 7) formatted += '-' + digits.substring(7, 9);
+        } else if (hpCurrentCountry.code === '+374') {
+          if (digits.length > 0) formatted += '(' + digits.substring(0, 2);
+          if (digits.length >= 2) formatted += ') ' + digits.substring(2, 5);
+          if (digits.length >= 5) formatted += '-' + digits.substring(5, 8);
+        } else if (hpCurrentCountry.code === '+995') {
+          if (digits.length > 0) formatted += '(' + digits.substring(0, 3);
+          if (digits.length >= 3) formatted += ') ' + digits.substring(3, 5);
+          if (digits.length >= 5) formatted += '-' + digits.substring(5, 7);
+          if (digits.length >= 7) formatted += '-' + digits.substring(7, 9);
+        } else {
+          formatted = digits;
+        }
+
+        inp.value = formatted;
       }
+
+      inp.addEventListener('input', formatPhoneValue);
+      inp.addEventListener('change', formatPhoneValue);
+      inp.addEventListener('paste', function() { setTimeout(formatPhoneValue, 10); });
     }
 
 
@@ -12068,131 +12202,46 @@
 
 
       var digits = (bPhoneInp ? bPhoneInp.value : '').replace(/\D/g, '');
+      var reqDigits = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.maxDigits) ? hpCurrentCountry.maxDigits : 10;
+      if (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+') reqDigits = 7;
 
-      var isOtherCountry = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+');
-
-      if (isOtherCountry) {
-
-        if (!digits || digits.length < 6) {
-
-          showCustomError(bPhoneInp, 'Пожалуйста, укажите телефон с кодом страны');
-
-          return false;
-
-        }
-
-      } else {
-
-        if (!digits || digits.length < 7) {
-
-          showCustomError(bPhoneInp, 'Пожалуйста, укажите номер телефона');
-
-          return false;
-
-        }
-
+      if (!digits || digits.length < (reqDigits > 7 ? reqDigits - 1 : reqDigits)) {
+        showCustomError(bPhoneInp, 'Пожалуйста, укажите полный номер телефона');
+        return false;
       }
-
-
 
       window.hpLastLeadSubmitTime = now;
-
       submitBtn.disabled = true;
-
       submitBtn.style.setProperty('pointer-events', 'none', 'important');
-
       submitBtn.style.setProperty('opacity', '0.7', 'important');
-
       submitBtn.textContent = 'Отправка заявки...';
 
-
-
       var methodLabels = {
-
         phone: '📞 Звонок по телефону',
-
         telegram: '✈️ Telegram',
-
         whatsapp: '💬 WhatsApp',
-
         max_messenger: '🟣 MAX'
-
       };
-
       var methodText = methodLabels[activeMethod] || activeMethod;
 
-
-
       var cutParamEl = document.getElementById('hp-selected-cut-text');
-
       var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || '');
-
-        if (!selectedCut || selectedCut === 'Общий подбор (срез не указан)') {
-
-          var actLen = document.querySelector('#hp-fp-length .hp-fp-chip.active');
-
-          var actType = document.querySelector('#hp-fp-type .hp-fp-chip.active');
-
-          if (actLen || actType) {
-
-            selectedCut = (actLen ? actLen.getAttribute('data-val') : '55–65 см') + ' • ' + (actType ? actType.getAttribute('data-val') : 'Детский шелк');
-
-          } else {
-
-            selectedCut = 'Общий подбор (срез не указан)';
-
-          }
-
+      if (!selectedCut || selectedCut === 'Общий подбор (срез не указан)') {
+        var actLen = document.querySelector('#hp-fp-length .hp-fp-chip.active');
+        var actType = document.querySelector('#hp-fp-type .hp-fp-chip.active');
+        if (actLen || actType) {
+          selectedCut = (actLen ? actLen.getAttribute('data-val') : '55–65 см') + ' • ' + (actType ? actType.getAttribute('data-val') : 'Детский шелк');
+        } else {
+          selectedCut = 'Общий подбор (срез не указан)';
         }
-
-
-
-      var isOtherCountry = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+');
-
-      var fPhone;
-
-      var intDigits;
-
-      if (isOtherCountry) {
-
-        fPhone = '+' + digits;
-
-        intDigits = digits;
-
-      } else {
-
-        var lastDigits = digits.slice(-10);
-
-        var pCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
-
-        fPhone = pCode + ' (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
-
-        var rawDigits = digits.replace(/\D/g, '');
-
-        intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
-
       }
 
-
-
-      var searchParams = new URLSearchParams(window.location.search);
-
-      var utmSource = searchParams.get('utm_source') || 'Прямой / Органика';
-
-      var utmCampaign = searchParams.get('utm_campaign') || '-';
-
-      var utmContent = searchParams.get('utm_content') || '-';
-
-      var utmTerm = searchParams.get('utm_term') || '-';
-
-      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-      var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
-
+      var pPref = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
+      var formattedVal = bPhoneInp ? bPhoneInp.value.trim() : digits;
+      var fPhone = (pPref === '+') ? ('+' + digits) : (pPref + ' ' + formattedVal);
+      var rawDigits = digits.replace(/\D/g, '');
+      var intDigits = (pPref === '+') ? rawDigits : (pPref.replace('+', '') + rawDigits);
       var clientName = (nVal || 'Клиент').trim();
-
-
-
       var waLink = 'https://wa.me/' + intDigits;
 
       
@@ -13070,244 +13119,87 @@
 
 
 
-        // 2. УНИВЕРСАЛЬНЫЙ ПОИСК ТЕЛЕФОНА (проверяем ВСЕ инпуты в форме, включая WhatsApp, Telegram, MAX и Телефон)
-
+        // 2. ПОИСК И ВАЛИДАЦИЯ ТЕЛЕФОНА
         var digits = '';
-
-        var telInp = null;
-
+        var telInp = form.querySelector('.t-contact-method__phone-value input[type="tel"]') || form.querySelector('input[type="tel"]') || form.querySelector('input[name="phone"]');
         var candidateInputs = form.querySelectorAll('.t-contact-method__value-container input:not([type="hidden"]), input[type="tel"], input[name="phone"], input[name="messenger-id"]');
 
-
-
-        for (var i = 0; i < candidateInputs.length; i++) {
-
-          var cInp = candidateInputs[i];
-
-          var d = (cInp.value || '').replace(/\D/g, '');
-
-          if (d.length >= 10) {
-
-            digits = d;
-
-            telInp = cInp;
-
-            break;
-
-          }
-
-        }
-
-
-
-        // Если ровно 10 цифр не найдено, берем инпут с любыми цифрами для показа ошибки
-
-        if (!digits) {
-
+        if (telInp) {
+          digits = (telInp.value || '').replace(/\D/g, '');
+        } else {
           for (var i = 0; i < candidateInputs.length; i++) {
-
-            var cInp = candidateInputs[i];
-
-            var d = (cInp.value || '').replace(/\D/g, '');
-
+            var d = (candidateInputs[i].value || '').replace(/\D/g, '');
             if (d.length > 0) {
-
               digits = d;
-
-              telInp = cInp;
-
-              break;
-
-            }
-
-          }
-
-        }
-
-
-
-        // Если совсем ничего, берем видимый инпут
-
-        if (!telInp) {
-
-          for (var i = 0; i < candidateInputs.length; i++) {
-
-            if (candidateInputs[i].offsetParent !== null) {
-
               telInp = candidateInputs[i];
-
               break;
-
             }
-
           }
-
           if (!telInp && candidateInputs.length > 0) telInp = candidateInputs[0];
-
         }
 
+        var reqDigits = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.maxDigits) ? hpCurrentCountry.maxDigits : 10;
+        if (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code === '+') reqDigits = 7;
 
-
-        if (!digits || digits.length < 10) {
-
-          showCustomError(telInp, 'Пожалуйста, укажите номер телефона');
-
+        if (!digits || digits.length < (reqDigits > 7 ? reqDigits - 1 : reqDigits)) {
+          showCustomError(telInp, 'Пожалуйста, укажите полный номер телефона');
           return false;
-
         }
-
-
 
         var trapInp = form.querySelector('input[name="hp_user_website_trap"]');
-
-        if (trapInp && trapInp.value) {
-
-          return false;
-
-        }
-
-
-
-        // Фиксируем отправку
+        if (trapInp && trapInp.value) return false;
 
         window.hpLastLeadSubmitTime = now;
-
         submitBtnEl.disabled = true;
-
         submitBtnEl.style.setProperty('pointer-events', 'none', 'important');
-
         submitBtnEl.style.setProperty('opacity', '0.7', 'important');
-
         submitBtnEl.textContent = 'Отправка заявки...';
 
-
-
         var cbInp = form.querySelector('input[name="Checkbox"]');
-
         if (cbInp) cbInp.checked = true;
 
-
-
         var prefixCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
-
-        var cleanPhone = prefixCode + digits.slice(-10);
-
-
-
-        // Заполняем абсолютно все скрытые и открытые поля телефона единым номером
+        var formattedVal = telInp ? telInp.value.trim() : digits;
+        var cleanPhone = (prefixCode === '+') ? ('+' + digits) : (prefixCode + ' ' + formattedVal);
+        var fPhone = cleanPhone;
 
         candidateInputs.forEach(function(inp) {
-
           inp.value = cleanPhone;
-
           inp.disabled = false;
-
         });
-
-
 
         var activeMethodEl = form.querySelector('.t-contact-method__type.hp-active, .t-contact-method__type.t-contact-method__type_active');
-
         var methodType = activeMethodEl ? (activeMethodEl.getAttribute('data-method-type') || activeMethodEl.getAttribute('data-method')) : 'phone';
 
-
-
-        // Активируем радио-кнопку нужного мессенджера для валидатора Тильды
-
         var radios = form.querySelectorAll('input[name="messenger-type"]');
-
-        radios.forEach(function(r) {
-
-          r.checked = (r.value === methodType);
-
-        });
-
-
-
-        // Заполняем абсолютно все инпуты телефона
+        radios.forEach(function(r) { r.checked = (r.value === methodType); });
 
         var allInputs = form.querySelectorAll('input[name="messenger-id"], input[name="phone"], input[type="tel"]');
-
-        allInputs.forEach(function(inp) {
-
-          inp.value = cleanPhone;
-
-        });
-
-
-
-        // Снимаем data-tilda-req со скрытых инпутов других мессенджеров
+        allInputs.forEach(function(inp) { inp.value = cleanPhone; });
 
         var hiddenMethodBlocks = form.querySelectorAll('.t-contact-method__telegram-value, .t-contact-method__whatsapp-value, .t-contact-method__max_messenger-value');
-
         hiddenMethodBlocks.forEach(function(b) {
-
           b.querySelectorAll('input').forEach(function(inp) {
-
             inp.removeAttribute('data-tilda-req');
-
             inp.removeAttribute('required');
-
             inp.classList.remove('js-tilda-rule');
-
           });
-
         });
 
         var methodLabels = {
-
           phone: '📞 Звонок по телефону',
-
           telegram: '✈️ Telegram',
-
           whatsapp: '💬 WhatsApp',
-
           max_messenger: '🟣 MAX'
-
         };
-
         var methodText = methodLabels[methodType] || methodType;
 
-
-
         var cutParamEl = document.getElementById('hp-selected-cut-text');
-
         var selectedCut = (cutParamEl && cutParamEl.textContent.trim()) ? cutParamEl.textContent.trim() : (chosenCutParam || 'Общий подбор (срез не указан)');
 
-
-
-        var lastDigits = digits.slice(-10);
-
-        var pCode = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
-
-        var fPhone = pCode + ' (' + lastDigits.substring(0, 3) + ') ' + lastDigits.substring(3, 6) + '-' + lastDigits.substring(6, 8) + '-' + lastDigits.substring(8, 10);
-
-
-
-        var searchParams = new URLSearchParams(window.location.search);
-
-        var utmSource = searchParams.get('utm_source') || 'Прямой / Органика';
-
-        var utmCampaign = searchParams.get('utm_campaign') || '-';
-
-        var utmContent = searchParams.get('utm_content') || '-';
-
-        var utmTerm = searchParams.get('utm_term') || '-';
-
-        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        var deviceText = isMobile ? '📱 Мобильный' : '💻 Десктоп';
-
-
-
         var rawDigits = digits.replace(/\D/g, '');
-
-        var intDigits = (rawDigits.length === 10 ? '7' + rawDigits : (rawDigits.length === 11 && rawDigits[0] === '8' ? '7' + rawDigits.substring(1) : rawDigits));
-
+        var intDigits = (prefixCode === '+') ? rawDigits : (prefixCode.replace('+', '') + rawDigits);
         var clientName = (nameVal || 'Клиент').trim();
-
-
-
         var waLink = 'https://wa.me/' + intDigits;
 
         
@@ -13670,17 +13562,13 @@
 
         }
 
-        if (!tVal || tVal.length < 10) {
-
+        if (!tVal || tVal.length < 7) {
           errs.push({ obj: t, type: ['req'] });
-
         }
 
-
-
         if (errs.length === 0) {
-
-          var fullNum = '+7' + tVal.slice(-10);
+          var pPref = (typeof hpCurrentCountry !== 'undefined' && hpCurrentCountry.code) ? hpCurrentCountry.code : '+7';
+          var fullNum = (pPref === '+') ? ('+' + tVal) : (pPref + ' ' + (t ? t.value.trim() : tVal));
 
           if (t) t.value = fullNum;
 
