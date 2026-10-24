@@ -12447,9 +12447,13 @@
 
       // 2. Заполнение скрытых полей формы перед отправкой
 
+      var bAnalytics = hpGetAnalyticsInfo();
+      var bFinalCut = selectedCut;
+      if (bAnalytics && !bFinalCut.includes('📍') && !bFinalCut.includes('Смартфон') && !bFinalCut.includes('ПК')) {
+        bFinalCut = bFinalCut + ' • ' + bAnalytics;
+      }
       var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
-
-      if (cutHidden) cutHidden.value = selectedCut;
+      if (cutHidden) cutHidden.value = bFinalCut;
 
       var msgHidden = bForm.querySelector('#hp-builtin-msg-hidden');
 
@@ -12785,7 +12789,8 @@
 
       if (utmCamp === '707367393') campLabel = 'Поиск (707367393)';
 
-      else if (utmCamp === '707364774') campLabel = 'РСЯ (707364774)';
+      else if (utmCamp === '707364774') campLabel = 'Конверсии (707364774)';
+      else if (utmCamp === '715320373') campLabel = 'Карты (715320373)';
 
       parts.push((utmSource ? utmSource + ' ' : '') + campLabel);
 
@@ -13583,7 +13588,12 @@
 
           }
 
-          if (typeof window.hpUpdateAllCutInputs === 'function') { window.hpUpdateAllCutInputs(selectedCut); } else { cutInp.value = selectedCut; }
+          var analyticsInfo = hpGetAnalyticsInfo();
+          var finalCutText = selectedCut;
+          if (analyticsInfo && !finalCutText.includes('📍') && !finalCutText.includes('Смартфон') && !finalCutText.includes('ПК')) {
+            finalCutText = finalCutText + ' • ' + analyticsInfo;
+          }
+          if (typeof window.hpUpdateAllCutInputs === 'function') { window.hpUpdateAllCutInputs(finalCutText); } else { cutInp.value = finalCutText; }
 
 
 
@@ -14083,6 +14093,15 @@ installBulletproofTildaValidator();
         if (typeof window.hpUpdateAllCutInputs === 'function') {
           window.hpUpdateAllCutInputs();
         }
+        var analytics = hpGetAnalyticsInfo();
+        var cutInp = form.querySelector('input[name="cut"]');
+        if (cutInp) {
+          var curVal = (cutInp.value || '').trim();
+          if (!curVal) curVal = 'Общий подбор (срез не указан)';
+          if (analytics && !curVal.includes('📍') && !curVal.includes('Смартфон') && !curVal.includes('ПК')) {
+            cutInp.value = curVal + ' • ' + analytics;
+          }
+        }
         var commentInp = form.querySelector('input[name="comment"]');
         if (!commentInp) {
           commentInp = document.createElement('input');
@@ -14090,7 +14109,7 @@ installBulletproofTildaValidator();
           commentInp.name = 'comment';
           form.appendChild(commentInp);
         }
-        commentInp.value = hpGetAnalyticsInfo();
+        commentInp.value = analytics;
       }
 
 
