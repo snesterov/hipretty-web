@@ -12453,7 +12453,15 @@
         bFinalCut = bFinalCut + ' • ' + bAnalytics;
       }
       var cutHidden = bForm.querySelector('#hp-builtin-cut-hidden');
-      if (cutHidden) cutHidden.value = bFinalCut;
+      if (cutHidden) cutHidden.value = selectedCut;
+      var commentHidden = bForm.querySelector('input[name="comment"]');
+      if (!commentHidden) {
+        commentHidden = document.createElement('input');
+        commentHidden.type = 'hidden';
+        commentHidden.name = 'comment';
+        bForm.appendChild(commentHidden);
+      }
+      commentHidden.value = hpGetAnalyticsInfo();
 
       var msgHidden = bForm.querySelector('#hp-builtin-msg-hidden');
 
@@ -13575,27 +13583,22 @@
 
 
           var cutInp = form.querySelector('input[name="cut"]');
-
           if (!cutInp) {
-
             cutInp = document.createElement('input');
-
             cutInp.type = 'hidden';
-
             cutInp.name = 'cut';
-
             form.appendChild(cutInp);
-
           }
+          cutInp.value = selectedCut;
 
-          var analyticsInfo = hpGetAnalyticsInfo();
-          var finalCutText = selectedCut;
-          if (analyticsInfo && !finalCutText.includes('📍') && !finalCutText.includes('Смартфон') && !finalCutText.includes('ПК')) {
-            finalCutText = finalCutText + ' • ' + analyticsInfo;
+          var commentInp = form.querySelector('input[name="comment"]');
+          if (!commentInp) {
+            commentInp = document.createElement('input');
+            commentInp.type = 'hidden';
+            commentInp.name = 'comment';
+            form.appendChild(commentInp);
           }
-          if (typeof window.hpUpdateAllCutInputs === 'function') { window.hpUpdateAllCutInputs(finalCutText); } else { cutInp.value = finalCutText; }
-
-
+          commentInp.value = hpGetAnalyticsInfo();
 
           if (nameInp) nameInp.value = clientName;
 
@@ -14093,14 +14096,9 @@ installBulletproofTildaValidator();
         if (typeof window.hpUpdateAllCutInputs === 'function') {
           window.hpUpdateAllCutInputs();
         }
-        var analytics = hpGetAnalyticsInfo();
         var cutInp = form.querySelector('input[name="cut"]');
-        if (cutInp) {
-          var curVal = (cutInp.value || '').trim();
-          if (!curVal) curVal = 'Общий подбор (срез не указан)';
-          if (analytics && !curVal.includes('📍') && !curVal.includes('Смартфон') && !curVal.includes('ПК')) {
-            cutInp.value = curVal + ' • ' + analytics;
-          }
+        if (cutInp && !cutInp.value) {
+          cutInp.value = 'Общий подбор (срез не указан)';
         }
         var commentInp = form.querySelector('input[name="comment"]');
         if (!commentInp) {
@@ -14109,7 +14107,7 @@ installBulletproofTildaValidator();
           commentInp.name = 'comment';
           form.appendChild(commentInp);
         }
-        commentInp.value = analytics;
+        commentInp.value = hpGetAnalyticsInfo();
       }
 
 
