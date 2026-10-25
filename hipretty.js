@@ -3953,6 +3953,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4350",
+    "cutNum": "#4350",
+    "title": "Срез #4350 (55 см / 139 гр)",
+    "cat": "straight",
+    "badge": "Прямой шелк",
+    "length": 55,
+    "weight": "139 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4350.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4350",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   1616  55 см  139 гр   Гладкий, мягкий, нежный, шелковистый   68000"
+  },
+  {
+    "id": "4347",
+    "cutNum": "#4347",
+    "title": "Срез #4347 (54 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 54,
+    "weight": "110 гр",
+    "price": "118 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4347.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4347",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Природный оттенок и структура   1615  54 см в кудре и 65 в вытянутом 168 грамм  Тон 6-7  118.000"
+  },
+  {
     "id": "4342",
     "cutNum": "#4342",
     "title": "Срез #4342 (52 см / 120 гр)",
@@ -4328,30 +4354,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4066.jpg",
     "tgUrl": "https://t.me/hi_pretty/4066",
     "desc": "#1557 • Детская кудряшка • Эффектный хвостик с природной кудрей"
-  },
-  {
-    "id": "4056",
-    "cutNum": "#1272",
-    "title": "Срез #1272 (76 см / 162 гр)",
-    "cat": "straight",
-    "length": 76,
-    "weight": "162 гр",
-    "price": "132 678 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4056.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4056",
-    "desc": "#1272 • Детский,прямой,блестящий срез • Есть выгоревшие пряди"
-  },
-  {
-    "id": "4046",
-    "cutNum": "#990",
-    "title": "Срез #990 (50 см / 117 гр)",
-    "cat": "silk",
-    "length": 50,
-    "weight": "117 гр",
-    "price": "52 650 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4046.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4046",
-    "desc": "Детские,шелковые   🤍 • #990 50см/117гр - 52.650₽ продан • #1429 50см/112гр - 49.000₽"
   }
 ];
 
