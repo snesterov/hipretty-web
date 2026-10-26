@@ -8043,6 +8043,58 @@
 
   var cutsDatabase = [
   {
+    "id": "4383",
+    "cutNum": "#4383",
+    "title": "Срез #4383 (68 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 68,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4383.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4383",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1607 68 см 146 грамм"
+  },
+  {
+    "id": "4377",
+    "cutNum": "#4377",
+    "title": "Срез #4377 (56 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 56,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4377.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4377",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1596 56 см   106 грамм"
+  },
+  {
+    "id": "4372",
+    "cutNum": "#4372",
+    "title": "Срез #4372 (61 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 61,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4372.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4372",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1600 61 см   176 грамм"
+  },
+  {
+    "id": "4366",
+    "cutNum": "#4366",
+    "title": "Срез #4366 (57 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 57,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4366.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4366",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1602 57 см 192 грамма"
+  },
+  {
     "id": "4353",
     "cutNum": "#4353",
     "title": "Срез #4353 (57 см / 182 гр)",
@@ -8433,18 +8485,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
     "tgUrl": "https://t.me/hi_pretty/4086",
     "desc": "#1557 • Детский нежнейший срез • Гладкий,как маслянистый"
-  },
-  {
-    "id": "4076",
-    "cutNum": "#1387",
-    "title": "Срез #1387 (66 см / 86 гр)",
-    "cat": "wave",
-    "length": 66,
-    "weight": "86 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4076.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4076",
-    "desc": "#1387 • Детский срез с волной • Волосинка между тонкой и средней,мягкий,воздушный"
   }
 ];
 
