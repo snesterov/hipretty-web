@@ -3953,6 +3953,19 @@
 
   var cutsDatabase = [
   {
+    "id": "4353",
+    "cutNum": "#4353",
+    "title": "Срез #4353 (57 см / 182 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 57,
+    "weight": "182 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4353.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4353",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Канал с окрашенными волосами ПРЕМИУМ   Детские пористые срезы с природной волной   861 57 см 182 гр 67000 1249 65 см 144 гр  60000 1255 62 см 211 гр 131000 1430 55 см 159 гр 83200"
+  },
+  {
     "id": "4350",
     "cutNum": "#4350",
     "title": "Срез #4350 (55 см / 139 гр)",
@@ -4342,18 +4355,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4076.jpg",
     "tgUrl": "https://t.me/hi_pretty/4076",
     "desc": "#1387 • Детский срез с волной • Волосинка между тонкой и средней,мягкий,воздушный"
-  },
-  {
-    "id": "4066",
-    "cutNum": "#1557",
-    "title": "Срез #1557 (48 см / 157 гр)",
-    "cat": "silk",
-    "length": 48,
-    "weight": "157 гр",
-    "price": "152 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4066.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4066",
-    "desc": "#1557 • Детская кудряшка • Эффектный хвостик с природной кудрей"
   }
 ];
 
