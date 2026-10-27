@@ -3953,6 +3953,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4395",
+    "cutNum": "#4395",
+    "title": "Срез #4395 (62 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 62,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4395.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4395",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1599 62 см 136 грамм"
+  },
+  {
+    "id": "4388",
+    "cutNum": "#4388",
+    "title": "Срез #4388 (56 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 56,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4388.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4388",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1601 56 см 153 грамма"
+  },
+  {
     "id": "4383",
     "cutNum": "#4383",
     "title": "Срез #4383 (68 см / 110 гр)",
@@ -4371,30 +4397,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4106.jpg",
     "tgUrl": "https://t.me/hi_pretty/4106",
     "desc": "#1221 • Детский срез с легкой волной • Волосинка между тонкой и средней,шелк"
-  },
-  {
-    "id": "4096",
-    "cutNum": "#1247",
-    "title": "Срез #1247 (65 см / 181 гр)",
-    "cat": "wave",
-    "length": 65,
-    "weight": "181 гр",
-    "price": "113 750 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4096.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4096",
-    "desc": "#1247 • Детский шелк • Легкая природная волна,блестящий,мягкий,волосинка ближе к тонкой"
-  },
-  {
-    "id": "4086",
-    "cutNum": "#1557",
-    "title": "Срез #1557 (55 см / 125 гр)",
-    "cat": "straight",
-    "length": 55,
-    "weight": "125 гр",
-    "price": "160 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4086.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4086",
-    "desc": "#1557 • Детский нежнейший срез • Гладкий,как маслянистый"
   }
 ];
 
