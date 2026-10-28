@@ -3953,6 +3953,45 @@
 
   var cutsDatabase = [
   {
+    "id": "4412",
+    "cutNum": "#4412",
+    "title": "Срез #4412 (62 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 62,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4412.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4412",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1599 62 см 136 грамм"
+  },
+  {
+    "id": "4407",
+    "cutNum": "#4407",
+    "title": "Срез #4407 (52 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 52,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4407.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4407",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Тончайший волосок (пух), воздушный, мягкий   1614 52 см 56 грамм"
+  },
+  {
+    "id": "4401",
+    "cutNum": "#4401",
+    "title": "Срез #4401 (62 см / 110 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 62,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4401.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4401",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Мягкий воздушный волос, с легкой волной   1612 62 см 112 грамм"
+  },
+  {
     "id": "4395",
     "cutNum": "#4395",
     "title": "Срез #4395 (62 см / 110 гр)",
