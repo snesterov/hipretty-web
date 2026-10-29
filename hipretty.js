@@ -3953,6 +3953,45 @@
 
   var cutsDatabase = [
   {
+    "id": "4429",
+    "cutNum": "#4429",
+    "title": "Срез #4429 (62 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 62,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4429.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4429",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1610 62 см 112 грамм"
+  },
+  {
+    "id": "4424",
+    "cutNum": "#4424",
+    "title": "Срез #4424 (61 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 61,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4424.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4424",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1611 61 см 198 грамм"
+  },
+  {
+    "id": "4418",
+    "cutNum": "#4418",
+    "title": "Срез #4418 (55 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 55,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4418.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4418",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природный оттенок и структура   1597 55 см в кудре 63 см в вытянутом виде 117 грамм"
+  },
+  {
     "id": "4412",
     "cutNum": "#4412",
     "title": "Срез #4412 (62 см / 110 гр)",
