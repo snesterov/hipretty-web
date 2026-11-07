@@ -8043,6 +8043,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4439",
+    "cutNum": "#4439",
+    "title": "Срез #4439 (60 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 60,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4439.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4439",
+    "desc": "Это что-то нереальное 💎 Природные, редчайшие  Пока на мойке"
+  },
+  {
+    "id": "4433",
+    "cutNum": "#1600",
+    "title": "Срез #1600 (60 см / 176 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 60,
+    "weight": "176 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4433.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4433",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Детские срезы с природной волной   #1600 60см 176гр #1611 61см 198гр #1612 62см 112гр #1610 60см 117гр #1243 65см 149гр"
+  },
+  {
     "id": "4429",
     "cutNum": "#4429",
     "title": "Срез #4429 (62 см / 110 гр)",
@@ -8541,30 +8567,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
     "tgUrl": "https://t.me/hi_pretty/4127",
     "desc": "#1218 • Детский,идеально прямой срез • Волосинка между тонкой и средней"
-  },
-  {
-    "id": "4117",
-    "cutNum": "#1261",
-    "title": "Срез #1261 (55 см / 117 гр)",
-    "cat": "wave",
-    "length": 55,
-    "weight": "117 гр",
-    "price": "90 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4117.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4117",
-    "desc": "#1261 • Детский шелковый срез с красивой природной,активной волной • Выгоревшие концы"
-  },
-  {
-    "id": "4106",
-    "cutNum": "#1221",
-    "title": "Срез #1221 (75 см / 197 гр)",
-    "cat": "wave",
-    "length": 75,
-    "weight": "197 гр",
-    "price": "149 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4106.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4106",
-    "desc": "#1221 • Детский срез с легкой волной • Волосинка между тонкой и средней,шелк"
   }
 ];
 
