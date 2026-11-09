@@ -8043,6 +8043,19 @@
 
   var cutsDatabase = [
   {
+    "id": "4486",
+    "cutNum": "#1616",
+    "title": "Срез #1616 (55 см / 139 гр)",
+    "cat": "straight",
+    "badge": "Прямой шелк",
+    "length": 55,
+    "weight": "139 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4486.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4486",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Нежнейший шелковый прямой детский хвост, с тончайшей волосинкой   #1616 55 см 139 гр"
+  },
+  {
     "id": "4477",
     "cutNum": "#1240",
     "title": "Срез #1240 (50 см / 45 гр)",
@@ -8594,18 +8607,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4137.jpg",
     "tgUrl": "https://t.me/hi_pretty/4137",
     "desc": "#993 • Детский,натуральный блонд,шелк • Волосинка между тонкой и средней"
-  },
-  {
-    "id": "4127",
-    "cutNum": "#1218",
-    "title": "Срез #1218 (58 см / 188 гр)",
-    "cat": "straight",
-    "length": 58,
-    "weight": "188 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4127.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4127",
-    "desc": "#1218 • Детский,идеально прямой срез • Волосинка между тонкой и средней"
   }
 ];
 
