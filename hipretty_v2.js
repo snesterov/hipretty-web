@@ -8043,6 +8043,45 @@
 
   var cutsDatabase = [
   {
+    "id": "4512",
+    "cutNum": "#4512",
+    "title": "Срез #4512 (56 см / 122 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 56,
+    "weight": "122 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4512.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4512",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами    Альбинос Легкая волна, волосинка ближе к тонкой  56 см 122 гр"
+  },
+  {
+    "id": "4504",
+    "cutNum": "#4504",
+    "title": "Срез #4504 (60 см / 137 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 60,
+    "weight": "137 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4504.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4504",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами    Редчайший оттенок, детский неокрашенный срез Шелковый, тонкий волосок  Фото срезки по запросу  60 см 137 гр"
+  },
+  {
+    "id": "4495",
+    "cutNum": "#4495",
+    "title": "Срез #4495 (45 см / 63 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 45,
+    "weight": "63 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4495.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4495",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами    Мягкий воздушный, волосинка между тонкой и средней, пористый  45 см 63 гр"
+  },
+  {
     "id": "4486",
     "cutNum": "#1616",
     "title": "Срез #1616 (55 см / 139 гр)",
