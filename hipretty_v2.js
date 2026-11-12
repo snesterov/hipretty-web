@@ -8043,6 +8043,19 @@
 
   var cutsDatabase = [
   {
+    "id": "4520",
+    "cutNum": "#1237",
+    "title": "Срез #1237 (56 см / 214 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 56,
+    "weight": "214 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4520.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4520",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Блестящий мягкий Небольшая пористость, волосинка ближе к тонкой, легкая волна  #1237 56 см 214 гр"
+  },
+  {
     "id": "4512",
     "cutNum": "#4512",
     "title": "Срез #4512 (56 см / 122 гр)",
@@ -8634,18 +8647,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4147.jpg",
     "tgUrl": "https://t.me/hi_pretty/4147",
     "desc": "#1434 • Детский струящийся шелк • Идеально прямой,блестящий"
-  },
-  {
-    "id": "4137",
-    "cutNum": "#993",
-    "title": "Срез #993 (53 см / 168 гр)",
-    "cat": "wave",
-    "length": 53,
-    "weight": "168 гр",
-    "price": "171 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4137.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4137",
-    "desc": "#993 • Детский,натуральный блонд,шелк • Волосинка между тонкой и средней"
   }
 ];
 
@@ -8654,6 +8655,32 @@
   // БАЗА ОКРАШЕННЫХ СРЕЗОВ HIPRETTY (@volosy_hi_pretty)
 
   var dyedCutsDatabase = [
+  {
+    "id": "1806",
+    "cutNum": "#33",
+    "title": "Срез #33 (58 см / 105 гр)",
+    "cat": "blond",
+    "badge": "Премиум шелк",
+    "length": 58,
+    "weight": "105 гр",
+    "price": "23 375 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1806.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1806",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум   #1480  Тонкая волосинка, шелковистый мягкий воздушный   58 см 105 гр  23.375"
+  },
+  {
+    "id": "1797",
+    "cutNum": "#33",
+    "title": "Срез #33 (55 см / 110 гр)",
+    "cat": "blond",
+    "badge": "Премиум шелк",
+    "length": 55,
+    "weight": "110 гр",
+    "price": "24 250 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_dyed_1797.jpg",
+    "tgUrl": "https://t.me/volosy_hi_pretty/1797",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами  Премиум   #1472  Мягкий, легкий, средняя плотность волосинки  55 см 110 гр  24.250"
+  },
   {
     "id": "1792",
     "cutNum": "#1471",
