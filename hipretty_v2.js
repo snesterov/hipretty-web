@@ -8043,6 +8043,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4538",
+    "cutNum": "#1598",
+    "title": "Срез #1598 (60 см / 114 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 60,
+    "weight": "114 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4538.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4538",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природная волна, воздушный, мягкий   #1598 60 см 114 гр"
+  },
+  {
+    "id": "4529",
+    "cutNum": "#1596",
+    "title": "Срез #1596 (56 см / 106 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 56,
+    "weight": "106 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4529.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4529",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Природная волна, средняя плотность волосинки, пористость   #1596 56 см 106 гр"
+  },
+  {
     "id": "4520",
     "cutNum": "#1237",
     "title": "Срез #1237 (56 см / 214 гр)",
@@ -8623,30 +8649,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4167.jpg",
     "tgUrl": "https://t.me/hi_pretty/4167",
     "desc": "#1560 • Самый настоящий шелк • Нежнейший детский хвостик с тончайшей волосинкой"
-  },
-  {
-    "id": "4157",
-    "cutNum": "#1263",
-    "title": "Срез #1263 (55 см / 156 гр)",
-    "cat": "silk",
-    "length": 55,
-    "weight": "156 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4157.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4157",
-    "desc": "Детские  💎 • Природный блонд • Корень холодный 8-9"
-  },
-  {
-    "id": "4147",
-    "cutNum": "#1434",
-    "title": "Срез #1434 (72 см / 153 гр)",
-    "cat": "straight",
-    "length": 72,
-    "weight": "153 гр",
-    "price": "73 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4147.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4147",
-    "desc": "#1434 • Детский струящийся шелк • Идеально прямой,блестящий"
   }
 ];
 
