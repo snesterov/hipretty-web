@@ -8043,6 +8043,45 @@
 
   var cutsDatabase = [
   {
+    "id": "4655",
+    "cutNum": "#4655",
+    "title": "Срез #4655 (77 см / 119 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 77,
+    "weight": "119 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4655.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4655",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Волосинка средняя, пористый, с природной легкой волной  #N32 77 см 119 гр"
+  },
+  {
+    "id": "4646",
+    "cutNum": "#4646",
+    "title": "Срез #4646 (72 см / 156 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 72,
+    "weight": "156 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4646.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4646",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Плотная структура, пористый   #N28 72 см 156 гр"
+  },
+  {
+    "id": "4637",
+    "cutNum": "#4637",
+    "title": "Срез #4637 (59 см / 144 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 59,
+    "weight": "144 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4637.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4637",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Мягкий воздушный с выгоревшими кончиками  #N37 59 см 144 гр"
+  },
+  {
     "id": "4538",
     "cutNum": "#1598",
     "title": "Срез #1598 (60 см / 114 гр)",
