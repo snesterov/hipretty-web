@@ -3953,6 +3953,19 @@
 
   var cutsDatabase = [
   {
+    "id": "4664",
+    "cutNum": "#1597",
+    "title": "Срез #1597 (63 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 63,
+    "weight": "110 гр",
+    "price": "130 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4664.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4664",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Натуральная кудряшка, хвостик мягкий, структура волосинки пористая, средняя плотность   #1597 63 см в вытянутом 55 см в кудре  117 грамм  130.000"
+  },
+  {
     "id": "4655",
     "cutNum": "#4655",
     "title": "Срез #4655 (77 см / 119 гр)",
@@ -4586,18 +4599,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4177.jpg",
     "tgUrl": "https://t.me/hi_pretty/4177",
     "desc": "#1246 • Детский,глянцевый срез • Шелковый,мягкий,волосинка ближе к средней"
-  },
-  {
-    "id": "4167",
-    "cutNum": "#1560",
-    "title": "Срез #1560 (54 см / 96 гр)",
-    "cat": "silk",
-    "length": 54,
-    "weight": "96 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4167.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4167",
-    "desc": "#1560 • Самый настоящий шелк • Нежнейший детский хвостик с тончайшей волосинкой"
   }
 ];
 
