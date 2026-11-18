@@ -3953,6 +3953,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4671",
+    "cutNum": "#4671",
+    "title": "Срез #4671 (60 см / 110 гр)",
+    "cat": "blond",
+    "badge": "Окрашенный блонд",
+    "length": 60,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4671.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4671",
+    "desc": "Саша добытчица😇 Наши эксклюзивные блонды 💎"
+  },
+  {
+    "id": "4670",
+    "cutNum": "#4670",
+    "title": "Срез #4670 (60 см / 110 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 60,
+    "weight": "110 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4670.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4670",
+    "desc": "Ждём вас на Meta Hairy Fest 2026 в Holliday In Сокольники  26-27 ноября  СТЕНД 32"
+  },
+  {
     "id": "4664",
     "cutNum": "#1597",
     "title": "Срез #1597 (63 см / 110 гр)",
@@ -4575,30 +4601,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
     "tgUrl": "https://t.me/hi_pretty/4194",
     "desc": "#1373 • Детский,воздушный хвостик • Окрашен в щадящей технике,качество осталось прежним,срез мягкий,нежный"
-  },
-  {
-    "id": "4187",
-    "cutNum": "#1555",
-    "title": "Срез #1555 (55 см / 106 гр)",
-    "cat": "wave",
-    "length": 55,
-    "weight": "106 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4187.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4187",
-    "desc": "#1555 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
-  },
-  {
-    "id": "4177",
-    "cutNum": "#1246",
-    "title": "Срез #1246 (67 см / 229 гр)",
-    "cat": "silk",
-    "length": 67,
-    "weight": "229 гр",
-    "price": "87 350 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4177.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4177",
-    "desc": "#1246 • Детский,глянцевый срез • Шелковый,мягкий,волосинка ближе к средней"
   }
 ];
 
