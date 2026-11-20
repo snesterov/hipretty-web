@@ -3953,6 +3953,19 @@
 
   var cutsDatabase = [
   {
+    "id": "4673",
+    "cutNum": "#4673",
+    "title": "Срез #4673 (80 см / 119 гр)",
+    "cat": "wave",
+    "badge": "Природная волна",
+    "length": 80,
+    "weight": "119 гр",
+    "price": "64 240 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4673.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4673",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Пористый, воздушный, волосинка ближе к средней, с природной волной  #N34 80см 119гр  64.240"
+  },
+  {
     "id": "4671",
     "cutNum": "#4671",
     "title": "Срез #4671 (60 см / 110 гр)",
@@ -4589,18 +4602,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
     "tgUrl": "https://t.me/hi_pretty/4201",
     "desc": "#1561 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
-  },
-  {
-    "id": "4194",
-    "cutNum": "#1373",
-    "title": "Срез #1373 (53 см / 117 гр)",
-    "cat": "silk",
-    "length": 53,
-    "weight": "117 гр",
-    "price": "68 300 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4194.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4194",
-    "desc": "#1373 • Детский,воздушный хвостик • Окрашен в щадящей технике,качество осталось прежним,срез мягкий,нежный"
   }
 ];
 
