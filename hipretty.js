@@ -3953,6 +3953,32 @@
 
   var cutsDatabase = [
   {
+    "id": "4691",
+    "cutNum": "#1618",
+    "title": "Срез #1618 (59 см / 135 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 59,
+    "weight": "135 гр",
+    "price": "235 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4691.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4691",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами    Редчайший оттенок, детский неокрашенный срез Шелковый, тонкий волосок  Фото срезки по запросу  #1618  59 см 135 гр  235.000"
+  },
+  {
+    "id": "4682",
+    "cutNum": "#4682",
+    "title": "Срез #4682 (62 см / 189 гр)",
+    "cat": "silk",
+    "badge": "Премиум шелк",
+    "length": 62,
+    "weight": "189 гр",
+    "price": "от 45 000 ₽",
+    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4682.jpg",
+    "tgUrl": "https://t.me/hi_pretty/4682",
+    "desc": "Подбор волос и запись на наращивание ТУТ  Канал с детскими волосами   Шелковый блестящий с тонкой волосинкой   #N23 62см 189гр"
+  },
+  {
     "id": "4673",
     "cutNum": "#4673",
     "title": "Срез #4673 (80 см / 119 гр)",
@@ -4578,30 +4604,6 @@
     "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4221.jpg",
     "tgUrl": "https://t.me/hi_pretty/4221",
     "desc": "#1255 • Детский воздушный хвостик • Слегка пористый,не жесткий"
-  },
-  {
-    "id": "4211",
-    "cutNum": "#1562",
-    "title": "Срез #1562 (50 см / 115 гр)",
-    "cat": "wave",
-    "length": 50,
-    "weight": "115 гр",
-    "price": "115 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4211.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4211",
-    "desc": "#1562 • Эксклюзив   🤍 • Шелковый,нежный,натуральный блонд"
-  },
-  {
-    "id": "4201",
-    "cutNum": "#1561",
-    "title": "Срез #1561 (55 см / 106 гр)",
-    "cat": "wave",
-    "length": 55,
-    "weight": "106 гр",
-    "price": "от 45 000 ₽",
-    "img": "https://cdn.jsdelivr.net/gh/snesterov/hipretty-web@main/cuts/cut_4201.jpg",
-    "tgUrl": "https://t.me/hi_pretty/4201",
-    "desc": "#1561 • Детский эксклюзив • Природная детская активная волнушка,нежнейший,волосинка тоненькая,легкая пористость"
   }
 ];
 
